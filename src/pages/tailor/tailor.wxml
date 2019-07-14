@@ -1,0 +1,31 @@
+
+
+
+<!-- 显示的照片 -->
+<!-- <view class='toux'> -->
+    <!-- <image mode='scaleToFill' class='toux1' src="{{img}}" bindtap='chooseimg'></image> -->
+    <!-- <image mode='scaleToFill' class='toux2' src='../../images/toux/xiangji.png' bindtap='chooseimg'></image> -->
+<!-- </view> -->
+    
+    
+    <!-- 裁剪  -->
+    <view class='caijain' wx:if="{{xx}}">
+      <!--start 用户自动截取正方形照片  -->
+      
+    <!-- 裁剪区域   重要 -->
+      <template name="we-cropper">
+        <canvas class="cropper  {{cutImage}}" disable-scroll="true" bindtouchstart="touchStart" bindtouchmove="touchMove" bindtouchend="touchEnd" style="width:{{width}}px;height:{{height}}px;" canvas-id="{{id}}">
+        </canvas>
+      </template>
+    
+    <!-- 按钮，无所谓的东西 -->
+      <view class="cropper-wrapper {{cutImage}}">
+        <template is="we-cropper" data="{{...cropperOpt}}" />
+        <view class='caijananniu'>
+          <!-- <view class='cxuan' bindtap="chooseimg">重新选择</view> -->
+          <view class='cxuan' bindtap="getCropperImage">确定</view>
+        </view>
+      </view>
+    
+      <!--end 用户自动截取正方形照片  -->
+    </view>

@@ -1,0 +1,10 @@
+<view class="helpbox">
+    <view class="item" wx:for="{{problemList}}" wx:for-index="index" wx:key="{{index}}" wx:for-item="item">
+        <view class="problem" bindtap="getAnswerFn" data-num="{{index}}">
+            <p>{{item.title}}</p>
+            <image class="{{item.class}}" src="/assets/images/jiantou.png"></image>
+        </view>
+        <view class="answer" style="{{item.style}}"><p>{{item.content}}</p></view>
+    </view>
+    
+</view>

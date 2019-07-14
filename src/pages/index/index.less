@@ -1,0 +1,289 @@
+
+@link-color : #FFDE00;
+
+// page{
+//     overflow-y: hidden;overflow-x:hidden;
+// }
+// page {
+//     height: 100%;
+//     position: relative;
+//     overflow: hidden;
+//     box-sizing: border-box;
+//   }
+  
+//   .view-page {
+//     height: 100%;
+//     width: 100%;
+//     left: 0;
+//     top: 0;
+//     box-sizing: border-box;
+//     position: absolute;
+//     overflow: hidden;
+//   }
+  
+//   .page-content {
+//     box-sizing: border-box;
+//     position: relative;
+//     overflow-y: auto;
+//   }
+page{
+  background:#f5f8fa;
+}
+#drawID{
+  background:#f5f8fa;
+    .tabtitle{
+        width: 100%;
+        height:80rpx;
+        padding-left:19rpx;
+        background:#fff;
+        color:#999;
+        position: fixed;
+        top:0;
+        left:0;
+        li{
+            float: left;
+            width:49%;
+            height:80rpx;
+            line-height: 80rpx;
+            font-size: 32rpx;
+            view{
+                float:left;
+                
+            }
+            
+            view.tuijian{
+                float:right;
+                margin-right:40rpx;
+            }
+            view.selector{
+                color:#343434;
+                font-weight: bold;
+            }
+            .distancebox{
+                
+                color:#999;
+                
+                image{
+                    width:19rpx;
+                    height:13rpx;
+                    transition: 0.5s;
+                    -moz-transition:  0.5s;	/* Firefox 4 */
+                    -webkit-transition:  0.5s;	/* Safari 和 Chrome */
+                    -o-transition:  0.5s;	/* Opera */
+                }
+                image.change{
+                    transform:rotate(180deg);
+                    -ms-transform:rotate(180deg); /* IE 9 */
+                    -webkit-transform:rotate(180deg); /* Safari and Chrome */
+                    transition: 0.5s;
+                    -moz-transition:  0.5s;	/* Firefox 4 */
+                    -webkit-transition:  0.5s;	/* Safari 和 Chrome */
+                    -o-transition:  0.5s;	/* Opera */
+                }
+            }
+            .focus{
+                margin-left:48rpx;
+            }
+        }
+        li.line{
+            width:1rpx;
+            color:#ededed;
+        }
+    }
+
+    .postbox{
+        width:750rpx;
+        margin-top:80rpx;
+        background:#f5f8fa;
+        display:flex;
+        flex-wrap: wrap;
+        justify-content: flex-start;
+        padding-bottom:20rpx;
+        .post_item{
+            margin:0 12rpx;
+            width:349rpx;
+           
+            background:#fff;
+            border-radius: 6rpx;
+            margin-top:20rpx;
+            overflow: hidden;
+            -moz-box-shadow:0px 2px 5px #d1d1d3; -webkit-box-shadow:0px 2px 5px #d1d1d3; box-shadow:0px 2px 5px #d1d1d3;
+            .imgbox{
+                width:349rpx;
+                height:349rpx;
+                background:#e6a977;
+                image{
+                    width:100%;
+                    height:100%;
+                }
+            }
+            .title{
+                font-size:30rpx;
+                padding:18rpx 18rpx 0 18rpx;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                display: -webkit-box;
+                -webkit-line-clamp: 2;
+                -webkit-box-orient: vertical;
+                max-height:100rpx;
+            }
+            .user{
+                height: 60rpx;
+                display: flex;
+                flex-flow: row;
+                justify-content: space-between;
+                
+                padding:20rpx 18rpx;
+                
+                .userimg{
+                    width:52rpx;
+                    height:52rpx;
+                    border-radius: 50%;
+                    overflow: hidden;
+                    image{
+                        width:100%;
+                        height:100%;
+                    }
+                }
+                .username{
+                    width:160rpx;
+                    font-size:22rpx;
+                    line-height: 52rpx;
+                    margin-left:-34rpx;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    display: -webkit-box;
+                    -webkit-line-clamp: 1;
+                    -webkit-box-orient: vertical;
+                }
+                .focus{
+                    width:34rpx;
+                    height:34rpx;
+                    margin-top:10rpx;
+                    margin-left: 8rpx;
+                    image{
+                        width:100%;
+                        height:100%;
+                    }
+
+                }
+                
+            }
+        }
+    }
+
+
+    .addbox{
+        width:110rpx;
+        height:110rpx;
+        position: fixed;
+        right:55rpx;
+        bottom:52rpx;
+        border-radius: 50%;
+        background:#ff2f43;
+        color:#fff;
+        text-align: center;
+        line-height: 104rpx;
+        font-size:80rpx;
+        -moz-box-shadow:0px 2px 6px #a3a4a6; -webkit-box-shadow:0px 2px 6px #a3a4a6; box-shadow:0px 2px 6px #a3a4a6;
+    }
+  
+}
+
+.ruzhu{
+    width:100%;
+    height:100%;
+    background:rgba(0,0,0,0.6);
+    position: fixed;
+    left:0;
+    top:0;
+    z-index: 3;
+    .ruzhucon{
+        width:499rpx;
+        height:270rpx;
+        background:#fff;
+        border-radius:8rpx;
+        position: absolute;
+        left:0;
+        right:0;
+        top:0;
+        bottom:0;
+        margin:auto;
+        .text{
+            font-size:30rpx;
+            text-align: center;
+            margin:50rpx 0;
+        }
+        .btnbox{
+            width:100%;
+            height:56rpx;
+            margin-top:8rpx;
+            padding-left:55rpx;
+        }
+        .btn{
+            width:168rpx;
+            height: 56rpx;
+            border-radius:25rpx;
+            border:0px;
+            background:#ff2f43;
+            overflow: hidden;
+            font-size: 30rpx;
+            text-align: center;
+            line-height: 56rpx;
+            color:#fff;
+            float:left;
+            border:1rpx solid #ff2f43;
+        }
+        .cancel{
+            background:#999;
+            margin-right:56rpx;
+            border:1rpx solid #999;
+        }
+    }
+}
+
+
+.tuijianbox{
+    width: 750rpx;
+    height:100%;
+    background:rgba(0,0,0,0.6);
+    position:fixed;
+    left: 0;
+    top:80rpx;
+    .tuijiandown{
+        width:100%;
+        height:244rpx;
+        background:#eef1f3;
+        position: absolute;
+        left:0;
+        top:0;
+        display:flex;
+        flex-wrap: wrap;
+        justify-content: space-around;
+        padding-top:34rpx;
+        li{
+            width:151rpx;
+            height:63rpx;
+            border:1rpx solid #ff2f43;
+            background:#eef1f3;
+            color:#333;
+            border-radius:8rpx;
+            text-align: center;
+            line-height: 63rpx;
+            font-size:25rpx;
+        }
+        li.selector{
+            background:#ff2f43;
+            color:#fff;
+        }
+    }
+}
+
+.fulltip{
+    font-size:28rpx;
+    color:#999;
+    display: block;
+    text-align: center;
+    line-height: 80rpx;
+    margin-top:300rpx;
+}

@@ -1,0 +1,8 @@
+
+{
+  "backgroundTextStyle":"dark",
+  "backgroundColor": "#fff",
+  "navigationBarTitleText": "我的淘贴",
+  "navigationBarTextStyle":"black",
+  "enablePullDownRefresh":true
+}

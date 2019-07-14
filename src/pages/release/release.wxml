@@ -1,0 +1,34 @@
+
+
+
+<!-- <view>{{imgList}}</view> -->
+
+<!-- tailor -->
+<!-- <image wx:for="{{imgList}}" wx:for-index="index" wx:key="index" wx:for-item="item" src="{{item}}"></image> -->
+<!-- <image src="{{src}}"></image> -->
+
+
+<view class="conbox">
+    <view class="imgbox" wx:if="{{isShow}}">
+        <swiper indicator-dots="{{indicatorDots}}"
+            autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" bindchange="swiperChange">
+            <block wx:for="{{imgUrls}}" wx:key="index">
+              <swiper-item>
+                <image src="{{item}}" class="slide-image" width="355" height="150"/>
+              </swiper-item>
+            </block>
+          </swiper>
+          <view class="close" bindtap="delFn">X</view>
+          <view class="add" bindtap="addFn">添加</view>
+          <view class="tipbox">{{current+1}}/{{imgUrls.length}}</view>
+    </view>
+    <view wx:if="{{kongShow}}" class="imgkong" bindtap="addFn"><image src="/assets/images/add.png"></image></view>
+    <view class="wordbox">
+        <textarea class="wordcon" placeholder-style="color:#b2b2b2" maxlength="100" placeholder="请输入要发布的内容，不多于100字" bindinput="addReleaseCon" value="{{releaseValue}}" ></textarea>
+    </view>
+
+    <button class="cxuan {{btnStatus==true? '':'grey'}}" bindtap="releaseFn">发布</button>
+</view>
+
+<import src="/components/tip/tip.wxml" />
+<template is="tip" data="{{isShowMod,con}}" />

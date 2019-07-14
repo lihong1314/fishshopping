@@ -1,0 +1,214 @@
+page{
+    background:#f5f8fa;
+}
+.personalbox{
+    padding:0 19rpx;
+    background:#fff;
+    .inforOne{
+        display: flex;
+        justify-content:space-between;
+        margin-bottom:20rpx;
+        border-bottom:1rpx solid #dbddde;
+        padding-bottom:28rpx;
+        position: relative;
+    }
+    .help{
+        position: absolute;
+        right:0;
+        top:0;
+        width:33rpx;
+        height:33rpx;
+        image{
+            width:100%;
+            height: 100%;
+        }
+    }
+    .person{
+        display: flex;
+        justify-content: flex-start;
+        .img{
+            width:110rpx;
+            height:110rpx;
+            margin-right:16rpx;
+            border-radius: 50%;
+            overflow: hidden;
+            image{
+                width:100%;
+                height:100%;
+            }
+        }
+        .name{
+            font-size:28rpx;
+            padding-top:8rpx;
+            div{
+                font-size:24rpx;
+                width:138rpx;
+                height:38rpx;
+                border:1rpx solid #999;
+                border-radius:20rpx;
+                overflow: hidden;
+                text-align: center;
+                line-height: 38rpx;
+                color:#333;
+                margin-top:10rpx;
+            }
+        }
+    }
+    .storbox{
+        width:112rpx;
+        height:110rpx;
+        text-align: center;
+        margin-right:80rpx;
+        image{
+            width:39rpx;
+            height:39rpx;
+            margin-top:20rpx;
+        }
+        p{
+            font-size:24rpx;
+            color:#333;
+        }
+    }
+
+    .inforTwo{
+        display:flex;
+        justify-content: space-around;
+        .items{
+            width:112rpx;
+            height:100rpx;
+            text-align: center;
+            font-size:24rpx;
+            color:#333;
+            margin-top:10rpx;
+            h3{
+                color:#ff2f43;
+                font-size:30rpx;
+                font-weight: inherit;
+                margin-bottom:10rpx;
+            }
+            
+            
+        }
+        .line{
+            width:1rpx;
+            height:88rpx;
+            background:#dbddde;
+        }
+        
+    }
+
+    
+}
+
+.collectionbox{
+    margin-top:10rpx;
+    .titlebox{
+        width:100%;
+        display:flex;
+        justify-content: space-evenly;
+        background: #fff;
+        height: 80rpx;
+        padding:0rpx 19rpx 0 19rpx;
+        p{
+            font-size:28rpx;
+            height:50rpx;
+            background:#fff;
+            border-bottom:1rpx solid #fff;
+            color:#666;
+            margin-right:20rpx;
+            margin-top:14rpx;
+        }
+        p.selector{
+            border-bottom:1rpx solid #ff2f43;
+            color:#333
+        }
+    }
+    
+    .fulltip{
+        font-size:28rpx;
+        color:#999;
+        display: block;
+        text-align: center;
+        line-height: 80rpx;
+        margin-top:300rpx;
+    }
+    .postbox{
+        width:750rpx;
+        background:#f5f8fa;
+        display:flex;
+        flex-wrap: wrap;
+        justify-content: flex-start;
+        padding-bottom:20rpx;
+        .post_item{
+            margin:0 12rpx;
+            width:349rpx;
+           
+            background:#fff;
+            border-radius: 6rpx;
+            margin-top:20rpx;
+            overflow: hidden;
+            -moz-box-shadow:0px 2px 5px #d1d1d3; -webkit-box-shadow:0px 2px 5px #d1d1d3; box-shadow:0px 2px 5px #d1d1d3;
+            .imgbox{
+                width:349rpx;
+                height:349rpx;
+                background:#e6a977;
+                image{
+                    width:100%;
+                    height:100%;
+                }
+            }
+            .title{
+                font-size:30rpx;
+                padding:18rpx 18rpx 0 18rpx;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                display: -webkit-box;
+                -webkit-line-clamp: 2;
+                -webkit-box-orient: vertical;
+                max-height:100rpx;
+            }
+            .user{
+                height: 60rpx;
+                display: flex;
+                flex-flow: row;
+                justify-content: space-between;
+                
+                padding:20rpx 18rpx;
+                
+                .userimg{
+                    width:52rpx;
+                    height:52rpx;
+                    border-radius: 50%;
+                    overflow: hidden;
+                    image{
+                        width:100%;
+                        height:100%;
+                    }
+                }
+                .username{
+                    width:160rpx;
+                    font-size:22rpx;
+                    line-height: 52rpx;
+                    margin-left:-34rpx;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    display: -webkit-box;
+                    -webkit-line-clamp: 1;
+                    -webkit-box-orient: vertical;
+                }
+                .focus{
+                    width:34rpx;
+                    height:34rpx;
+                    margin-top:10rpx;
+                    margin-left: 8rpx;
+                    image{
+                        width:100%;
+                        height:100%;
+                    }
+
+                }
+                
+            }
+        }
+    }
+}

@@ -1,0 +1,10 @@
+<view class="box">
+    <view class="namebox">
+        <text>昵称</text>
+        <view class="name">
+            <input type="text" maxlength="16" value="{{name}}" bindinput="modifyNameFn"/>
+        </view>
+    </view>
+</view>
+
+<button class="btn" bindtap="saveFn">保存</button>

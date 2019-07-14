@@ -1,0 +1,44 @@
+page{
+    background:#f5f8fa;
+}
+.item{
+    background:#fff;
+    padding:0 19rpx;
+    line-height: 100rpx;
+    margin-top:10rpx;
+    .problem{
+        height:100rpx;
+        font-size:30rpx;
+        display:flex;
+        justify-content: space-between;
+        image{
+            width:25rpx;
+            height:25rpx;
+            margin-top:40rpx;
+            transition: 0.5s;
+            -moz-transition:  0.5s;	/* Firefox 4 */
+            -webkit-transition:  0.5s;	/* Safari 和 Chrome */
+            -o-transition:  0.5s;	/* Opera */
+        }
+        .up{
+            transform:rotate(180deg);
+            -ms-transform:rotate(180deg); /* IE 9 */
+            -webkit-transform:rotate(180deg); /* Safari and Chrome */
+            transition: 0.5s;
+            -moz-transition:  0.5s;	/* Firefox 4 */
+            -webkit-transition:  0.5s;	/* Safari 和 Chrome */
+            -o-transition:  0.5s;	/* Opera */
+    }
+    }
+    .answer{
+        overflow: hidden;
+        font-size:30rpx;
+        line-height: 50rpx;
+        color:#999;
+        p{
+            padding:20rpx 0;
+            box-sizing: border-box;
+            border-top:1rpx solid #e8e8e8;
+        }
+    }
+}

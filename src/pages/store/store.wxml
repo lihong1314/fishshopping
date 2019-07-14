@@ -1,0 +1,23 @@
+<view class="storbox">
+    <view class="stor_item" wx:for="{{shopList}}" wx:for-index="index" wx:key="{{item.shopId}}" wx:for-item="item"  bindtap="inStorFn" data-shopid="{{item.shopId}}">
+            <view class="stor_title" >
+                <view class="storimg">
+                    <image src="{{item.shopIcon}}"></image>
+                </view>
+                <view class="storinfo">
+                    <view class="storname">{{item.shopName}}</view>
+                    <view class="address">{{item.distance}}km {{item.shopDetailAdress}}</view>
+                </view>
+                <view class="instor">
+                    进店
+                </view>
+            </view>
+            <view class="imgbox" >
+                <view class="img" wx:for="{{item.images}}" wx:for-index="num" wx:key="index" wx:for-item="img">
+                    <image mode='aspectFill' src="{{img}}"></image>
+                </view>
+            </view>
+    </view>
+
+ 
+</view>

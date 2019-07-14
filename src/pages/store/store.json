@@ -1,0 +1,8 @@
+
+{
+  "backgroundTextStyle":"dark",
+  "backgroundColor": "#fff",
+  "navigationBarTitleText": "好店",
+  "navigationBarTextStyle":"black",
+  "enablePullDownRefresh":true
+}

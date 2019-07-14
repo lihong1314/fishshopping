@@ -1,0 +1,80 @@
+<!-- <view class='view-page'>
+        <navbar page-name="首页"></navbar>
+         <view class='page-content' style='height:calc(100vh - {{navH}}px)'> -->
+          <!--这里放你的内容-->
+          <view id="drawID">
+
+                <ul class="tabtitle">
+                    <li>
+                        <view class="distancebox" wx:if="{{distancebFl}}" bindtap="showdistanceb">{{distance}}km内
+                            <image class="{{addjiantou?'change':''}}" src="/assets/images/arrow_down.png" alt=""></image>
+                        </view>
+                        <view class="tuijian {{addweight==0?'selector':''}}" bindtap="recommendFn">推荐</view>
+                    </li>
+                    <li class="line">|</li>
+                    <li>
+                        <view class="focus {{addweight==1?'selector':''}}" bindtap="getFocus">关注</view>
+                    </li>
+                </ul>
+            
+                <view class="postbox" wx:if="{{tuijianList.length > 0}}">
+                    <!--第一个淘贴start-->
+                    <view class="post_item" wx:for="{{tuijianList}}" wx:key="index" wx:for-item="item">
+                        <view bindtap="gotoPostFn" data-publishid="{{item.publishId}}">
+                            <view class="imgbox">
+                                <image src="{{item.images[0]}}"></image>
+                            </view>
+                            <view class="title">
+                                {{item.content}}
+                            </view>
+                        </view>
+                        <ul class="user">
+                            <li> <view class="userimg"><image src="{{item.cUserIcon}}"></image></view> </li>
+                            <li class="username">{{item.cUserName}}</li>
+                            <li class="focus" bindtap="focusFn" data-publishid="{{item.publishId}}" data-index="{{index}}" data-collection="{{item.collection}}"><image src="{{item.collection?'/assets/images/collection_red.png':'/assets/images/collection.png'}}"></image></li>
+                        </ul>
+                    </view>
+                    <!--第一个淘贴end-->
+                </view>
+                <!-- <view class="postbox" >
+                        
+                </view> -->
+                
+                <view class="addbox" bindtap="tailorTo">+</view> 
+
+                <view class="fulltip" wx:if="{{!tuijianList }}">还没有关注任何用户哦！</view>
+            </view>
+                
+
+            
+            
+            
+            
+            <!--推荐遮罩-->
+            <view class="tuijianbox" wx:if="{{tuijianFl}}" bindtap="hiddenFn">
+                <ul class="tuijiandown">
+                    <li wx:for="{{distanceArr}}" wx:for-index="index" wx:key="index" wx:for-item="item" class="{{index==distanceNum || item == distance?'selector':''}}" bindtap="selectList" data-num="{{index}}">{{item}}km</li>
+                    <!-- <li class="selector">10km</!-->
+                </ul>
+            </view>
+            
+            <!--入驻遮罩-->
+            <view class="ruzhu" wx:if="{{ruzhuFn}}">
+                <view class="ruzhucon">
+                    <view class="text">入驻为淘街商家后可发布帖子</view>
+                    <view class="btnbox">
+                        <button class="btn cancel">取消</button>
+                        <button class="btn">立即入驻</button>
+                    </view>
+                </view>
+            </view>
+            
+            <!-- <tip id="tip" is-show="{{isShowMod}}" ></tip> -->
+            <!-- <import src="/components/tip/tip.wxml" />
+            <template is="tip" data="{{isShowMod}}" /> -->
+         <!-- </view>
+        </view>  -->
+
+        
+
+

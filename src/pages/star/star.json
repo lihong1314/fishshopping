@@ -1,0 +1,8 @@
+
+{
+  "backgroundTextStyle":"dark",
+  "backgroundColor": "#fff",
+  "navigationBarTitleText": "我的鱼苗",
+  "navigationBarTextStyle":"black",
+  "enablePullDownRefresh":true
+}

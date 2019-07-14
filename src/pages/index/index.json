@@ -1,0 +1,9 @@
+
+{
+
+  "backgroundTextStyle":"dark",
+  "backgroundColor": "#fff",
+  "navigationBarTitleText": "小鱼淘街",
+  "navigationBarTextStyle":"black",
+  "enablePullDownRefresh":true
+}

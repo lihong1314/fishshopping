@@ -1,0 +1,61 @@
+{
+  "pages": [
+    
+    "pages/index/index",
+    "pages/personal/personal",
+    "pages/release/release",
+    "pages/tailor/tailor",
+    "pages/report/report",
+    "pages/post/post",
+    "pages/stordetail/stordetail",
+    "pages/store/store",
+    "pages/help/help",
+    "pages/information/information",
+    "pages/fans/fans",
+    "pages/star/star",
+    "pages/focusStore/focusStore",
+    "pages/mypost/mypost",
+    "pages/fansDetail/fansDetail",
+    "pages/login/login",
+    "pages/loginmode/loginmode",
+    "pages/changename/changename"
+    
+    
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#FFFFFF",
+    "navigationBarTitleText": "小鱼淘街",
+    "navigationBarTextStyle": "black",
+    "navigationStyle":"default"
+  },
+  "tabBar": {
+    "color": "#999999",
+    "selectedColor": "#ff2f43",
+    "backgroundColor": "#eef1f3",
+    "borderStyle": "black",
+    "list": [{
+      "pagePath": "pages/index/index",
+      "iconPath": "assets/images/hometab.png",
+      "selectedIconPath": "assets/images/hometab_selected.png",
+      "text": "首页"
+    },
+    {
+      "pagePath": "pages/store/store",
+      "iconPath": "assets/images/shop.png",
+      "selectedIconPath": "assets/images/shop_selected.png",
+      "text": "好店"
+    },
+    {
+      "pagePath": "pages/personal/personal",
+      "iconPath": "assets/images/my.png",
+      "selectedIconPath": "assets/images/my_selected.png",
+      "text": "我的"
+    }]
+  },
+  "permission": {
+    "scope.userLocation": {
+      "desc": "你的位置信息将用于小程序位置接口的效果展示"
+    }
+  }
+}

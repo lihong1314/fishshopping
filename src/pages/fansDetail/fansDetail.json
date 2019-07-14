@@ -1,0 +1,8 @@
+
+{
+  "backgroundTextStyle":"dark",
+  "backgroundColor": "#fff",
+  "navigationBarTitleText": "鱼苗详情",
+  "navigationBarTextStyle":"black",
+  "enablePullDownRefresh":true
+}

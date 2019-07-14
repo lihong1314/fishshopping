@@ -1,0 +1,29 @@
+<view class="box">
+  
+
+    <view wx:if="{{fansList}}" class="fansitem" wx:for="{{fansList}}" wx:key="{{item.fansId}}" wx:for-index="index" wx:for-item="item">
+        <!-- <navigator url="../fansDetail/fansDetail"> -->
+            <view class="imgbox" bindtap="gotoFansDetailFn" data-fansid="{{item.fansId}}">
+                <view class="userimg">
+                    <image src="{{item.userIcon}}"></image>
+                </view>
+                <view class="userinfo">
+                    <view class="name">{{item.userName}}</view>
+                    <view class="numbox">
+                        <view>淘贴 {{item.publishNum}}</view>
+                        <view>鱼粉 {{item.fansNum}}</view>
+                    </view>
+                </view>
+            </view>
+        <!-- </navigator> -->
+        <view wx:if="{{item.attentionFans}}" class="focus cancel" data-index="{{index}}" data-attention="{{item.attentionFans}}" data-fansid="{{item.fansId}}" bindtap="focusFn">取关</view>
+        <view wx:else class="focus" data-index="{{index}}" data-attention="{{item.attentionFans}}" data-fansid="{{item.fansId}}" bindtap="focusFn">关注</view>
+            
+    </view>
+
+    <view class="fulltip" wx:if="{{!fansList}}">还没有任何用户关注您哦！</view>
+
+</view>
+
+<import src="/components/tip/tip.wxml" />
+<template is="tip" data="{{isShowMod}}" />

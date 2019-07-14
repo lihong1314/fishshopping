@@ -1,0 +1,41 @@
+<view class="stordetailbox">
+    <view class="storIcon">
+        <view class="icon"><image src="{{cUserIcon}}"></image></view>
+        <view class="name">{{cUserName}}</view>
+        <view class="textbox">
+            <p>淘贴 {{publishNum}}</p>
+            <p>鱼粉 {{fansNum}}</p>
+        </view>
+        <view wx:if="{{attention}}" class="cancel" bindtap="cancelFocus">取关</view>
+        <view wx:else class="focus" bindtap="focusFn">关注</view>
+    </view>
+</view>
+
+<view class="collectionbox">
+        <view wx:if="{{list.length <= 0}}" class="fulltip">还没有收藏的淘贴</view>
+        <view wx:if="{{list.length > 0}}" class="postbox">
+            <!--第一个淘贴-->
+            <view class="post_item" wx:for="{{list}}" wx:key="index">
+                <!-- <navigator url="../post/post"> -->
+                <view bindtap="gotoPostFn" data-publishid="{{item.publishId}}">
+                    <view class="imgbox">
+                        <image src="{{item.images[0]}}"></image>
+                    </view>
+                    <view class="title">
+                        {{item.content}}
+                    </view>
+                </view>
+                <ul class="user">
+                    <li> <view class="userimg"><image src="{{cUserIcon}}"></image></view> </li>
+                    <li class="username">{{cUserName}}</li>
+                    <li class="focus" bindtap="collectionFn" data-publishid="{{item.publishId}}" data-index="{{index}}" data-collection="{{item.collection}}"><image src="{{item.collection?'/assets/images/collection_red.png':'/assets/images/collection.png'}}"></image></li>
+                </ul>
+                <!-- </navigator> -->
+            </view>
+            <!--第一个淘贴-->
+        </view>
+    </view>
+
+
+<import src="/components/tip/tip.wxml" />
+<template is="tip" data="{{isShowMod}}" />

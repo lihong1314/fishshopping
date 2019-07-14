@@ -1,0 +1,8 @@
+
+{
+  "backgroundTextStyle":"dark",
+  "backgroundColor": "#fff",
+  "navigationBarTitleText": "关注门店",
+  "navigationBarTextStyle":"black",
+  "enablePullDownRefresh":true
+}

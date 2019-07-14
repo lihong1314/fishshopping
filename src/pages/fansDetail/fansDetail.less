@@ -1,0 +1,204 @@
+page{
+    background:#f5f8fa; 
+}
+.stordetailbox{
+    background:#f5f8fa;
+    .storIcon{
+        padding:29rpx 19rpx;
+        background:#fff;
+        text-align: center;
+        padding-bottom:30rpx;
+        position: relative;
+        .icon{
+            width:132rpx;
+            height: 132rpx;
+            position: relative;
+            left:0;
+            right:0;
+            top:0;
+            bottom:0;
+            margin:auto;
+            border-radius: 50%;
+            overflow: hidden;
+            image{
+                width:100%;
+                height:100%
+            }
+        }
+        .name{
+            font-size:34rpx;
+            margin-top: 10rpx;
+        }
+        .textbox{
+            width:280rpx;
+            font-size:26rpx;
+            color:#999;
+            display: flex;
+            justify-content: space-between;
+            position: relative;
+            left:0;
+            top:0;
+            bottom:0;
+            right:0;
+            margin:auto;
+        }
+        .cancel{
+            width:100rpx;
+            height:40rpx;
+            font-size:26rpx;
+            color:#666;
+            background:#fff;
+            border-radius:8rpx;
+            overflow: hidden;
+            line-height: 36rpx;
+            text-align: center;
+            margin-top:32rpx;
+            box-sizing: border-box;
+            border:1rpx solid #666;
+            float:right;
+            margin-right:10rpx;
+            position: absolute;
+            top:0rpx;
+            right:20rpx;
+        }
+        .focus{
+            width:100rpx;
+            height:40rpx;
+            font-size:26rpx;
+            color:#fff;
+            background:#ff2f43;
+            border-radius:8rpx;
+            overflow: hidden;
+            line-height: 36rpx;
+            text-align: center;
+            margin-top:32rpx;
+            box-sizing: border-box;
+            border:1rpx solid #ff2f43;
+            float:right;
+            margin-right:10rpx;
+            position: absolute;
+            top:0rpx;
+            right:20rpx;
+        }
+    }
+ 
+    .imgbox{
+        padding:0 19rpx;
+        background:#fff;
+        .title{
+            font-size:28rpx;
+            color:#999;
+            line-height:90rpx;
+        }
+        .con{
+            display:flex;
+            flex-wrap: wrap;
+            justify-content: flex-start;
+            .img{
+                width:224rpx;
+                height:224rpx;
+                background:grey;
+                margin:7rpx;
+                image{
+                    width:100%;
+                    height:100%;
+                }
+            }
+        }
+    }
+}
+
+
+.collectionbox{
+    margin-top:10rpx;
+    
+    .fulltip{
+        font-size:28rpx;
+        color:#999;
+        display: block;
+        text-align: center;
+        line-height: 80rpx;
+        margin-top:300rpx;
+    }
+    .postbox{
+        width:750rpx;
+        height:auto;
+        background:#f5f8fa;
+        padding:0 10rpx 0 10rpx;
+        display:flex;
+        flex-wrap: wrap;
+        justify-content:flex-start;
+        .post_item{
+            margin:0 9rpx;
+            width:349rpx;
+            height:auto;
+            background:#fff;
+            border-radius: 6rpx;
+            margin-top:20rpx;
+            overflow: hidden;
+            -moz-box-shadow:0px 2px 5px #d1d1d3; -webkit-box-shadow:0px 2px 5px #d1d1d3; box-shadow:0px 2px 5px #d1d1d3;
+            .imgbox{
+                width:349rpx;
+                height:349rpx;
+                background:#e6a977;
+                image{
+                    width:100%;
+                    height:100%;
+                }
+            }
+            .title{
+                font-size:30rpx;
+                padding:18rpx 18rpx 0 18rpx;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                display: -webkit-box;
+                -webkit-line-clamp: 2;
+                -webkit-box-orient: vertical;
+                max-height: 100rpx;
+            }
+            .user{
+                height: 60rpx;
+                display: flex;
+                flex-flow: row;
+                justify-content: space-between;
+                
+                padding:20rpx 18rpx;
+                
+                .userimg{
+                    width:52rpx;
+                    height:52rpx;
+                    border-radius: 50%;
+                    overflow: hidden;
+                    image{
+                        width:100%;
+                        height:100%;
+                    }
+                }
+                .username{
+                    width:160rpx;
+                    font-size:22rpx;
+                    line-height: 52rpx;
+                    margin-left:-34rpx;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    display: -webkit-box;
+                    -webkit-line-clamp: 1;
+                    -webkit-box-orient: vertical;
+                }
+                .focus{
+                    width:34rpx;
+                    height:34rpx;
+                    margin-top:10rpx;
+                    margin-left: 8rpx;
+                    image{
+                        width:100%;
+                        height:100%;
+                    }
+
+                }
+                
+            }
+        }
+    }
+}
+

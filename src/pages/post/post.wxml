@@ -1,0 +1,70 @@
+
+
+<view wx:if="{{con == ''}}" class="postbox">
+    <view class="userbox">
+        <view style="display:flex;" bindtap="gotoFansDetailFn" data-fansid="{{cuserId}}">
+        <view class="userimg">
+            <image src="{{cuserIcon}}"></image>
+        </view>
+        <view class="userinfo">
+            <view class="name">{{cuserName}}</view>
+            <view class="numbox">
+                <view>淘贴 {{publishNum}}</view>
+                <view>鱼粉 {{fansNum}}</view>
+            </view>
+        </view>
+        </view>
+        <view wx:if="{{attention}}" class="focus selector" bindtap="cancelFocus">取关</view>
+        <view wx:else class="focus" bindtap="focusFn">关注</view>
+       
+    </view>
+
+    <view class="postconbox">
+        <view class="imgbox">
+            <swiper indicator-dots="{{indicatorDots}}"
+                autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" bindchange="swiperChange">
+                
+                <swiper-item wx:for="{{imgUrls}}" wx:key="index" wx:for-item="item" wx:for-index="index">
+                    <image src="{{item}}" class="slide-image" width="355" height="150"/>
+                
+                </swiper-item>
+                
+                </swiper>
+                <view class="tipbox">{{current+1}}/{{imgUrls.length}}</view>
+        </view>
+        <view class="text">{{content}}</view>
+        <view class="fun">
+            <view class="time">{{createTime}}</view>
+            <view class="read" >{{readTimes}}浏览</view>
+            <view class="jubao" bindtap="jubaoFn" data-cuserid= "{{cuserId}}">举报</view>  
+        </view>
+    </view>
+
+    <view class="storbox">
+        <view class="store" bindtap="inStorFn" data-shopid="{{shopId}}">
+        <view class="storimg">
+            <image src="{{shopIcon}}"></image>
+        </view>
+        <view class="storinfo">
+            <view class="storname">{{shopName}}</view>
+            <view class="address">{{shopDitance}}km {{shopDetailAddress}}</view>
+        </view>
+        </view>
+        <view class="position" bindtap="chooselaction">
+            <image src="/assets/images/position.png"></image>
+        </view>
+    </view>
+
+    <view class="btnbox">
+        <button class="btn {{collection?'':'collection'}}" bindtap="checkCollentFn"><image src="{{collection?'/assets/images/collection_red.png':'/assets/images/collection.png'}}"></image>{{collection?'已收藏':'收藏'}}</button>
+        <button class="btn share" bindtap="shareFn" open-type='share'><image src="/assets/images/shear.png"></image>分享</button>
+    </view>
+</view>
+
+
+<view class="con" wx:if="{{con!=''}}">{{con}}</view>
+
+<!-- <tip id="tip" is-show="{{isShowMod}}" ></tip> -->
+<import src="/components/tip/tip.wxml" />
+<template is="tip" data="{{isShowMod}}" />
+
