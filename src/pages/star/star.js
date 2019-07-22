@@ -8,7 +8,7 @@ Page({
   data:{
     isShowMod:false,
     offset: 1,
-    limit: 20,
+    limit: 10,
     total: 0,
     starList:[]
   },
@@ -29,22 +29,38 @@ Page({
     this.setData({
       isShowMod:false
     })
-  },
-  cancelFocus(e){
-
-    const {attention,attentionid,index} =  e.currentTarget.dataset;
-    this.setData({
-      isShowMod:true
-    })
-
+    // const {attention,attentionid,index} =  e.currentTarget.dataset;
+ 
+    const { cuserId } = getStorage( 'USER_INFO' ) || {};
+    // console.log("attentionid:",attentionid)
     personalService
     .addOrCancleAttention({
-      attentionId:attentionid,
+      cuserId,
+      attentionId:this.data.attentionid,
       attention:false
     })
     .then(res=>{
       this.getList();
     })
+  },
+  cancelFocus(e){
+
+    const {attention,attentionid,index} =  e.currentTarget.dataset;
+    this.setData({
+      isShowMod:true,
+      attentionid
+    })
+    // const { cuserId } = getStorage( 'USER_INFO' ) || {};
+    // console.log("attentionid:",attentionid)
+    // personalService
+    // .addOrCancleAttention({
+    //   cuserId,
+    //   attentionId:attentionid,
+    //   attention:false
+    // })
+    // .then(res=>{
+    //   this.getList();
+    // })
   },
   onReachBottom: function() {
     if (this.data.total > this.data.limit * (this.data.offset + 1)) {
@@ -58,7 +74,7 @@ Page({
 
   onPullDownRefresh() {
     this.setData({
-      starList: [],
+      // starList: [],
       offset: 1,
       total: 0,
     })

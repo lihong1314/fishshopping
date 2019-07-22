@@ -2,7 +2,7 @@
 {
   "backgroundTextStyle":"dark",
   "backgroundColor": "#fff",
-  "navigationBarTitleText": "门店详情",
+  "navigationBarTitleText": "",
   "navigationBarTextStyle":"black",
   "enablePullDownRefresh":true
 }

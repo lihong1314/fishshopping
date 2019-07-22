@@ -10,12 +10,12 @@
                 <view class="name">{{item.userName}}</view>
                 <view class="numbox">
                     <view>淘贴 {{item.publishNum}}</view>
-                    <view>鱼粉 {{item.fansNum}}</view>
+                    <view>粉丝 {{item.fansNum}}</view>
                 </view>
             </view>
         </view>
     
-        <view class="focus cancel" data-index="{{index}}" data-attention="{{item.attentionFans}}" data-attentionid="{{item.attentionId}}" bindtap="cancelFocus">取关</view>
+        <view class="focus cancel" data-index="{{index}}" data-attention="{{item.attentionFans}}" data-attentionid="{{item.attentionId}}" bindtap="cancelFocus">已关注</view>
     </view>
 
     <view  wx:if="{{!starList}}" class="fulltip">您还没有关注任何用户哦！</view>

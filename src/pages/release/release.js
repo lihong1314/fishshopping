@@ -73,10 +73,6 @@ Page({
     wx.showLoading({title:'加载中...'})
 
     const {imgUrls,releaseValue} = this.data;
-   
-
-    
-    
     new Promise((resolve, reject) => {
       imgUrls.map((index,item)=>{
         this.upload(that,index,item);
@@ -100,10 +96,12 @@ Page({
         // console.log('发布:',res)
           wx.showToast({title: '发布成功'})
           setTimeout(()=>{
+            setStorage("refresh","1");
             wx.switchTab({
               url: `/pages/index/index`
             })
           },1000)
+
       })
     },2000)
    

@@ -4,7 +4,7 @@
             {{item.value}}<radio value="{{item.value}}" checked="{{item.checked}}"/>
         </label>
     </radio-group>
-    <view class="phonebox"><input type="number" maxlength="11" value="{{phone}}" placeholder="请您留下您的联系方式，方便我们联系您（选填）" bindinput="phoneFn"/></view>
+    <view class="phonebox"><input type="number" maxlength="11" value="{{phone}}" placeholder="请留下您的联系方式，方便我们联系您（选填）" bindinput="phoneFn"/></view>
 </view>
 
 <button class="sub {{subFlg?'':'grey'}}" bindtap="subFn">提交</button>

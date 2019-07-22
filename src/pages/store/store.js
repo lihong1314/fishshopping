@@ -7,7 +7,7 @@ Page({
   data:{
     shopList:[],
     offset:1,
-    limit:20,
+    limit:10,
     total: 0
   },
   onShow(){
@@ -27,7 +27,7 @@ Page({
 
   onPullDownRefresh() {
     this.setData({
-      shopList: [],
+      // shopList: [],
       offset: 1,
       total: 0,
     })

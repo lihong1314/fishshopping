@@ -8,7 +8,7 @@ Page({
   data:{
     isShowMod:false,
     offset: 1,
-    limit: 20,
+    limit: 10,
     total: 0,
     fansList:[]
   },
@@ -94,7 +94,7 @@ Page({
 
   onPullDownRefresh() {
     this.setData({
-      fansList: [],
+      // fansList: [],
       offset: 1,
       total: 0,
     })

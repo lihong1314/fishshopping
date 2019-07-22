@@ -2,7 +2,7 @@
     <view class="imgbox">
         <text>头像</text>
         <view class="img" bindtap="modifyFn">
-            <image class="user" src="{{img}}"></image><image class="jiantou" src="/assets/images/jiantou.png"></image>
+            <image class="user" src="{{img}}"></image><image class="jiantou" src="/assets/images/right.png"></image>
         </view>
     </view>
     <view class="namebox" bindtap="gotoChangeName">
@@ -10,7 +10,7 @@
         <view class="name">
             <!-- <input type="text" maxlength="16" value="{{name}}" bindinput="modifyNameFn"/> -->
             <view>{{name}}</view>
-            <image class="jiantou" src="/assets/images/jiantou.png"></image>
+            <image class="jiantou" src="/assets/images/right.png"></image>
         </view>
     </view>
 </view>

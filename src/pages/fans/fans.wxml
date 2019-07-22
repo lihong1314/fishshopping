@@ -11,12 +11,12 @@
                     <view class="name">{{item.userName}}</view>
                     <view class="numbox">
                         <view>淘贴 {{item.publishNum}}</view>
-                        <view>鱼粉 {{item.fansNum}}</view>
+                        <view>粉丝 {{item.fansNum}}</view>
                     </view>
                 </view>
             </view>
         <!-- </navigator> -->
-        <view wx:if="{{item.attentionFans}}" class="focus cancel" data-index="{{index}}" data-attention="{{item.attentionFans}}" data-fansid="{{item.fansId}}" bindtap="focusFn">取关</view>
+        <view wx:if="{{item.attentionFans}}" class="focus cancel" data-index="{{index}}" data-attention="{{item.attentionFans}}" data-fansid="{{item.fansId}}" bindtap="focusFn">已关注</view>
         <view wx:else class="focus" data-index="{{index}}" data-attention="{{item.attentionFans}}" data-fansid="{{item.fansId}}" bindtap="focusFn">关注</view>
             
     </view>

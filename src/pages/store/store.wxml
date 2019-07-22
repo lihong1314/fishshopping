@@ -8,9 +8,9 @@
                     <view class="storname">{{item.shopName}}</view>
                     <view class="address">{{item.distance}}km {{item.shopDetailAdress}}</view>
                 </view>
-                <view class="instor">
+                <!-- <view class="instor">
                     进店
-                </view>
+                </view> -->
             </view>
             <view class="imgbox" >
                 <view class="img" wx:for="{{item.images}}" wx:for-index="num" wx:key="index" wx:for-item="img">

@@ -2,7 +2,7 @@
 
 <view wx:if="{{con == ''}}" class="postbox">
     <view class="userbox">
-        <view style="display:flex;" bindtap="gotoFansDetailFn" data-fansid="{{cuserId}}">
+        <view style="display:flex;width:80%" bindtap="gotoFansDetailFn" data-fansid="{{cuserId}}">
         <view class="userimg">
             <image src="{{cuserIcon}}"></image>
         </view>
@@ -10,11 +10,11 @@
             <view class="name">{{cuserName}}</view>
             <view class="numbox">
                 <view>淘贴 {{publishNum}}</view>
-                <view>鱼粉 {{fansNum}}</view>
+                <view>粉丝 {{fansNum}}</view>
             </view>
         </view>
         </view>
-        <view wx:if="{{attention}}" class="focus selector" bindtap="cancelFocus">取关</view>
+        <view wx:if="{{attention}}" class="focus selector" bindtap="cancelFocus">已关注</view>
         <view wx:else class="focus" bindtap="focusFn">关注</view>
        
     </view>
@@ -35,7 +35,7 @@
         <view class="text">{{content}}</view>
         <view class="fun">
             <view class="time">{{createTime}}</view>
-            <view class="read" >{{readTimes}}浏览</view>
+            <view class="read" >浏览 {{readTimes}}</view>
             <view class="jubao" bindtap="jubaoFn" data-cuserid= "{{cuserId}}">举报</view>  
         </view>
     </view>

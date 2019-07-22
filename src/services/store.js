@@ -48,7 +48,7 @@ export const attentionFn = ({shopId,attention}) => {
 }
 
 
-//获取关注的门店列表
+//获已关注注的门店列表
 export const getAttentionList = ({page,size}) => {
   const {cuserId} = getStorage("USER_INFO") || {};
   const {longitude,latitude} = getStorage("location") || {};

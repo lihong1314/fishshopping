@@ -17,7 +17,7 @@ export const getImage = ()=>new Promise(( resolve, reject )=>{
   
     wx.chooseImage({
       count:1,
-      sizeType:"original",
+      sizeType:"compressed",
       sourceType:'album',
       success(res){
         console.log('哈哈')

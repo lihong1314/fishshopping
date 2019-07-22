@@ -65,9 +65,10 @@ Page({
   },
   onShareAppMessage(option) {
     let that = this;
+    console.log("that.data.shopName:",that.data.shopName)
     return {
       title: that.data.shopName,
-      imageUrl,
+      imageUrl:'',
       path: `/pages/stordetail/stordetail?shopid=${this.data.shopid}`,//小程序的跳转路径
       success: function (res) {
           console.log(res)
@@ -79,15 +80,49 @@ Page({
       }
   }
   },
-  cancelFn(){
-    this.setData({
-      isShowMod:false
-    })
-  },
-  sureFn(){
-    this.setData({
-      isShowMod:false
-    })
+  // cancelFn(){
+  //   this.setData({
+  //     isShowMod:false
+  //   })
+  // },
+  // sureFn(){
+  //   this.setData({
+  //     isShowMod:false
+  //   })
+  //   storeService
+  //     .attentionFn({
+  //       shopId:this.data.shopid,
+  //       attention:!this.data.attention
+  //     })
+  //     .then(res=>{
+  //       this.setData({
+  //         attention:res.attention
+  //       })
+  //     })
+  // },
+  focusFn(){
+    // if(!this.data.attention){
+    //   this.setData({
+    //     isShowMod:false
+    //   })
+    //   storeService
+    //   .attentionFn({
+    //     shopId:this.data.shopid,
+    //     attention:!this.data.attention
+    //   })
+    //   .then(res=>{
+    //     this.setData({
+    //       attention:res.attention
+    //     })
+    //   })
+      
+    // }else{
+    //   this.setData({
+    //     isShowMod:true
+    //   })
+    
+    // }
+
     storeService
       .attentionFn({
         shopId:this.data.shopid,
@@ -98,29 +133,6 @@ Page({
           attention:res.attention
         })
       })
-  },
-  focusFn(){
-    if(!this.data.attention){
-      this.setData({
-        isShowMod:false
-      })
-      storeService
-      .attentionFn({
-        shopId:this.data.shopid,
-        attention:!this.data.attention
-      })
-      .then(res=>{
-        this.setData({
-          attention:res.attention
-        })
-      })
-      
-    }else{
-      this.setData({
-        isShowMod:true
-      })
-    
-    }
     
   },
   callFn(){

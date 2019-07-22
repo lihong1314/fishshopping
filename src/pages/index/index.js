@@ -24,7 +24,7 @@ Page({
     windowHeight:0,
     windowWidth:0,
     offset: 1,
-    limit: 20,
+    limit: 10,
     total: 0,
     tuijianList:[]
   },
@@ -108,6 +108,15 @@ Page({
       tuijianFl:false,
       addjiantou:false
     })
+    const refresh = getStorage("refresh") || '';
+    setStorage("refresh",'0')
+    if(refresh == '1'){
+      this.setData({
+        addweight:1
+      })
+      this.getList();
+    }
+    
     // this.getList();
   },
   tailorTo(){
@@ -135,7 +144,8 @@ Page({
 
    
   },
-  onLoad(){
+  onLoad(option){
+    // const {refresh} = option;
     let _this = this;
     _this.setData({
       navH: App.globalData.navHeight
@@ -143,7 +153,10 @@ Page({
     this.initLocation()
     
     const { cuserId } = getStorage( 'USER_INFO' ) || {};
+    
     if(cuserId){
+      // console.log(refresh);
+      
       this.getList();
       
     }else{
@@ -216,7 +229,7 @@ Page({
 
   onPullDownRefresh() {
     this.setData({
-      tuijianList: [],
+      // tuijianList: [],
       offset: 1,
       total: 0,
     })

@@ -125,12 +125,19 @@ Page({
       
     },
     cancelFocus(){
+      const { cuserId } = getStorage( 'USER_INFO' ) || {};
+      if(cuserId == this.data.cuserId){
+        return;
+      }
       this.setData({
         isShowMod:true
       })
     },
     focusFn(){
       const { cuserId } = getStorage( 'USER_INFO' ) || {};
+      if(cuserId == this.data.cuserId){
+        return;
+      }
       personalService
       .addOrCancleAttention({
         cuserId,

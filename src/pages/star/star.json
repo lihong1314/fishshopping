@@ -2,7 +2,7 @@
 {
   "backgroundTextStyle":"dark",
   "backgroundColor": "#fff",
-  "navigationBarTitleText": "我的鱼苗",
+  "navigationBarTitleText": "我的关注",
   "navigationBarTextStyle":"black",
   "enablePullDownRefresh":true
 }

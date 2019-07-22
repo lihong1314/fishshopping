@@ -1,18 +1,53 @@
-<view class="stordetailbox">
+<!-- <view class="stordetailbox">
     <view class="storIcon">
         <view class="icon"><image src="{{cUserIcon}}"></image></view>
         <view class="name">{{cUserName}}</view>
         <view class="textbox">
             <p>淘贴 {{publishNum}}</p>
-            <p>鱼粉 {{fansNum}}</p>
+            <p>粉丝 {{fansNum}}</p>
         </view>
-        <view wx:if="{{attention}}" class="cancel" bindtap="cancelFocus">取关</view>
+        <view wx:if="{{attention}}" class="cancel" bindtap="cancelFocus">已关注</view>
         <view wx:else class="focus" bindtap="focusFn">关注</view>
     </view>
+</view> -->
+<view class="box">
+<view class="stordetailbox">
+        <view class="userbox">
+            <view style="display:flex;width:80%">
+            <view class="userimg">
+                <image src="{{cUserIcon}}"></image>
+            </view>
+            <view class="userinfo">
+                <view class="name">{{cUserName}}</view>
+                <view class="numbox">
+                    <view><p>{{attentionShopNum}}</p>收藏</view>
+                    <view><p>{{attentionCNum}}</p>关注 </view>
+                    <view><p>{{fansNum}}</p>粉丝 </view>
+                </view>
+            </view>
+            </view>
+            <view wx:if="{{attention}}" class="focus selector" bindtap="cancelFocus">已关注</view>
+            <view wx:else class="focus" bindtap="focusFn">关注</view>
+            
+        </view>
 </view>
-
+<view class="storbox">
+        <view class="store" bindtap="inStorFn" data-shopid="{{shopId}}">
+        <view class="storimg">
+            <image src="{{shopIcon}}"></image>
+        </view>
+        <view class="storinfo">
+            <view class="storname">{{shopName}}</view>
+            <view class="address">{{shopDitance}}km {{shopDetailAddress}}</view>
+        </view>
+        </view>
+        <view class="position" bindtap="chooselaction">
+            <image src="/assets/images/position.png"></image>
+        </view>
+    </view>
+</view>
 <view class="collectionbox">
-        <view wx:if="{{list.length <= 0}}" class="fulltip">还没有收藏的淘贴</view>
+        <view wx:if="{{list.length <= 0}}" class="fulltip">该用户还没有发布淘贴</view>
         <view wx:if="{{list.length > 0}}" class="postbox">
             <!--第一个淘贴-->
             <view class="post_item" wx:for="{{list}}" wx:key="index">

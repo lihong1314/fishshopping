@@ -9,7 +9,7 @@ Page({
   data:{
     isShowMod:false,
     offset: 1,
-    limit: 20,
+    limit: 10,
     total: 0,
     shopList:[]
   },
@@ -52,7 +52,7 @@ Page({
 
   onPullDownRefresh() {
     this.setData({
-      shopList: [],
+      // shopList: [],
       offset: 1,
       total: 0,
     })
@@ -67,6 +67,8 @@ Page({
       size:this.data.limit
     })
     .then(res=>{
+      
+      wx.hideLoading();
       let list = res.shopList;
       list.images
       list.map(item=>{
@@ -79,7 +81,6 @@ Page({
         total:res.totalSize
       })
       wx.stopPullDownRefresh();
-      wx.hideLoading();
     })
     
   },

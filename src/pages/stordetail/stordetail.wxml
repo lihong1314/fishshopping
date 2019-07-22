@@ -1,21 +1,48 @@
 <view class="stordetailbox">
-    <view class="storIcon">
+    <!-- <view class="storIcon">
         <view class="icon"><image src="{{shopIcon}}"></image></view>
         <view class="name">{{shopName}}</view>
         <view class="time">营业时间：{{openingTime}}-{{closingTime}}</view>
         <view class="focusbox">
-            <view>关注：<text>{{attentionedNum}}</text></view>
-            <view wx:if="{{attention}}" class="focus selector" bindtap="focusFn">取关</view>
-            <view wx:else class="focus" bindtap="focusFn">关注</view>
+            <view>收藏：<text>{{attentionedNum}}</text></view>
+            <view wx:if="{{attention}}" class="focus selector" bindtap="focusFn">已收藏</view>
+            <view wx:else class="focus" bindtap="focusFn">收藏</view>
         </view>
         <button class="share" bindtap="shareFn" open-type='share'><image src="/assets/images/shear.png"></image>分享</button>
-    </view>
+    </view> -->
+    <view class="storIcon1">
+        <view class="img">
+            <view class="icon"><image src="{{shopIcon}}"></image></view>
+        </view>
+        <view class="con">
+            <view class="name">{{shopName}}</view>
+            <view class="time">营业时间：{{openingTime}}-{{closingTime}}</view>
+            <div class="btnbox">
+                    <div class="focusbox">
+                            <view class="coll">
+                                <text>收藏：{{attentionedNum}}</text>
+                                <view class="focus" bindtap="focusFn"  data-index="{{index}}" data-collection="{{attention}}"><image src="{{attention?'/assets/images/collection_red.png':'/assets/images/collection.png'}}"></image></view>
+                            </view>
+                            
+                    </div> 
+                    <button class="share" bindtap="shareFn" open-type='share'><image src="/assets/images/shear.png"></image>分享</button>
+            </div>
+            
+        </view> 
+            
+            <!-- <view class="focusbox">
+                <view>收藏：<text>{{attentionedNum}}</text></view>
+                <view wx:if="{{attention}}" class="focus selector" bindtap="focusFn">已收藏</view>
+                <view wx:else class="focus" bindtap="focusFn">收藏</view>
+            </view> -->
+            
+        </view>
     <view class="info">
         <view class="phone" bindtap="callFn"><image src="/assets/images/phone.png"></image>{{shopTel}}</view>
         <view class="address" bindtap="openAddressFn"><view><image src="/assets/images/position.png"></image>{{shopDetailAdress}}</view>  <view class="disc">{{distance}}km</view></view>
     </view>
     <view class="imgbox">
-        <view class="title">店铺商品相册</view>
+        <view class="title">好店相册</view>
         <view class="con">
             <view class="img" wx:for="{{imgArr}}" wx:for-index="index" wx:key="index" wx:for-item="item" data-num="{{index}}">
                 <image bindtap="maxFn" mode='aspectFill' data-list="{{imgArr}}" data-index="{{index}}" src="{{item}}"></image>
@@ -26,5 +53,5 @@
 </view>
 
 
-<import src="/components/tip/tip.wxml" />
-<template is="tip" data="{{isShowMod}}" />
+<!-- <import src="/components/tip/tip.wxml" />
+<template is="tip" data="{{isShowMod}}" /> -->

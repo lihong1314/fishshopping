@@ -53,7 +53,7 @@ export const attentionFansOrCalcle=({fansId,attentionFans})=>{
 }
 
 
-// 获取关注鱼苗列表
+// 获已关注注鱼苗列表
 export const getAttentionList=({page,size})=>{
   const { cuserId } = getStorage( 'USER_INFO' ) || {};
   return post('https://www.xiaoxiaohb.com/street/home/attentionList', {

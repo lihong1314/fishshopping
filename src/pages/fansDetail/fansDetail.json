@@ -2,7 +2,7 @@
 {
   "backgroundTextStyle":"dark",
   "backgroundColor": "#fff",
-  "navigationBarTitleText": "鱼苗详情",
+  "navigationBarTitleText": "个人主页",
   "navigationBarTextStyle":"black",
   "enablePullDownRefresh":true
 }

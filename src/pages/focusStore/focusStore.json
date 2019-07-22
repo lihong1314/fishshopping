@@ -2,7 +2,7 @@
 {
   "backgroundTextStyle":"dark",
   "backgroundColor": "#fff",
-  "navigationBarTitleText": "关注门店",
+  "navigationBarTitleText": "收藏好店",
   "navigationBarTextStyle":"black",
   "enablePullDownRefresh":true
 }

@@ -12,7 +12,7 @@ Page({
     collectShow:true,
     postShow:false,
     offset: 1,
-    limit: 20,
+    limit: 10,
     total: 0,
     addweight:0
   },
@@ -95,7 +95,7 @@ Page({
 
   onPullDownRefresh() {
     this.setData({
-      publishList: [],
+      // publishList: [],
       offset: 1,
       total: 0,
     })

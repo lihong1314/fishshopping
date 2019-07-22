@@ -6,7 +6,7 @@
 
                 <ul class="tabtitle">
                     <li>
-                        <view class="distancebox" wx:if="{{distancebFl}}" bindtap="showdistanceb">{{distance}}km内
+                        <view class="distancebox" wx:if="{{distancebFl}}" bindtap="showdistanceb">{{distance}}km
                             <image class="{{addjiantou?'change':''}}" src="/assets/images/arrow_down.png" alt=""></image>
                         </view>
                         <view class="tuijian {{addweight==0?'selector':''}}" bindtap="recommendFn">推荐</view>
@@ -52,10 +52,14 @@
             
             <!--推荐遮罩-->
             <view class="tuijianbox" wx:if="{{tuijianFl}}" bindtap="hiddenFn">
-                <ul class="tuijiandown">
-                    <li wx:for="{{distanceArr}}" wx:for-index="index" wx:key="index" wx:for-item="item" class="{{index==distanceNum || item == distance?'selector':''}}" bindtap="selectList" data-num="{{index}}">{{item}}km</li>
-                    <!-- <li class="selector">10km</!-->
-                </ul>
+                <view class="con">
+                        <p>选择想看的距离范围</p>
+                        <ul class="tuijiandown">
+                            <li wx:for="{{distanceArr}}" wx:for-index="index" wx:key="index" wx:for-item="item" class="{{index==distanceNum || item == distance?'selector':''}}" bindtap="selectList" data-num="{{index}}">{{item}}km</li>
+                            <!-- <li class="selector">10km</!-->
+                        </ul>
+                </view>
+               
             </view>
             
             <!--入驻遮罩-->

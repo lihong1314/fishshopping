@@ -1,12 +1,14 @@
 
 @link-color : #FFDE00;
 page{
-    background:#f5f8fa
+    background:#fff;
 }
 .postbox{
-    background:#f5f8fa;
+    background:#fff;
     position: relative;
+    padding-bottom:100rpx;
     .userbox{
+        
         height:117rpx;
         padding:20rpx 19rpx;
         background:#fff;
@@ -45,25 +47,25 @@ page{
             }
         }
         .focus{
-            width:100rpx;
-            height:40rpx;
+            width: 130rpx;
+            height:50rpx;
             font-size:24rpx;
-            color:#fff;
-            background:#ff2f43;
-            border-radius: 8rpx;
+            color:#ff2f43;
+            // background:#ff2f43;
+            border:1rpx solid #ff2f43;
+            border-radius: 30rpx;
             text-align: center;
-            line-height: 40rpx;
-            margin-left:246rpx;
-            margin-top:26rpx;
+            line-height: 49rpx;
+            margin-top:16rpx;
         }
         .focus.selector{
             background:#fff;
             color:#666;
-            border-radius: 4px;
+            border-radius: 30px;
             border:1rpx solid #666;
             box-sizing: border-box;
-            line-height: 34rpx;
         }
+       
     }
     .postconbox{
         background:#fff;
@@ -95,9 +97,10 @@ page{
             }
         }
         .text{
-            font-size:28rpx;
+            font-size:32rpx;
             color:#333;
             padding:20rpx 19rpx;
+            line-height: 1.5
         }
         .fun{
             display:flex;
@@ -110,28 +113,34 @@ page{
             }
             .read{
                 color:#999;
-                margin-left:-250rpx;
+                margin-left:-306rpx;
             }
             .jubao{
-                color:#5387f4;
+                color:#333;
                 margin-left:45rpx;
             }
         }
     }
     .storbox{
-        margin:22rpx 0;
-        padding:18rpx 19rpx;
+        width:95%;
+        height:160rpx;
+        margin:22rpx auto;
+        padding:24rpx 19rpx;
         background:#fff;
         display:flex;
+        border-radius: 16rpx;
         justify-content:space-between;
+        margin-bottom:80rpx;
+        -moz-box-shadow:0px 2px 5px rgba(223,223,223,0.6); -webkit-box-shadow:0px 2px 5px rgba(223,223,223,0.6); box-shadow:0px 2px 5px rgba(223,223,223,0.6);
+        border:1rpx solid rgba(223,223,223,0.4);
         .store{
             display:flex;
             justify-content:flex-start;
         }
         .storimg{
-            width:98rpx;
-            height:98rpx;
-            border-radius: 50%;
+            width:110rpx;
+            height:110rpx;
+            border-radius: 8rpx;
             overflow: hidden;
             image{
                 width:100%;
@@ -139,23 +148,24 @@ page{
             }
         }
         .storinfo{
-            margin-left:33rpx;
+            margin-left:20rpx;
             font-size:30rpx;
             color:#333;
             padding-top:8rpx;
             .address{
                 font-size:24rpx;
                 color:#999;
-                margin-top:8rpx;
+                margin-top:16rpx;
             }
         }
         .position{
-            width:70rpx;
+            width:100rpx;
             height:79rpx;
             border-left:1rpx solid #eaeaea;
             text-align: center;
-            margin-top:8rpx;
+            margin-top:13rpx;
             line-height: 79rpx;
+            padding-left:19rpx;
             image{
                 width:32rpx;
                 height:32rpx;
@@ -164,6 +174,7 @@ page{
     }
     .btnbox{
         padding:20rpx 0;
+        height:100rpx;
         background:#fff;
         display: flex;
         justify-content: space-around;
@@ -192,11 +203,11 @@ page{
         }
         .collection{
             color:#333;
-            border:1rpx solid #333;
+            border:1rpx solid #eaeaea;
         }
         .share{
             color:#333;
-            border:1rpx solid #333;
+            border:1rpx solid #eaeaea;
         }
     }
 }
