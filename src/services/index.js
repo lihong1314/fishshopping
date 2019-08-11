@@ -6,16 +6,29 @@ const { getStorage, setStorage } = require('../utils/storage');
 //获取推荐淘贴列表
 export const getRecommend = ({ latitude,longitude,distance,page,size}) => {
   const {cuserId} = getStorage("USER_INFO") || {};
-  return post('https://www.xiaoxiaohb.com/street/home/list', {
-    data: {
-      cuserId,
-      latitude,
-      longitude,
-      distance:2500,
-      page,
-      size
-    }
-  })
+  if(cuserId){
+    return post('https://www.xiaoxiaohb.com/street/home/list', {
+      data: {
+        cuserId,
+        latitude,
+        longitude,
+        distance,
+        page,
+        size
+      }
+    })
+  }else{
+    return post('https://www.xiaoxiaohb.com/street/home/list', {
+      data: {
+        latitude,
+        longitude,
+        distance,
+        page,
+        size
+      }
+    })
+  }
+  
 }
 
 //获取首页已关注列表
@@ -34,15 +47,34 @@ export const getInterestList = ({page,size}) => {
 //获取推荐淘贴详情
 export const getRecommendDetail = ({ publishId}) => {
   const {cuserId} = getStorage("USER_INFO") || {};
-  const {latitude,longitude} = getStorage('location');
-  return post('https://www.xiaoxiaohb.com/street/home/detail', {
-    data: {
-      cuserId,
-      latitude,
-      longitude,
-      publishId
-    }
-  })
+  const {latitude,longitude} = getStorage('location') ||{};
+  if(cuserId && latitude){
+    
+    return post('https://www.xiaoxiaohb.com/street/home/detail', {
+      data: {
+        cuserId,
+        latitude,
+        longitude,
+        publishId
+      }
+    })
+  }else if(latitude){
+    return post('https://www.xiaoxiaohb.com/street/home/detail', {
+      data: {
+        publishId,
+        latitude,
+        longitude,
+      }
+    })
+  }else{
+    return post('https://www.xiaoxiaohb.com/street/home/detail', {
+      data: {
+        publishId,
+      }
+    })
+  }
+  
+  
 }
 
 

@@ -10,7 +10,7 @@ export const getStoreList = ({ latitude,longitude,distance,page,size}) => {
     data: {
       latitude,
       longitude,
-      distance:2500,
+      distance,
       page,
       size
     }
@@ -24,14 +24,33 @@ export const getStoreDetail = ({shopId}) => {
   //console.log(cityId, longitude, latitude )
   const {cuserId} = getStorage("USER_INFO") || {};
   const {longitude,latitude} = getStorage("location") || {};
-  return post('https://www.xiaoxiaohb.com/street/shop/detail', {
-    data: {
-      shopId,
-      cuserId,
-      longitude,
-      latitude
-    }
-  })
+  if(cuserId && longitude){
+    
+    return post('https://www.xiaoxiaohb.com/street/shop/detail', {
+      data: {
+        shopId,
+        cuserId,
+        longitude,
+        latitude
+      }
+    })
+  }else if(longitude){
+    return post('https://www.xiaoxiaohb.com/street/shop/detail', {
+      data: {
+        shopId,
+        longitude,
+        latitude
+      }
+    })
+  }else{
+    return post('https://www.xiaoxiaohb.com/street/shop/detail', {
+      data: {
+        shopId
+      }
+    })
+  }
+  
+  
 }
 
 
@@ -49,8 +68,8 @@ export const attentionFn = ({shopId,attention}) => {
 
 
 //获已关注注的门店列表
-export const getAttentionList = ({page,size}) => {
-  const {cuserId} = getStorage("USER_INFO") || {};
+export const getAttentionList = ({cuserId,page,size}) => {
+  // const {cuserId} = getStorage("USER_INFO") || {};
   const {longitude,latitude} = getStorage("location") || {};
   return post('https://www.xiaoxiaohb.com/street/shop/attentionlist', {
     data: {

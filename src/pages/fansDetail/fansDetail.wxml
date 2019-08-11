@@ -20,25 +20,25 @@
             <view class="userinfo">
                 <view class="name">{{cUserName}}</view>
                 <view class="numbox">
-                    <view><p>{{attentionShopNum}}</p>收藏</view>
-                    <view><p>{{attentionCNum}}</p>关注 </view>
-                    <view><p>{{fansNum}}</p>粉丝 </view>
+                    <view bindtap="gotofans"><p>{{fansNum}}</p>粉丝 </view>
+                    <view bindtap="gotostar"><p>{{attentionCNum}}</p>关注 </view>
+                    <view bindtap="gotoColl"><p>{{attentionPbNum}}</p>收藏</view>
                 </view>
             </view>
             </view>
-            <view wx:if="{{attention}}" class="focus selector" bindtap="cancelFocus">已关注</view>
-            <view wx:else class="focus" bindtap="focusFn">关注</view>
+            <view wx:if="{{attention}}" class="focus selector">已关注<button data-type="2" class="btnStyle" open-type="getUserInfo" lang="zh_CN" bindgetuserinfo="onGotUserInfo"></button></view>
+            <view wx:else class="focus">关注<button data-type="1" class="btnStyle" open-type="getUserInfo" lang="zh_CN" bindgetuserinfo="onGotUserInfo"></button></view>
             
         </view>
 </view>
 <view class="storbox">
         <view class="store" bindtap="inStorFn" data-shopid="{{shopId}}">
         <view class="storimg">
-            <image src="{{shopIcon}}"></image>
+            <image mode='aspectFill' src="{{shopIcon}}"></image>
         </view>
         <view class="storinfo">
             <view class="storname">{{shopName}}</view>
-            <view class="address">{{shopDitance}}km {{shopDetailAddress}}</view>
+            <view class="address"><text wx:if="{{shopDitance}}">{{shopDitance}}km</text> {{shopDetailAddress}}</view>
         </view>
         </view>
         <view class="position" bindtap="chooselaction">
@@ -57,17 +57,18 @@
                         <image src="{{item.images[0]}}"></image>
                     </view>
                     <view class="title">
-                        {{item.content}}
+                        <text>{{item.content}}</text>
                     </view>
                 </view>
-                <ul class="user">
-                    <li> <view class="userimg"><image src="{{cUserIcon}}"></image></view> </li>
-                    <li class="username">{{cUserName}}</li>
-                    <li class="focus" bindtap="collectionFn" data-publishid="{{item.publishId}}" data-index="{{index}}" data-collection="{{item.collection}}"><image src="{{item.collection?'/assets/images/collection_red.png':'/assets/images/collection.png'}}"></image></li>
-                </ul>
+                <div class="user">
+                    <div bindtap="gotoPostFn" data-publishid="{{item.publishId}}"> <view class="userimg"><image src="{{cUserIcon}}"></image></view> </div>
+                    <div bindtap="gotoPostFn" data-publishid="{{item.publishId}}" class="username">{{cUserName}}</div>
+                    <div class="focus" ><image src="{{item.collection?'/assets/images/collection_red.png':'/assets/images/collection.png'}}"></image><button data-type="3" data-publishid="{{item.publishId}}" data-index="{{index}}" data-collection="{{item.collection}}" class="btnStyle" open-type="getUserInfo" lang="zh_CN" bindgetuserinfo="onGotUserInfo"></button></div>
+                </div>
                 <!-- </navigator> -->
             </view>
             <!--第一个淘贴-->
+            <view class="endbox" wx:if="{{list.length > 0}}">- 没有更多了 -</view>
         </view>
     </view>
 

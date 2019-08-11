@@ -12,7 +12,7 @@
     </view> -->
     <view class="storIcon1">
         <view class="img">
-            <view class="icon"><image src="{{shopIcon}}"></image></view>
+            <view class="icon"><image mode='aspectFill' src="{{shopIcon}}"></image></view>
         </view>
         <view class="con">
             <view class="name">{{shopName}}</view>
@@ -21,7 +21,7 @@
                     <div class="focusbox">
                             <view class="coll">
                                 <text>收藏：{{attentionedNum}}</text>
-                                <view class="focus" bindtap="focusFn"  data-index="{{index}}" data-collection="{{attention}}"><image src="{{attention?'/assets/images/collection_red.png':'/assets/images/collection.png'}}"></image></view>
+                                <view class="focus"><image src="{{attention?'/assets/images/collection_red.png':'/assets/images/collection.png'}}"></image><button class="btnStyle" open-type="getUserInfo" lang="zh_CN"  data-index="{{index}}" data-collection="{{attention}}" bindgetuserinfo="onGotUserInfo"></button></view>
                             </view>
                             
                     </div> 
@@ -39,13 +39,13 @@
         </view>
     <view class="info">
         <view class="phone" bindtap="callFn"><image src="/assets/images/phone.png"></image>{{shopTel}}</view>
-        <view class="address" bindtap="openAddressFn"><view><image src="/assets/images/position.png"></image>{{shopDetailAdress}}</view>  <view class="disc">{{distance}}km</view></view>
+        <view class="address" bindtap="openAddressFn"><view><image src="/assets/images/position.png"></image>{{shopDetailAdress}}</view>  <view class="disc" wx:if="{{distance}}">{{distance}}km</view></view>
     </view>
     <view class="imgbox">
         <view class="title">好店相册</view>
         <view class="con">
             <view class="img" wx:for="{{imgArr}}" wx:for-index="index" wx:key="index" wx:for-item="item" data-num="{{index}}">
-                <image bindtap="maxFn" mode='aspectFill' data-list="{{imgArr}}" data-index="{{index}}" src="{{item}}"></image>
+                <image  mode='aspectFill' bindtap="maxFn" mode='aspectFill' data-list="{{imgArr}}" data-index="{{index}}" src="{{item}}"></image>
             </view>
         </view>
          
@@ -55,3 +55,6 @@
 
 <!-- <import src="/components/tip/tip.wxml" />
 <template is="tip" data="{{isShowMod}}" /> -->
+
+<import src="/components/disable/tip.wxml" />
+    <template is="disable" data="{{disableFlag}}" />  

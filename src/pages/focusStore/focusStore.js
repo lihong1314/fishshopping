@@ -41,7 +41,7 @@ Page({
     })
   },
   onReachBottom: function() {
-    if (this.data.total > this.data.limit * (this.data.offset + 1)) {
+    if (this.data.total > this.data.limit * (this.data.offset)) {
       this.setData({
         offset: this.data.offset + 1,
       });
@@ -52,7 +52,7 @@ Page({
 
   onPullDownRefresh() {
     this.setData({
-      // shopList: [],
+      shopList: [],
       offset: 1,
       total: 0,
     })
@@ -61,25 +61,35 @@ Page({
   },
   getList(){
     wx.showLoading({title:'加载中...'})
+    const {cuserId} = getStorage("USER_INFO") || {};
     storeService
     .getAttentionList({
+      cuserId,
       page:this.data.offset,
       size:this.data.limit
     })
     .then(res=>{
       
       wx.hideLoading();
-      let list = res.shopList;
-      list.images
-      list.map(item=>{
-        item.images = item.images.filter( (list,index) => {
-          return index <= 2
+      if(!res.shopList){
+        this.setData({
+          shopList:null,
+          total:res.totalSize
         })
-      })
-      this.setData({
-        shopList:list,
-        total:res.totalSize
-      })
+      }else{
+        let list = res.shopList;
+        list.images
+        list.map(item=>{
+          item.images = item.images.filter( (list,index) => {
+            return index <= 2
+          })
+        })
+        this.setData({
+          shopList:this.data.shopList.concat(list),
+          total:res.totalSize
+        })
+      }
+      
       wx.stopPullDownRefresh();
     })
     

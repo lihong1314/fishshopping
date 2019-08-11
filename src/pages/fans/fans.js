@@ -3,19 +3,34 @@ require('./fans.less');
 const { getStorage, setStorage } = require('../../utils/storage');
 import '../../components/tip/tip.less';
 import * as personalService from '../../services/personal';
-
+const account = require('../../services/account.js');
 Page({
   data:{
     isShowMod:false,
     offset: 1,
     limit: 10,
     total: 0,
-    fansList:[]
+    fansList:[],
+    tipcon:'还没有任何用户关注您哦！'
   },
-  onShow(){  
+  onShow(){ 
+    this.setData({
+      fansList:[]
+    }) 
   },
-  onLoad(){
+  onLoad(option){
+    const {id,type,uname} = option;
+    this.setData({
+      id
+    })
     this.getList()
+    if(type == '1'){
+      wx.setNavigationBarTitle({
+        title: uname+'的粉丝',
+        tipcon:'还没有任何用户关注他哦！'
+     })
+    }
+   
   },
   cancelFn(){
     this.setData({
@@ -49,8 +64,11 @@ Page({
   focusFn(e){
     
     const {attention,fansid,index} =  e.currentTarget.dataset;
+    const {cuserId} = getStorage("USER_INFO") || {};
     // console.log('attention:',fansid)
-
+    if(cuserId == fansid){
+      return;
+    }
     if(attention){
       this.setData({
         isShowMod:true,
@@ -83,7 +101,7 @@ Page({
 
   },
   onReachBottom: function() {
-    if (this.data.total > this.data.limit * (this.data.offset + 1)) {
+    if (this.data.total > this.data.limit * (this.data.offset)) {
       this.setData({
         offset: this.data.offset + 1,
       });
@@ -94,7 +112,7 @@ Page({
 
   onPullDownRefresh() {
     this.setData({
-      // fansList: [],
+      fansList: [],
       offset: 1,
       total: 0,
     })
@@ -103,18 +121,28 @@ Page({
   },
   getList(){
     wx.showLoading({title:'加载中...'})
+    const {id} = this.data;
     personalService
       .getFansList({
+        cuserId:id,
         page:this.data.offset,
         size:this.data.limit
       })
       .then(res=>{
-
-        this.setData({
-          fansList:res.publishList,
-          total:res.totalSize
-        })
         wx.hideLoading()
+        if(res.publishList){
+          this.setData({
+            fansList:this.data.fansList.concat(res.publishList),
+            total:res.totalSize
+          })
+        }else{
+          this.setData({
+            fansList:null,
+            total:res.totalSize
+          })
+        }
+        
+        
         wx.stopPullDownRefresh();
       })
     
@@ -124,5 +152,37 @@ Page({
     wx.navigateTo({
       url:`/pages/fansDetail/fansDetail?fansid=${fansid}`
     })
+  },
+  onGotUserInfo(e){
+      const { cuserId,access } = getStorage( 'USER_INFO' ) || {};
+      if(cuserId){
+        this.focusFn(e)
+      }else{
+        console.log('允许')
+        wx.showLoading({
+          title: '授权中请稍后...',
+          mask: true
+        })
+        console.log('e:',e)
+        if(e.detail.errMsg == "getUserInfo:fail auth deny"){
+          wx.hideLoading();
+          
+          return
+        }
+        return account.bindAccountBySilent(e.detail).then(res => {
+          setStorage( 'USER_INFO', res );
+          this.setData({
+            islogin:true
+          })
+          this.getList()
+          const pages = getCurrentPages()
+          const perpage = pages[pages.length - 1]
+          perpage.onLoad()  
+        }, err => {
+          // wx.redirectTo({ url: '/pages/personal/personal'})
+        })
+      }
+      
+    
   }
 })

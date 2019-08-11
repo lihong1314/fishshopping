@@ -4,6 +4,7 @@ page{
 .personalbox{
     padding:0 19rpx;
     background:#fff;
+    position: relative;
     .inforOne{
         display: flex;
         justify-content:space-between;
@@ -32,6 +33,7 @@ page{
             margin-right:16rpx;
             border-radius: 50%;
             overflow: hidden;
+            background:#eee;
             image{
                 width:100%;
                 height:100%;
@@ -40,6 +42,7 @@ page{
         .name{
             font-size:28rpx;
             padding-top:8rpx;
+            position: relative;
             div{
                 font-size:24rpx;
                 width:174rpx;
@@ -80,6 +83,7 @@ page{
             font-size:24rpx;
             color:#999;
             margin-top:10rpx;
+            position: relative;
             h3{
                 color:#333;
                 font-size:28rpx;
@@ -129,23 +133,26 @@ page{
         }
     }
     
-    .fulltip{
-        font-size:28rpx;
-        color:#999;
-        display: block;
-        text-align: center;
-        line-height: 80rpx;
-        margin-top:300rpx;
-    }
+   
     .postbox{
-        width:750rpx;
+        width:98%;
+        margin:0 auto;
         background:#f5f8fa;
         display:flex;
         flex-wrap: wrap;
         justify-content: flex-start;
         padding-bottom:20rpx;
+        .endbox{
+            font-size:20rpx;
+            color:#999;
+            text-align: center;
+            line-height: 54rpx;
+            width:100%;
+            height:54rpx;
+            float: left;
+        }
         .post_item{
-            margin:0 12rpx;
+            margin:0 8rpx;
             width:349rpx;
            
             background:#fff;
@@ -165,12 +172,15 @@ page{
             .title{
                 font-size:30rpx;
                 padding:18rpx 18rpx 0 18rpx;
+                height:100rpx;
+                text{
+
                 overflow: hidden;
                 text-overflow: ellipsis;
                 display: -webkit-box;
                 -webkit-line-clamp: 2;
                 -webkit-box-orient: vertical;
-                max-height:100rpx;
+                }
             }
             .user{
                 height: 60rpx;
@@ -214,6 +224,59 @@ page{
                 }
                 
             }
+        }
+    }
+}
+
+.ruzhu{
+    width:100%;
+    height:100%;
+    background:rgba(0,0,0,0.6);
+    position: fixed;
+    left:0;
+    top:0;
+    z-index: 3;
+    .ruzhucon{
+        width:499rpx;
+        height:270rpx;
+        background:#fff;
+        border-radius:8rpx;
+        position: absolute;
+        left:0;
+        right:0;
+        top:0;
+        bottom:0;
+        margin:auto;
+        .text{
+            font-size:30rpx;
+            text-align: center;
+            margin:50rpx 0;
+        }
+        .btnbox{
+            width:100%;
+            height:56rpx;
+            margin-top:8rpx;
+            padding-left:10rpx;
+        }
+        .btn{
+            width:168rpx;
+            height: 56rpx;
+            border-radius:25rpx;
+            border:0px;
+            background:#ff2f43;
+            overflow: hidden;
+            font-size: 30rpx;
+            text-align: center;
+            line-height: 56rpx;
+            color:#fff;
+            float:left;
+            border:1rpx solid #ff2f43;
+            position: relative;
+        }
+        .cancel{
+            background:#999;
+            margin-right:10rpx;
+            border:1rpx solid #999;
         }
     }
 }

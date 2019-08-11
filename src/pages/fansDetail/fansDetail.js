@@ -4,7 +4,7 @@ const { getStorage, setStorage } = require('../../utils/storage');
 import '../../components/tip/tip.less';
 import * as personalService from '../../services/personal';
 import * as indexService from '../../services/index'; 
-
+const account = require('../../services/account.js');
 Page({
   data:{
     isShowMod:false,
@@ -23,8 +23,9 @@ Page({
     this.setData({
       fansid
     })
+    const {latitude,longitude} = getStorage('location') || {};
     personalService
-   .getmine({cuserId:fansid})
+   .getmine2({cuserId:fansid,latitude,longitude})
    .then(res => {
      this.setData({
       attentionCNum:res.attentionCNum,
@@ -32,7 +33,8 @@ Page({
       fansNum:res.fansNum,
       publishNum:res.publishNum,
       cUserIcon:res.cUserIcon,
-      cUserName:res.cUserName
+      cUserName:res.cUserName,
+      ...res
      })
    })
     this.getList()
@@ -98,7 +100,7 @@ Page({
     })
   },
   onReachBottom: function() {
-    if (this.data.total > this.data.limit * (this.data.offset + 1)) {
+    if (this.data.total > this.data.limit * (this.data.offset)) {
       this.setData({
         offset: this.data.offset + 1,
       });
@@ -109,7 +111,7 @@ Page({
 
   onPullDownRefresh() {
     this.setData({
-      // list: [],
+      list: [],
       offset: 1,
       total: 0,
     })
@@ -125,13 +127,23 @@ Page({
       size:this.data.limit
     })
     .then(res=>{
-      this.setData({
-        list:res.publishList,
-        total:res.totalSize,
-        attention:res.attention
-      })
-      wx.stopPullDownRefresh();
       wx.hideLoading()
+      if(!res.publishList){
+        this.setData({
+          list:null,
+          total:res.totalSize,
+          attention:res.attention
+        })
+      }else{
+        this.setData({
+          list:this.data.list.concat(res.publishList),
+          total:res.totalSize,
+          attention:res.attention
+        })
+      }
+      
+      wx.stopPullDownRefresh();
+      
     })
   },
   gotoPostFn(e){
@@ -150,6 +162,7 @@ Page({
       })
       .then(res => {
         let list = this.data.list;
+        
         list[index].collection = res.collection
         this.setData({
           list
@@ -160,6 +173,9 @@ Page({
   },
   focusFn(){
     const { cuserId } = getStorage( 'USER_INFO' ) || {};
+    if(cuserId == this.data.fansid){
+      return;
+    }
       personalService
       .addOrCancleAttention({
         cuserId,
@@ -171,5 +187,60 @@ Page({
           attention:res.attention
         })
       })
+  },
+  gotofans(e){
+    wx.navigateTo({
+      url:`/pages/fans/fans?id=${this.data.fansid}&type=1&uname=${this.data.cUserName}`
+    })
+  },
+  gotostar(){
+    wx.navigateTo({
+      url:`/pages/star/star?id=${this.data.fansid}&type=1&uname=${this.data.cUserName}`
+    })
+  },
+  gotoColl(){
+    wx.navigateTo({
+      url:`/pages/tacollection/tacollection?id=${this.data.fansid}&uname=${this.data.cUserName}`
+    })
+  },
+  onGotUserInfo: function (e) {
+    const {type} =  e.currentTarget.dataset;
+    const { cuserId,access } = getStorage( 'USER_INFO' ) || {};
+    if(cuserId){
+      console.log("type:",type)
+      if(type == "2"){
+        this.cancelFocus()
+      }else if(type == '1'){
+        this.focusFn()
+      }else if(type == '3'){
+        this.collectionFn(e)
+      }
+      
+    }else{
+      console.log('允许')
+      wx.showLoading({
+        title: '授权中请稍后...',
+        mask: true
+      })
+      console.log('e:',e)
+      if(e.detail.errMsg == "getUserInfo:fail auth deny"){
+        wx.hideLoading();
+        
+        return
+      }
+      return account.bindAccountBySilent(e.detail).then(res => {
+        setStorage( 'USER_INFO', res );
+        this.setData({
+          islogin:true
+        })
+        this.getList()
+        const pages = getCurrentPages()
+        const perpage = pages[pages.length - 1]
+        perpage.onLoad()  
+      }, err => {
+        // wx.redirectTo({ url: '/pages/personal/personal'})
+      })
+    }
+    
   }
 })

@@ -2,28 +2,66 @@ require('./stordetail.less');
 
 const { getStorage, setStorage } = require('../../utils/storage');
 import '../../components/tip/tip.less';
+import '../../components/disable/tip.less';
 import * as storeService from '../../services/store';
-
+import * as wxp from '../../services/wxp';
+const account = require('../../services/account.js');
 Page({
   data:{
     imgArr:[],
     imgSrc:'',
     maxFlg:false,
     isShowMod:false,
-    
+    disableFlag:false
   },
   onShow(){
     
     
   },
+  initLocation() {
+    wxp
+      .getLocation()
+      .then((res) =>{
+        // console.log('res:',res)
+        setStorage('location',{latitude:res.latitude.toFixed(4),longitude:res.longitude.toFixed(4)})
+        this.setData({
+          location:{latitude:res.latitude.toFixed(4),longitude:res.longitude.toFixed(4)}
+        })
+      })
+      
+  },
   onLoad(option){
+    this.initLocation();
     const {shopid} = option;
+    this.setData({
+      shopid
+    })
+    const { access,cuserId } = getStorage( 'USER_INFO' ) || {};
+    if(!cuserId){
+      this.getData()
+    }else{
+      if(access == "Y" && access){
+       
+        this.getData()
+      }else{
+        this.setData({
+          disableFlag:true
+        })
+      }
+    }
+   
+      
+   
+  },
+  getData(){
+    const {shopid} = this.data;
     wx.showLoading({title:'加载中...'})
     storeService
       .getStoreDetail({
         shopId:shopid
       })
       .then(res => {
+        wx.hideLoading();
         this.setData({
           shopid,
           attention:res.attention,
@@ -42,7 +80,7 @@ Page({
         })
 
 
-        wx.hideLoading();
+        
         
       })
   },
@@ -80,49 +118,8 @@ Page({
       }
   }
   },
-  // cancelFn(){
-  //   this.setData({
-  //     isShowMod:false
-  //   })
-  // },
-  // sureFn(){
-  //   this.setData({
-  //     isShowMod:false
-  //   })
-  //   storeService
-  //     .attentionFn({
-  //       shopId:this.data.shopid,
-  //       attention:!this.data.attention
-  //     })
-  //     .then(res=>{
-  //       this.setData({
-  //         attention:res.attention
-  //       })
-  //     })
-  // },
-  focusFn(){
-    // if(!this.data.attention){
-    //   this.setData({
-    //     isShowMod:false
-    //   })
-    //   storeService
-    //   .attentionFn({
-    //     shopId:this.data.shopid,
-    //     attention:!this.data.attention
-    //   })
-    //   .then(res=>{
-    //     this.setData({
-    //       attention:res.attention
-    //     })
-    //   })
-      
-    // }else{
-    //   this.setData({
-    //     isShowMod:true
-    //   })
-    
-    // }
 
+  focusFn(){
     storeService
       .attentionFn({
         shopId:this.data.shopid,
@@ -148,5 +145,34 @@ Page({
       name: '',
       address: this.data.shopDetailAdress
     })
+  },
+  onGotUserInfo(e){
+    const { cuserId,access } = getStorage( 'USER_INFO' ) || {};
+    if(cuserId){
+      this.focusFn()
+    }else{
+      console.log('允许')
+      wx.showLoading({
+        title: '授权中请稍后...',
+        mask: true
+      })
+      console.log('e:',e)
+      if(e.detail.errMsg == "getUserInfo:fail auth deny"){
+        wx.hideLoading();
+        return
+      }
+      return account.bindAccountBySilent(e.detail).then(res => {
+        setStorage( 'USER_INFO', res );
+        this.setData({
+          islogin:true
+        })
+        this.getData()
+        const pages = getCurrentPages()
+        const perpage = pages[pages.length - 1]
+        perpage.onLoad()  
+      }, err => {
+        // wx.redirectTo({ url: '/pages/personal/personal'})
+      })
+    }
   }
 })

@@ -2,7 +2,7 @@
 {
   "backgroundTextStyle":"dark",
   "backgroundColor": "#fff",
-  "navigationBarTitleText": "我的淘贴",
+  "navigationBarTitleText": "TA的收藏",
   "navigationBarTextStyle":"black",
   "enablePullDownRefresh":true
 }

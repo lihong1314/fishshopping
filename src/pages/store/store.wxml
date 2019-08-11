@@ -2,7 +2,7 @@
     <view class="stor_item" wx:for="{{shopList}}" wx:for-index="index" wx:key="{{item.shopId}}" wx:for-item="item"  bindtap="inStorFn" data-shopid="{{item.shopId}}">
             <view class="stor_title" >
                 <view class="storimg">
-                    <image src="{{item.shopIcon}}"></image>
+                    <image mode='aspectFill' src="{{item.shopIcon}}"></image>
                 </view>
                 <view class="storinfo">
                     <view class="storname">{{item.shopName}}</view>
@@ -19,5 +19,9 @@
             </view>
     </view>
 
- 
+    <view class="endbox" wx:if="{{shopList.length > 0}}">- 没有更多了 -</view>
 </view>
+
+
+<import src="/components/disable/tip.wxml" />
+    <template is="disable" data="{{disableFlag}}" />  

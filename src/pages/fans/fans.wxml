@@ -16,12 +16,12 @@
                 </view>
             </view>
         <!-- </navigator> -->
-        <view wx:if="{{item.attentionFans}}" class="focus cancel" data-index="{{index}}" data-attention="{{item.attentionFans}}" data-fansid="{{item.fansId}}" bindtap="focusFn">已关注</view>
-        <view wx:else class="focus" data-index="{{index}}" data-attention="{{item.attentionFans}}" data-fansid="{{item.fansId}}" bindtap="focusFn">关注</view>
-            
+        <view wx:if="{{item.attentionFans}}" class="focus cancel">已关注<button class="btnStyle" open-type="getUserInfo" lang="zh_CN" data-type="2" data-index="{{index}}" data-attention="{{item.attentionFans}}" data-fansid="{{item.fansId}}"  bindgetuserinfo="onGotUserInfo"></button></view>
+        <view wx:else class="focus" >关注<button class="btnStyle" open-type="getUserInfo" lang="zh_CN" data-type="2"  data-index="{{index}}" data-attention="{{item.attentionFans}}" data-fansid="{{item.fansId}}"  bindgetuserinfo="onGotUserInfo"></button></view>
+        
     </view>
-
-    <view class="fulltip" wx:if="{{!fansList}}">还没有任何用户关注您哦！</view>
+    <view class="endbox" wx:if="{{fansList.length > 0}}">- 没有更多了 -</view>
+    <view class="fulltip" wx:if="{{!fansList}}">{{tipcon}}</view>
 
 </view>
 

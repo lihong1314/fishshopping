@@ -1,20 +1,24 @@
 
 <view class="personalbox">
     <view class="inforOne">
-        <view class="person" bindtap="gotoInformation">
+        <view class="person" >
             <view class="img"><image src="{{avatarUrl}}"></image></view>
             <view class="name">
                 <p>{{nickName}}</p>
-                <div>个人信息</div>  
+                <div wx:if="{{cuserId}}">个人信息</div> 
+                <div wx:else>登录</div> 
+                <button class="btnStyle" open-type="getUserInfo" data-type="4" lang="zh_CN" bindgetuserinfo="onGotUserInfo"></button>
             </view>
+            
         </view>
-        <view class="storbox">
-            <navigator url="">
+
+        <view class="storbox" bindtap="gotoShopapp">
+            
                 <div>
                     <image src="/assets/images/stor_grey.png"></image>
                 </div>
                 <p> 我的好店</p>
-            </navigator>
+            
         </view>
         
         <!-- <div class="help" bindtap="gotoHelp"><image src="/assets/images/help.png"></image></div> -->
@@ -22,24 +26,24 @@
     </view>
     <view class="inforTwo">
         <view class="items">
-            <navigator url="../fans/fans">
-                <h3 class="fans">{{fansNum}}</h3>
-                <p> 我的粉丝</p>
-            </navigator>
+            <h3 class="fans">{{fansNum}}</h3>
+            <p> 我的粉丝</p>
+            <button class="btnStyle" open-type="getUserInfo" data-type="1" lang="zh_CN" bindgetuserinfo="onGotUserInfo">
+                </button>
         </view>
         <view class="line"></view>
         <view class="items">
-            <navigator url="../star/star">
-                <h3 class="star">{{attentionCNum}}</h3>
-                <p> 我的关注</p>
-            </navigator>
+            <h3 class="star">{{attentionCNum}}</h3>
+            <p> 我的关注</p>
+            <button class="btnStyle" open-type="getUserInfo" data-type="2" lang="zh_CN" bindgetuserinfo="onGotUserInfo">
+                </button>
         </view>
         <view class="line"></view>
         <view class="items">
-            <navigator url="../focusStore/focusStore">
-                <h3 class="focusStore">{{attentionShopNum}}</h3>
-                <p> 收藏好店</p>
-            </navigator>
+            <h3 class="focusStore">{{attentionShopNum}}</h3>
+            <p> 收藏好店</p>
+            <button class="btnStyle" open-type="getUserInfo" data-type="3" lang="zh_CN" bindgetuserinfo="onGotUserInfo">
+                </button>
         </view>
         <!-- <view class="line"></view>
         <view class="items">
@@ -69,19 +73,19 @@
                         <image src="{{item.images[0]}}"></image>
                     </view>
                     <view class="title">
-                        {{item.content}}
+                        <text>{{item.content}}</text>
                     </view>
                 </view>
-                <ul class="user">
-                    <li> <view class="userimg"><image src="{{item.cUserIcon}}"></image></view> </li>
-                    <li class="username">{{item.cUserName}}</li>
-                    <li class="focus" bindtap="focusFn" data-publishid="{{item.publishId}}" data-index="{{index}}" data-collection="{{item.collection}}"><image src="{{item.collection?'/assets/images/collection_red.png':'/assets/images/collection.png'}}"></image></li>
-                </ul>
+                <div class="user">
+                    <div bindtap="gotoPostFn" data-publishid="{{item.publishId}}"> <view class="userimg"><image src="{{item.cUserIcon}}"></image></view> </div>
+                    <div bindtap="gotoPostFn" data-publishid="{{item.publishId}}" class="username">{{item.cUserName}}</div>
+                    <div class="focus" bindtap="focusFn" data-publishid="{{item.publishId}}" data-index="{{index}}" data-collection="{{item.collection}}"><image src="{{item.collection?'/assets/images/collection_red.png':'/assets/images/collection.png'}}"></image></div>
+                </div>
             </view>
             <!--第一个淘贴end-->
    
     
-           
+            <view class="endbox" wx:if="{{publishList.length > 0}}">- 没有更多了 -</view>
         </view>
     
         <view class="postbox" wx:if="{{postShow}}">
@@ -93,21 +97,21 @@
                             <image src="{{item.images[0]}}"></image>
                         </view>
                         <view class="title">
-                            {{item.content}}
+                            <text>{{item.content}}</text>
                         </view>
                     </view>
-                        <ul class="user" data-cuserid="{{item.cuserId}}">
-                            <li> <view class="userimg"><image src="{{avatarUrl}}"></image></view> </li>
-                            <li class="username">{{nickName}}</li>
-                            <li class="focus" bindtap="delFn" data-publishid="{{item.publishId}}"><image src="/assets/images/del.png"></image></li>
-                        </ul>
+                    <div class="user" data-cuserid="{{item.cuserId}}">
+                        <div bindtap="gotoPostFn" data-publishid="{{item.publishId}}"> <view class="userimg"><image src="{{avatarUrl}}"></image></view> </div>
+                        <div bindtap="gotoPostFn" data-publishid="{{item.publishId}}" class="username">{{nickName}}</div>
+                        <div class="focus" bindtap="delFn" data-publishid="{{item.publishId}}"><image src="/assets/images/del.png"></image></div>
+                    </div>
                 </view>
         
                 <!--第一个淘贴-->
                 
   
                 
-        
+                <view class="endbox" wx:if="{{publishList.length > 0}}">- 没有更多了 -</view>
                
             </view>
 </view>
@@ -115,3 +119,20 @@
 
 <import src="/components/tip/tip.wxml" />
 <template is="tip" data="{{isShowMod}}"/>
+
+<import src="/components/disable/tip.wxml" />
+<template is="disable" data="{{disableFlag}}" />
+
+<!-- 登录授权 -->
+<view class="ruzhu" wx:if="{{ruzhuFn}}">
+    <view class="ruzhucon">
+        <view class="text">请登录</view>
+        <view class="btnbox">
+            <div class="btn cancel" bindtap="cancelDen">取消</div>
+            <div class="btn">登录<button class="btnStyle" data-publishid="{{item.publishId}}" data-index="{{index}}" data-collection="{{item.collection}}" data-type="5" open-type="getUserInfo" lang="zh_CN" bindgetuserinfo="onGotUserInfo">
+            </button></div>
+        </view>
+    </view>
+</view>
+
+

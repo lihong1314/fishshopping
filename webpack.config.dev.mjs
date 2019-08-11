@@ -15,7 +15,7 @@ import {
 
 export default function() {
   return {
-    devtool: 'cheap-module-source-map',
+    // devtool: 'cheap-module-source-map',
 
     entry: check.entries,
 

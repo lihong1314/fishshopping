@@ -34,34 +34,36 @@ Page({
   //选择图片
   chooseimg: function (addweight) {
     var that = this;
-    releaseService
-    .getImage()
-    .then(res =>{
+
+    wx.chooseImage({ 
+      count: 1, // 默认9 // 选择图片数量，选项采用只能选择1张图片 
+      sizeType: ['compressed'], // 可以指定是原图还是压缩图，选项采用压缩图 
+      sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有 
+      success: function (res) { 
+           console.log("选择：",res)
         that.setData({
           cutImage: 'show',
           addtribeConShow: 'hide',
           xx: true
         });
-        that.wecropper.pushOrign(res.res.tempFilePaths[0]);
-        
-    })
-    .catch(err=>{
-      // console.log("addweight:",addweight)
-      if(addweight ==1){
-        wx.switchTab({
-          url: `/pages/index/index`
-        })
-      }else if(addweight ==0){
-        wx.redirectTo({
-          url: `/pages/release/release`
-        })
-      }else if(addweight ==2){
-        wx.redirectTo({
-          url: `/pages/information/information`
-        })
-      }
-      
-    })
+        that.wecropper.pushOrign(res.tempFilePaths[0]);
+      },
+      fail:function(){
+        if(addweight ==1){
+              wx.switchTab({
+                url: `/pages/index/index`
+              })
+            }else if(addweight ==0){
+              wx.redirectTo({
+                url: `/pages/release/release`
+              })
+            }else if(addweight ==2){
+              wx.redirectTo({
+                url: `/pages/information/information`
+              })
+            }
+      } 
+    });
     
   },
   onUnload(){
@@ -90,17 +92,17 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad(option){
-    
+    var that = this
     const {index} = option;
     this.setData({
       index
     })
     this.chooseimg(index);
-    var that = this
+    
     const {
       cropperOpt
     } = this.data
-    
+    console.log("index:",index)
     new WeCropper(cropperOpt)
       .on('ready', (ctx) => { })
       .on('beforeImageLoad', (ctx) => {
@@ -122,6 +124,8 @@ Page({
         console.log(`current canvas context:`, ctx)
       })
       .updateCanvas();
+
+
   },
   touchStart(e) {
     this.wecropper.touchStart(e)
@@ -147,7 +151,7 @@ Page({
             img: src,
           })
           let list =  getStorage('imgUrls') || [];
-          list.unshift(src)
+          list.push(src)
           setStorage('imgUrls',list);
           wx.redirectTo({
             url: `/pages/release/release`

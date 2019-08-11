@@ -609,7 +609,8 @@ function methods () {
   var y = ref.y; if ( y === void 0 ) y = 0;
   var width = ref.width; if ( width === void 0 ) width = boundWidth;
   var height = ref.height; if ( height === void 0 ) height = boundHeight;
-
+  console.log("self.scaleWidth",self.scaleWidth)
+  console.log("self.scaleHeight:",self.scaleHeight)
   self.updateCanvas = function () {
     if (self.croperTarget) {
       //  画布绘制图片
@@ -684,7 +685,7 @@ function methods () {
       case '[object Object]':
         var ref = args[0];
     var quality = ref.quality; if ( quality === void 0 ) quality = 10;
-
+      console.log("quality:",quality)
         if (typeof (quality) !== 'number') {
           console.error(("quality：" + quality + " is invalid"));
         } else if (quality < 0 || quality > 10) {
@@ -698,6 +699,7 @@ function methods () {
           height: height,
           destWidth: width * quality / (deviceRadio * 10),
           destHeight: height * quality / (deviceRadio * 10),
+          quality:0.6,
           success: function success (res) {
             isFunction(fn) && fn.call(self, res.tempFilePath);
           },
@@ -714,6 +716,7 @@ function methods () {
           height: height,
           destWidth: width / deviceRadio,
           destHeight: height / deviceRadio,
+          quality:0.6,
           success: function success (res) {
             isFunction(fn) && fn.call(self, res.tempFilePath);
           },
@@ -898,7 +901,7 @@ function cut () {
 	 */
   self.setBoundStyle = function (ref) {
     if ( ref === void 0 ) ref = {};
-    var color = ref.color; if ( color === void 0 ) color = '#04b00f';
+    var color = ref.color; if ( color === void 0 ) color = '#19cd24';
     var mask = ref.mask; if ( mask === void 0 ) mask = 'rgba(0, 0, 0, 0.3)';
     var lineWidth = ref.lineWidth; if ( lineWidth === void 0 ) lineWidth = 1;
 

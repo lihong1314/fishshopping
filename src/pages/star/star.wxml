@@ -15,10 +15,12 @@
             </view>
         </view>
     
-        <view class="focus cancel" data-index="{{index}}" data-attention="{{item.attentionFans}}" data-attentionid="{{item.attentionId}}" bindtap="cancelFocus">已关注</view>
-    </view>
+        <view class="focus cancel" >已关注<button class="btnStyle" open-type="getUserInfo" lang="zh_CN" data-index="{{index}}" data-attention="{{item.attentionFans}}" data-attentionid="{{item.attentionId}}"  bindgetuserinfo="onGotUserInfo"></button></view>
 
-    <view  wx:if="{{!starList}}" class="fulltip">您还没有关注任何用户哦！</view>
+        
+    </view>
+    <view class="endbox" wx:if="{{starList.length > 0}}">- 没有更多了 -</view>
+    <view  wx:if="{{!starList}}" class="fulltip">{{tipcon}}</view>
 
 </view>
     

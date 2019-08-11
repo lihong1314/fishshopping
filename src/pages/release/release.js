@@ -37,13 +37,14 @@ Page({
       })
     }
     this.setData({
-      imgUrls:list
+      imgUrls:list,
+      current:list.length - 1
     })
     setStorage('imgUrls',list);
     let qqmapsdk = new QQMapWX({
         key: 'HUZBZ-ND7W4-MA4UY-X2QFA-XXT2V-BBBTX'
     });
-    const {latitude,longitude} = getStorage('location');
+    const {latitude,longitude} = getStorage('location')||{};
     qqmapsdk.reverseGeocoder({
       location: {
         latitude,
@@ -70,40 +71,17 @@ Page({
       clickflg:true
     })
     let that = this;
-    wx.showLoading({title:'加载中...'})
+    wx.showLoading({title:'正在上传图片...'})
 
     const {imgUrls,releaseValue} = this.data;
-    new Promise((resolve, reject) => {
-      imgUrls.map((index,item)=>{
-        this.upload(that,index,item);
-      })
-    })
-    
-    setTimeout(()=>{
-      console.log("图片列表:",this.data.publishImages)
-      const {latitude,longitude} = getStorage('location');
-      const {cuserId} = getStorage('USER_INFO');
-      releaseService
-      .publish({
-        cuserId,
-        content:releaseValue,
-        latitude,
-        longitude,
-        location:this.data.address,
-        publishImages:this.data.publishImages
-      })
-      .then(res => {
-        // console.log('发布:',res)
-          wx.showToast({title: '发布成功'})
-          setTimeout(()=>{
-            setStorage("refresh","1");
-            wx.switchTab({
-              url: `/pages/index/index`
-            })
-          },1000)
+    this.upload({
+      i:0,
+      url:'https://www.xiaoxiaohb.com/street/file/upload',//这里是你图片上传的接口
+      path:imgUrls//这里是选取的图片的地址数组 
+    });
 
-      })
-    },2000)
+    
+   
    
     
 
@@ -136,9 +114,21 @@ Page({
     setStorage('imgUrls',list);
   },
   addFn(){
-    wx.navigateTo({
-      url: `/pages/tailor/tailor?index=0`
-    })
+    const list = this.data.imgUrls;
+    if(list.length >= 9){
+      wx.showModal({
+        title: '',
+        content: '最多添加9张图片',
+        showCancel:false,
+        success (res) {}
+      })
+      
+    }else{
+      wx.navigateTo({
+        url: `/pages/tailor/tailor?index=0`
+      })
+    }
+   
     
   },
   onShow() {
@@ -169,57 +159,95 @@ Page({
       })
     }
   },
-  upload(page, path,index){
+  upload(data){
     let that = this;
-    wx.showToast({
-      icon: "loading",
-      title: "正在上传"
+    // wx.showToast({
+    //   icon: "loading",
+    //   title: "正在上传"
+    // })
+    this.setData({
+      btnStatus:false
     })
-      wx.uploadFile({
-        url: "https://www.xiaoxiaohb.com/street/file/upload",
-        filePath: path, 
-        name: 'file',
-        header: { "Content-Type": "multipart/form-data;charset=UTF-8" },
-        formData: {
-          //和服务器约定的token, 一般也可以放在header中
-          'session_token': wx.getStorageSync('LOGIN_SESSION_FFAN')
-        },
-        success: function (res) {
-          console.log(res.data)
-          var obj = JSON.parse(res.data);//转换为json对象obj
-          if (res.code == 0 || res.code == 200) { 
-            wx.showModal({
+
+      var i=data.i?data.i:0,//当前上传的哪张图片
+      success=data.success?data.success:0,//上传成功的个数
+      fail=data.fail?data.fail:0;//上传失败的个数
+         wx.uploadFile({
+         url: data.url, 
+         filePath: data.path[i],
+         name: 'file',//这里根据自己的实际情况改
+         formData:null,//这里是上传图片时一起上传的数据
+         success:(resp)=>{
+            success++;//图片上传成功，图片上传成功的变量+1
+            console.log(resp)
+            console.log(i);                
+            //这里可能有BUG，失败也会执行这里,所以这里应该是后台返回过来的状态码为成功时，这里的success才+1
+            var obj = JSON.parse(resp.data);//转换为json对象obj
+            if (resp.code == 0 || resp.code == 200) { 
+              // wx.showModal({
+              //   title: '提示',
+              //   content: `已上传${index}张图片`,
+              //   showCancel: false
+              // })
+              
+            }
+            let list = that.data.publishImages;
+            list[i]={};
+            list[i].imageOrder = i;
+            list[i].imageUrl = obj.data.imageUrl;
+            // list.push(list[index]);
+            that.setData({
+              publishImages:list
+            }) 
+         },
+         fail:(res)=>{
+             fail++;//图片上传失败，图片上传失败的变量+1
+             wx.showModal({
               title: '提示',
-              content: `已上传${index}张图片`,
+              content: '上传失败',
               showCancel: false
             })
-            
-          }
-          let list = that.data.publishImages;
-          list[index]={};
-          list[index].imageOrder = index;
-          list[index].imageUrl = obj.data.imageUrl;
-          // list.push(list[index]);
-          that.setData({
-            publishImages:list
-          })
-          // var data = res.data
-          // page.setData({  //上传成功修改显示头像
-          //   src: path[0]
-          // })
-        },
-        fail: function (e) {
-          console.log(e);
-          wx.showModal({
-            title: '提示',
-            content: '上传失败',
-            showCancel: false
-          })
-        },
-        complete: function () {
-          wx.hideToast();  //隐藏Toast
-        }
-      })
+         },
+         complete:()=>{
+             console.log(i);
+             i++;//这个图片执行完上传后，开始上传下一张            
+             if(i==data.path.length){   //当图片传完时，停止调用          
+                 console.log('执行完毕');
+                 console.log('成功：'+success+" 失败："+fail);
+                 const {latitude,longitude} = getStorage('location') || {};
+                  const {cuserId} = getStorage('USER_INFO');
+                  let releaseValue = that.data.releaseValue;
+                  releaseValue = releaseValue.replace(/(^\s*)|(\s*$)/g,"");
+                  releaseService
+                  .publish({
+                    cuserId,
+                    content:releaseValue.split('\n').join('&hc'),
+                    latitude,
+                    longitude,
+                    location:this.data.address,
+                    publishImages:this.data.publishImages
+                  })
+                  .then(res => {
+                    // console.log('发布:',res)
+                      wx.showToast({title: '发布成功'})
+                      setTimeout(()=>{
+                        setStorage("refresh","1");
+                        wx.switchTab({
+                          url: `/pages/index/index`
+                        })
+                      },1000)
+
+                  })
+             }else{//若图片还没有传完，则继续调用函数                
+               console.log(i);
+               data.i=i;
+               data.success=success;
+               data.fail=fail;
+               that.upload(data);
+             }
+         }
+     });
+
   },
   promiseCallBack(){
     return new Promise((resolve,reject)=>{

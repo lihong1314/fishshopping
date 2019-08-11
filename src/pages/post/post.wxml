@@ -14,8 +14,9 @@
             </view>
         </view>
         </view>
-        <view wx:if="{{attention}}" class="focus selector" bindtap="cancelFocus">已关注</view>
-        <view wx:else class="focus" bindtap="focusFn">关注</view>
+        <view wx:if="{{attention}}" class="focus selector" >已关注<button class="btnStyle" open-type="getUserInfo" data-type="2" lang="zh_CN" bindgetuserinfo="onGotUserInfo">
+            </button></view>
+        <view wx:else class="focus">关注<button data-type="1" class="btnStyle" open-type="getUserInfo" lang="zh_CN" bindgetuserinfo="onGotUserInfo"></button></view>
        
     </view>
 
@@ -32,7 +33,7 @@
                 </swiper>
                 <view class="tipbox">{{current+1}}/{{imgUrls.length}}</view>
         </view>
-        <view class="text">{{content}}</view>
+        <text class="text">{{content}}</text>
         <view class="fun">
             <view class="time">{{createTime}}</view>
             <view class="read" >浏览 {{readTimes}}</view>
@@ -43,11 +44,11 @@
     <view class="storbox">
         <view class="store" bindtap="inStorFn" data-shopid="{{shopId}}">
         <view class="storimg">
-            <image src="{{shopIcon}}"></image>
+            <image mode='aspectFill' src="{{shopIcon}}"></image>
         </view>
         <view class="storinfo">
             <view class="storname">{{shopName}}</view>
-            <view class="address">{{shopDitance}}km {{shopDetailAddress}}</view>
+            <view class="address"><text wx:if="{{shopDitance}}">{{shopDitance}}km</text> {{shopDetailAddress}}</view>
         </view>
         </view>
         <view class="position" bindtap="chooselaction">
@@ -56,7 +57,8 @@
     </view>
 
     <view class="btnbox">
-        <button class="btn {{collection?'':'collection'}}" bindtap="checkCollentFn"><image src="{{collection?'/assets/images/collection_red.png':'/assets/images/collection.png'}}"></image>{{collection?'已收藏':'收藏'}}</button>
+        <div class="btn {{collection?'':'collection'}}" ><image src="{{collection?'/assets/images/collection_red.png':'/assets/images/collection.png'}}"></image>{{collection?'已收藏':'收藏'}}<button class="btnStyle" open-type="getUserInfo" data-type="3" lang="zh_CN" bindgetuserinfo="onGotUserInfo">
+            </button></div>
         <button class="btn share" bindtap="shareFn" open-type='share'><image src="/assets/images/shear.png"></image>分享</button>
     </view>
 </view>
@@ -67,4 +69,5 @@
 <!-- <tip id="tip" is-show="{{isShowMod}}" ></tip> -->
 <import src="/components/tip/tip.wxml" />
 <template is="tip" data="{{isShowMod}}" />
-
+<import src="/components/disable/tip.wxml" />
+    <template is="disable" data="{{disableFlag}}" />  

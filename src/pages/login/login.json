@@ -1,8 +1,0 @@
-{
-  "navigationBarTitleText": "注册或登录",
-  "navigationBarBackgroundColor": "#ffffff",
-  "navigationBarTextStyle": "black",
-  "usingComponents": {
-    "tiperr": "/components/tip_err/tip_err"
-  }
-}

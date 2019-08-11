@@ -10,7 +10,7 @@
 
 <view class="conbox">
     <view class="imgbox" wx:if="{{isShow}}">
-        <swiper indicator-dots="{{indicatorDots}}"
+        <swiper current="{{current}}" indicator-dots="{{indicatorDots}}"
             autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" bindchange="swiperChange">
             <block wx:for="{{imgUrls}}" wx:key="index">
               <swiper-item>
@@ -24,7 +24,7 @@
     </view>
     <view wx:if="{{kongShow}}" class="imgkong" bindtap="addFn"><image src="/assets/images/add.png"></image></view>
     <view class="wordbox">
-        <textarea class="wordcon" placeholder-style="color:#b2b2b2" maxlength="500" placeholder="请输入要发布的内容，不多于500字" bindinput="addReleaseCon" value="{{releaseValue}}" ></textarea>
+        <textarea class="wordcon" placeholder-style="color:#b2b2b2" maxlength="500" placeholder="请输入要发布的内容，不多于500字" cols="20" wrap="hard" bindinput="addReleaseCon" value="{{releaseValue}}" ></textarea>
     </view>
 
     <button class="cxuan {{btnStatus==true? '':'grey'}}" bindtap="releaseFn">发布</button>

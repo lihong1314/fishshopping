@@ -17,8 +17,8 @@ export const getImage = ()=>new Promise(( resolve, reject )=>{
   
     wx.chooseImage({
       count:1,
-      sizeType:"compressed",
-      sourceType:'album',
+      sizeType:['compressed'],
+      sourceType:['album', 'camera'],
       success(res){
         console.log('哈哈')
         resolve({
@@ -32,18 +32,6 @@ export const getImage = ()=>new Promise(( resolve, reject )=>{
       }
     })
 
-    // wx.chooseMessageFile({
-    //   count: 10,
-    //   type: 'image',
-    //   success (res) {
-    //     // tempFilePath可以作为img标签的src属性显示图片
-    //     const tempFilePaths = res.tempFilePaths
-    //     resolve({res})
-    //   },
-    //   fail(){
-    //     reject()
-    //   }
-    // })
   
 })
 

@@ -1,0 +1,5 @@
+<template name="disable">
+    <view class="jingyongbox" wx:if="{{disableFlag}}">
+        <view class="jingyong">您的账号已被禁用，如有疑问，请关注“小鱼淘街”微信公众号进行咨询。</view>
+    </view>
+</template>

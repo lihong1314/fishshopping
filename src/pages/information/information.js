@@ -17,20 +17,20 @@ Page({
   onLoad(option){
     // wx.showLoading({title:'加载中...'})
     const { cuserId,avatarUrl,nickName } = getStorage( 'USER_INFO' ) || {};
-    const {src,name} = option;
+    const {src} = option;
     console.log('src',src)
     if(src){
       this.setData({
         img:src,
         cuserId,
-        name:name
+        name:nickName
       })
       this.saveFn()
     }else{
       this.setData({
         cuserId,
         img:avatarUrl,
-        name:name
+        name:nickName
       })
     }
     
@@ -52,7 +52,10 @@ Page({
     this.setData({
       clickFlg:false
     })
-    const {name,img,cuserId}=this.data;
+    const {name, img, cuserId}=this.data;
+    let username = name;
+    // const { cuserId,avatarUrl,nickName } = getStorage( 'USER_INFO' ) || {};
+    console.log('name:',username)
     if(name != ''){
       wx.showToast({
         icon: "loading",
@@ -65,7 +68,7 @@ Page({
         header: { "Content-Type": "multipart/form-data;charset=UTF-8" },
         formData: {
           'file':img,
-          'cuserName':name,
+          'cuserName':username,
           'cuserId':cuserId
         },
         success: function (res) {

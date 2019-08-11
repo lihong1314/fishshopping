@@ -1,0 +1,67 @@
+
+
+
+<view class="collectionbox">
+    <div style="background:#fff;">
+    <div class="titlebox">
+        <p bindtap="collectFn" class="{{collectShow ? 'selector':''}}">收藏淘贴</p>
+        <p bindtap="postFn" class="{{postShow ? 'selector':''}}">收藏好店</p>
+    </div>
+</div>
+    <!-- <view class="fulltip">还没有收藏的淘贴</view> -->
+    <view class="postbox" wx:if="{{collectShow}}">
+            <!--第一个淘贴start-->
+            <view class="post_item" wx:for="{{publishList}}" wx:key="index" wx:for-item="item">
+                <view bindtap="gotoPostFn" data-publishid="{{item.publishId}}">
+                    <view class="imgbox">
+                        <image src="{{item.images[0]}}"></image>
+                    </view>
+                    <view class="title">
+                        <text>{{item.content}}</text>
+                    </view>
+                </view>
+                <div class="user">
+                    <div bindtap="gotoPostFn" data-publishid="{{item.publishId}}"> <view class="userimg"><image src="{{item.cUserIcon}}"></image></view> </div>
+                    <div bindtap="gotoPostFn" data-publishid="{{item.publishId}}" class="username">{{item.cUserName}}</div>
+                    <div class="focus"><image src="{{item.collection?'/assets/images/collection_red.png':'/assets/images/collection.png'}}"></image><button class="btnStyle" open-type="getUserInfo" lang="zh_CN" data-type="2" data-publishid="{{item.publishId}}" data-index="{{index}}" data-collection="{{item.collection}}" bindgetuserinfo="onGotUserInfo"></button></div>
+                </div>
+            </view>
+            <!--第一个淘贴end-->
+   
+    
+            <view class="endbox" wx:if="{{publishList.length > 0}}">- 没有更多了 -</view>
+            <view class="fulltip" wx:if="{{!publishList}}">还没有收藏任何淘贴哦！</view>
+        </view>
+
+
+        <view class="storbox" wx:if="{{postShow}}">
+                <view wx:if="{{publishList.length>0}}" class="stor_item" wx:for="{{publishList}}" wx:for-index="index" wx:key="{{item.shopId}}" wx:for-item="item"  bindtap="inStorFn" data-shopid="{{item.shopId}}">
+                        <view class="stor_title" >
+                            <view class="storimg">
+                                <image mode='aspectFill' src="{{item.shopIcon}}"></image>
+                            </view>
+                            <view class="storinfo">
+                                <view class="storname">{{item.shopName}}</view>
+                                <view class="address">{{item.distance}}km {{item.shopDetailAdress}}</view>
+                            </view>
+                            <!-- <view class="instor">
+                                进店
+                            </view> -->
+                        </view>
+                        <view class="imgbox" >
+                            <view class="img" wx:for="{{item.images}}" wx:for-index="num" wx:key="index" wx:for-item="img">
+                                <image mode='aspectFill' src="{{img}}"></image>
+                            </view>
+                        </view>
+                </view>
+                <view class="endbox" wx:if="{{publishList.length > 0}}">- 没有更多了 -</view>
+                <view class="fulltip" wx:if="{{!publishList}}">还没有收藏任何门店哦！</view>
+        </view>
+</view>
+
+
+<import src="/components/tip/tip.wxml" />
+<template is="tip" data="{{isShowMod}}"/>
+
+<import src="/components/disable/tip.wxml" />
+<template is="disable" data="{{disableFlag}}" />  

@@ -40,12 +40,14 @@ page{
         position: fixed;
         top:0;
         left:0;
+        z-index: 2;
         li{
             float: left;
             width:49.4%;
             height:80rpx;
             line-height: 80rpx;
             font-size: 32rpx;
+        
             view{
                 float:left;
                 
@@ -83,6 +85,7 @@ page{
             }
             .focus{
                 margin-left:48rpx;
+                position: relative;
             }
         }
         li.line{
@@ -92,17 +95,25 @@ page{
     }
 
     .postbox{
-        width:750rpx;
+        width:98%;
+        margin:0 auto;
         margin-top:80rpx;
         background:#f5f8fa;
-        // display:flex;
-        // flex-wrap: wrap;
-        // justify-content: flex-start;
-        padding-bottom:20rpx;
         padding-left:3rpx;
+        // display: flex;
+        // flex-flow: column wrap;
+        .endbox{
+            font-size:20rpx;
+            color:#999;
+            text-align: center;
+            line-height: 54rpx;
+            width:100%;
+            height:54rpx;
+            float:left;
+        }
         .post_item{
             float:left;
-            margin:0 12rpx;
+            margin:0 8rpx;
             width:349rpx;
             background:#fff;
             border-radius: 6rpx;
@@ -121,12 +132,14 @@ page{
             .title{
                 font-size:30rpx;
                 padding:18rpx 18rpx 0 18rpx;
-                overflow: hidden;
-                text-overflow: ellipsis;
-                display: -webkit-box;
-                -webkit-line-clamp: 2;
-                -webkit-box-orient: vertical;
-                max-height:100rpx;
+                height:100rpx;
+                text{
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    display: -webkit-box;
+                    -webkit-line-clamp: 2;
+                    -webkit-box-orient: vertical;
+                }
             }
             .user{
                 height: 60rpx;
@@ -162,6 +175,7 @@ page{
                     height:34rpx;
                     margin-top:10rpx;
                     margin-left: 8rpx;
+                    position: relative;
                     image{
                         width:100%;
                         height:100%;
@@ -240,6 +254,31 @@ page{
             margin-right:56rpx;
             border:1rpx solid #999;
         }
+        .btnbox2{
+            width:100%;
+            height:56rpx;
+            margin-top:8rpx;
+            display: flex;
+        }
+        button.btn2{
+            width:268rpx;
+            height: 56rpx;
+            border-radius:25rpx;
+            border:0px;
+            background:#ff2f43;
+            overflow: hidden;
+            font-size: 30rpx;
+            text-align: center;
+            line-height: 56rpx;
+            color:#fff;
+            float:left;
+            border:1rpx solid #ff2f43;
+        }
+        button.btn2.cancel2{
+            background:#999;
+            width:168rpx;
+            border:1rpx solid #999;
+        }
     }
 }
 
@@ -290,11 +329,5 @@ page{
     }
 }
 
-.fulltip{
-    font-size:28rpx;
-    color:#999;
-    display: block;
-    text-align: center;
-    line-height: 80rpx;
-    margin-top:300rpx;
-}
+
+
