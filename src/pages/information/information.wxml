@@ -1,7 +1,7 @@
 <view class="box">
-    <view class="imgbox">
+    <view class="imgbox"  bindtap="modifyFn">
         <text>头像</text>
-        <view class="img" bindtap="modifyFn">
+        <view class="img">
             <image class="user" src="{{img}}"></image><image class="jiantou" src="/assets/images/right.png"></image>
         </view>
     </view>

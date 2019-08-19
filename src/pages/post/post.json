@@ -2,5 +2,6 @@
 {
   "backgroundTextStyle":"dark",
   "backgroundColor": "#fff",
-  "navigationBarTitleText": "淘贴详情"
+  "navigationBarTitleText": "",
+  "navigationStyle": "custom"
 }

@@ -243,23 +243,29 @@ Page({
   tailorTo(){
     const { cuserId } = getStorage( 'USER_INFO' ) || {};
     if(cuserId){
-      indexService
-      .checkPublish()
-      .then(res => {
-        if(res){
-          this.setData({
-            ruzhuFn:false
-          })
-          wx.navigateTo({
-            url: `/pages/tailor/tailor?index=1`
-          })
-        }else{
-          this.setData({
-            ruzhuFn:true
-          })
-        }
-       
+      this.setData({
+        ruzhuFn:false
       })
+      wx.navigateTo({
+        url: `/pages/tailor/tailor?index=1`
+      })
+      // indexService
+      // .checkPublish()
+      // .then(res => {
+      //   if(res){
+      //     this.setData({
+      //       ruzhuFn:false
+      //     })
+      //     wx.navigateTo({
+      //       url: `/pages/tailor/tailor?index=1`
+      //     })
+      //   }else{
+      //     this.setData({
+      //       ruzhuFn:true
+      //     })
+      //   }
+       
+      // })
     }
     
 

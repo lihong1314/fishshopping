@@ -214,6 +214,12 @@ Page({
         this.focusFn()
       }else if(type == '3'){
         this.collectionFn(e)
+      }else if(type == '4'){
+        this.gotofans(e)
+      }else if(type == '5'){
+        this.gotostar(e)
+      }else if(type == '6'){
+        this.gotoColl(e)
       }
       
     }else{
@@ -242,5 +248,21 @@ Page({
       })
     }
     
-  }
+  },
+  inStorFn(e){
+    const {shopid} = e.currentTarget.dataset;
+    wx.navigateTo({
+      url:`/pages/stordetail/stordetail?shopid=${shopid}`
+    })
+  },
+    chooselaction(){
+
+      wx.openLocation({
+        latitude: this.data.shopLatitude,
+        longitude: this.data.shopLongitude,
+        scale: 18,
+        name: '',
+        address: this.data.shopDetailAddress
+      })
+    },
 })

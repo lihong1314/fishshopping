@@ -4,5 +4,6 @@
   "backgroundColor": "#fff",
   "navigationBarTitleText": "",
   "navigationBarTextStyle":"black",
+  "navigationStyle": "custom",
   "enablePullDownRefresh":true
 }

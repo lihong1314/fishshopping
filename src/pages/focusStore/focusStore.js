@@ -14,8 +14,6 @@ Page({
     shopList:[]
   },
   onShow(){
-    
-    
   },
   onLoad(){
     this.getList()

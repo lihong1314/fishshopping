@@ -10,7 +10,7 @@ export const getStoreList = ({ latitude,longitude,distance,page,size}) => {
     data: {
       latitude,
       longitude,
-      distance,
+      // distance,
       page,
       size
     }

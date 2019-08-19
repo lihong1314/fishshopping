@@ -14,9 +14,9 @@ Page({
     tipcon:'还没有任何用户关注您哦！'
   },
   onShow(){ 
-    this.setData({
-      fansList:[]
-    }) 
+    // this.setData({
+    //   fansList:[]
+    // }) 
   },
   onLoad(option){
     const {id,type,uname} = option;

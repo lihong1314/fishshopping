@@ -7,9 +7,9 @@
                 <p>{{nickName}}</p>
                 <div wx:if="{{cuserId}}">个人信息</div> 
                 <div wx:else>登录</div> 
-                <button class="btnStyle" open-type="getUserInfo" data-type="4" lang="zh_CN" bindgetuserinfo="onGotUserInfo"></button>
+                
             </view>
-            
+            <button class="btnStyle" open-type="getUserInfo" data-type="4" lang="zh_CN" bindgetuserinfo="onGotUserInfo"></button>
         </view>
 
         <view class="storbox" bindtap="gotoShopapp">

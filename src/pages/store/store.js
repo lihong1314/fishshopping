@@ -153,7 +153,7 @@ Page({
     .getStoreList({
       latitude,
       longitude,
-      distance:10,
+      // distance:10,
       page:this.data.offset,
       size:this.data.limit
     })

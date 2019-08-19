@@ -1,4 +1,18 @@
-<view class="stordetailbox">
+<view style="width:100%;height:{{statusBarHeight}}px;position:fixed;top:0;padding-top:{{toph}}px;display:flex;background:#fff;z-index: 999;">
+        <view class="titlebox">
+            <view class="imgbox" bindtap="uppage">
+                <image src="/assets/images/zuojiantou.png" alt=""/>
+            </view>
+            <view class="imgbox imgbox1" bindtap="gotoShouye">
+                <image class="images2" src="/assets/images/shouye.png" alt=""/>
+            </view>
+            
+        </view>
+        <view class="titlezi">
+            <text>好店主页</text>
+        </view>
+    </view>
+<view class="stordetailbox" style="margin-top:{{statusBarHeight}}px">
     <!-- <view class="storIcon">
         <view class="icon"><image src="{{shopIcon}}"></image></view>
         <view class="name">{{shopName}}</view>

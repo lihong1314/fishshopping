@@ -16,9 +16,9 @@ Page({
   },
   onShow(){
     
-    this.setData({
-      starList:[],
-    })
+    // this.setData({
+    //   starList:[],
+    // })
   },
   onLoad(option){
     const {id,type,uname} = option
@@ -28,7 +28,7 @@ Page({
     this.getList()
     if(type == '1'){
       wx.setNavigationBarTitle({
-        title: uname+'的粉丝',
+        title: uname+'的关注',
         tipcon:"他还没有关注任何用户哦！"
      })
     }

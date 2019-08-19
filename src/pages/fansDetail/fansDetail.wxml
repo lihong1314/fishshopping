@@ -20,9 +20,9 @@
             <view class="userinfo">
                 <view class="name">{{cUserName}}</view>
                 <view class="numbox">
-                    <view bindtap="gotofans"><p>{{fansNum}}</p>粉丝 </view>
-                    <view bindtap="gotostar"><p>{{attentionCNum}}</p>关注 </view>
-                    <view bindtap="gotoColl"><p>{{attentionPbNum}}</p>收藏</view>
+                    <view><p>{{fansNum}}</p>粉丝 <button data-type="4" class="btnStyle" open-type="getUserInfo" lang="zh_CN" bindgetuserinfo="onGotUserInfo"></button></view>
+                    <view><p>{{attentionCNum}}</p>关注 <button data-type="5" class="btnStyle" open-type="getUserInfo" lang="zh_CN" bindgetuserinfo="onGotUserInfo"></button></view>
+                    <view><p>{{attentionPbNum}}</p>收藏<button data-type="6" class="btnStyle" open-type="getUserInfo" lang="zh_CN" bindgetuserinfo="onGotUserInfo"></button></view>
                 </view>
             </view>
             </view>
@@ -31,7 +31,7 @@
             
         </view>
 </view>
-<view class="storbox">
+<view class="storbox" wx:if="{{shopId}}">
         <view class="store" bindtap="inStorFn" data-shopid="{{shopId}}">
         <view class="storimg">
             <image mode='aspectFill' src="{{shopIcon}}"></image>

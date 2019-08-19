@@ -77,7 +77,6 @@
 <import src="/components/disable/tip.wxml" />
 <template is="disable" data="{{disableFlag}}" />  
 
-
 <!-- <view class="ruzhu" wx:if="{{weizhiFlg}}">
     <view class="ruzhucon">
         <view class="text">地理位置授权后显示页面内容</view>

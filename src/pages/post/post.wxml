@@ -1,6 +1,18 @@
-
-
-<view wx:if="{{con == ''}}" class="postbox">
+<view style="width:100%;height:{{statusBarHeight}}px;position:fixed;top:0;padding-top:{{toph}}px;display:flex;background:#fff;z-index: 999;">
+    <view class="titlebox">
+        <view class="imgbox" bindtap="uppage">
+            <image src="/assets/images/zuojiantou.png" alt=""/>
+        </view>
+        <view class="imgbox imgbox1" bindtap="gotoShouye">
+            <image class="images2" src="/assets/images/shouye.png" alt=""/>
+        </view>
+        
+    </view>
+    <view class="titlezi">
+        <text>淘贴详情</text>
+    </view>
+</view>
+<view wx:if="{{con == ''}}" class="postbox" style="margin-top:{{statusBarHeight}}px">
     <view class="userbox">
         <view style="display:flex;width:80%" bindtap="gotoFansDetailFn" data-fansid="{{cuserId}}">
         <view class="userimg">
@@ -41,7 +53,7 @@
         </view>
     </view>
 
-    <view class="storbox">
+    <view class="storbox" wx:if="{{shopId}}">
         <view class="store" bindtap="inStorFn" data-shopid="{{shopId}}">
         <view class="storimg">
             <image mode='aspectFill' src="{{shopIcon}}"></image>
