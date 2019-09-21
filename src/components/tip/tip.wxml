@@ -3,10 +3,10 @@
   <!-- 这部分内容可以灵活修改，例如改成一个模态框 -->
   <!-- <text class="text">{{text}}</text> -->
   <view class="ruzhucon">
-      <view class="text">确定要取消关注吗？</view>
+      <view class="text">{{con?con:"确定要取消关注吗？"}}</view>
       <view class="btnbox">
           <div class="btn" bindtap="sureFn">确定</div>
-          <div class="btn cancel" bindtap="cancelFn">取消</div>
+          <div wx:hide="{{con?true:false}}" class="btn cancel" bindtap="cancelFn">取消</div>
       </view>
   </view>
 </view>

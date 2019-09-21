@@ -178,17 +178,20 @@ Page({
       addweight:0,
       tuijianList:[],
       offset: 1,
-      total: 0
+      total: 0,
+      tipcon:"您选择的距离内没有更多内容"
     })
     this.getList()
   },
   getFocus(){
+    
     this.setData({
       distancebFl:false,
       addweight:1,
       tuijianList:[],
       offset: 1,
-      total: 0
+      total: 0,
+      tipcon:'还没有关注任何用户哦!'
     })
     this.getList()
     
@@ -197,6 +200,7 @@ Page({
     
     let aShow  = getStorage('aShow') || '';
     setStorage('imgUrls',[])
+    setStorage('inputValue','')
     if(aShow){
       setStorage('aShow',true);
       setStorage('imgUrls',[]);//清除图片数组中的数据
@@ -278,6 +282,7 @@ Page({
       navH: App.globalData.navHeight
     })
     this.checkLocation()
+    
     this.setData({
       tipcon:this.data.addweight == '0'?"您选择的距离内没有更多内容":'还没有关注任何用户哦！'
     })
@@ -302,7 +307,7 @@ Page({
   focusFn(e){
     const {publishid,index,collection} =  e.currentTarget.dataset;//当前所在页面的 index
     // if(!collection){
-      console.log('现在collection:',collection)
+      // console.log('现在collection:',collection)
       indexService
       .chenkCollection({
         publishId:publishid,
@@ -350,7 +355,7 @@ Page({
       this.setData({
         offset: this.data.offset + 1,
       });
-      console.log("上拉加载:",this.data.offset)
+      // console.log("上拉加载:",this.data.offset)
       this.getList()
     }
   },
@@ -361,7 +366,7 @@ Page({
       offset: 1,
       total: 0,
     })
-    console.log("下拉刷新:",this.data.offset)
+    // console.log("下拉刷新:",this.data.offset)
     this.getList();
   },
   getList(){
@@ -379,7 +384,7 @@ Page({
         })
         .then(res => {
           wx.hideLoading();
-          console.log("列表:",res)
+          // console.log("列表:",res)
           if(!res.publishList){
             this.setData({
               tuijianList:null,
@@ -415,7 +420,7 @@ Page({
             total:res.totalSize
           })
         }else{
-          console.log('关注：',res)
+          // console.log('关注：',res)
           var list = res.publishList;
           list.map(item=>{
             item.content = item.content.split('&hc').join('\n')
@@ -452,12 +457,12 @@ Page({
         this.tailorTo()
       }
     }else{
-      console.log('允许')
+      // console.log('允许')
       wx.showLoading({
         title: '授权中请稍后...',
         mask: true
       })
-      console.log('e:',e)
+      // console.log('e:',e)
       if(e.detail.errMsg == "getUserInfo:fail auth deny"){
         wx.hideLoading();
         return

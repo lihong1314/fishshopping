@@ -17,20 +17,19 @@ Page({
   onLoad(option){
     // wx.showLoading({title:'加载中...'})
     const { cuserId,avatarUrl,nickName } = getStorage( 'USER_INFO' ) || {};
-    const {src} = option;
-    console.log('src',src)
+    const {src,name} = option;
     if(src){
       this.setData({
         img:src,
         cuserId,
-        name:nickName
+        name:name
       })
       this.saveFn()
     }else{
       this.setData({
         cuserId,
         img:avatarUrl,
-        name:nickName
+        name:name
       })
     }
     
@@ -38,7 +37,7 @@ Page({
   },
   modifyFn(){
     wx.navigateTo({
-      url: `/pages/tailor/tailor?index=2`
+      url: `/pages/tailor/tailor?index=2&name=${this.data.name}`
     })
   },
   modifyNameFn(e){
@@ -73,15 +72,33 @@ Page({
         },
         success: function (res) {
           var obj = JSON.parse(res.data);//转换为json对象obj
-          if (obj.code == 0 || obj.code == 200) { 
-            console.log('res',obj.data);
-            setStorage('USER_INFO',{
-              avatarUrl:obj.data.cUserIcon,
-              nickName:obj.data.cUserName,
-              cuserId
+         
+          if(obj.code == 87014){
+            wx.hideLoading()
+            wx.showModal({
+              content: obj.message,
+              showCancel:false,
+              confirmText:'重新编辑',
+              success (res) {
+                if (res.confirm) {
+                  console.log("有问题")
+                }
+              }
             })
-            wx.showToast({title: '保存成功'})
+          }else{
+            if (obj.code == 0 || obj.code == 200) { 
+              console.log('res',obj.data);
+              const {access}=getStorage('USER_INFO')
+              setStorage('USER_INFO',{
+                avatarUrl:obj.data.cUserIcon,
+                nickName:obj.data.name,
+                cuserId,
+                access:access
+              })
+              wx.showToast({title: '保存成功'})
+            }
           }
+          
           
         },
         fail: function (e) {

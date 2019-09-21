@@ -40,7 +40,7 @@ Page({
       sizeType: ['compressed'], // 可以指定是原图还是压缩图，选项采用压缩图 
       sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有 
       success: function (res) { 
-           console.log("选择：",res)
+          //  console.log("选择：",res)
         that.setData({
           cutImage: 'show',
           addtribeConShow: 'hide',
@@ -93,21 +93,22 @@ Page({
    */
   onLoad(option){
     var that = this
-    const {index} = option;
+    const {index,name} = option;
     this.setData({
-      index
+      index,
+      name:name?name:''
     })
     this.chooseimg(index);
     
     const {
       cropperOpt
     } = this.data
-    console.log("index:",index)
+    // console.log("index:",index)
     new WeCropper(cropperOpt)
       .on('ready', (ctx) => { })
       .on('beforeImageLoad', (ctx) => {
-        console.log(`before picture loaded, i can do something`)
-        console.log(`current canvas context:`, ctx)
+        // console.log(`before picture loaded, i can do something`)
+        // console.log(`current canvas context:`, ctx)
         wx.showToast({
           title: '上传中',
           icon: 'loading',
@@ -115,13 +116,13 @@ Page({
         })
       })
       .on('imageLoad', (ctx) => {
-        console.log(`picture loaded`)
-        console.log(`current canvas context:`, ctx)
+        // console.log(`picture loaded`)
+        // console.log(`current canvas context:`, ctx)
         wx.hideToast()
       })
       .on('beforeDraw', (ctx, instance) => {
-        console.log(`before canvas draw,i can do something`)
-        console.log(`current canvas context:`, ctx)
+        // console.log(`before canvas draw,i can do something`)
+        // console.log(`current canvas context:`, ctx)
       })
       .updateCanvas();
 
@@ -158,7 +159,7 @@ Page({
           })
         }else if(this.data.index == 2){
           wx.redirectTo({
-            url: `/pages/information/information?src=${src}`
+            url: `/pages/information/information?src=${src}&name=${this.data.name}`
           })
         }
       }
@@ -179,7 +180,7 @@ Page({
           'session_token': wx.getStorageSync('LOGIN_SESSION_FFAN')
         },
         success: function (res) {
-          console.log("图片上传：",res);
+          // console.log("图片上传：",res);
           if (res.statusCode != 200) { 
             wx.showModal({
               title: '提示',
@@ -194,7 +195,7 @@ Page({
           })
         },
         fail: function (e) {
-          console.log(e);
+          // console.log(e);
           wx.showModal({
             title: '提示',
             content: '上传失败',

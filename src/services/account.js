@@ -154,11 +154,11 @@ exports.bindAccountBySilent = ({ encryptedData, iv, ...params } = {}) =>
       \n https://mp.weixin.qq.com/debug/wxadoc/dev/api/open.html`
       )
     } else {
-      
+      console.log("res:",res)
       return post(`${prUrl}/street/weixin/register`,{
             encryptedData,
             iv,
-            thirdSession:res
+            thirdSession:res.thirdSession
           })
       
     }

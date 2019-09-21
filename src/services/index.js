@@ -34,13 +34,23 @@ export const getRecommend = ({ latitude,longitude,distance,page,size}) => {
 //获取首页已关注列表
 export const getInterestList = ({page,size}) => {
   const {cuserId} = getStorage("USER_INFO") || {};
-  return post('https://www.xiaoxiaohb.com/street/home/interestList', {
-    data: {
-      cuserId,
-      page,
-      size
-    }
-  })
+  if(cuserId){
+    return post('https://www.xiaoxiaohb.com/street/home/interestList', {
+      data: {
+        cuserId,
+        page,
+        size
+      }
+    })
+  }else{
+    return post('https://www.xiaoxiaohb.com/street/home/interestList', {
+      data: {
+        page,
+        size
+      }
+    })
+  }
+  
 }
 
 

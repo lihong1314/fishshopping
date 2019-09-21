@@ -39,6 +39,8 @@ class Request {
                 if (code == 200 || code==0) {
                   // console.log(data)
                   resolve( data )
+                }else if( code == 87014 || code == 87015){
+                  resolve({ code, data, message })
                 } else {
                   reject( data || `${status},${ message || ''}` )
                 }

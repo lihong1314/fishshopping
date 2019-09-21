@@ -59,7 +59,6 @@ Page({
     personalService
     .getmine2({cuserId,longitude,latitude})
     .then(res => {
- 
       this.setData({
         publishList:[],
         cuserId,
@@ -150,7 +149,6 @@ Page({
       this.setData({
         offset: this.data.offset + 1,
       });
-      console.log("上拉加载:",this.data.offset)
       this.getList()
     }
   },
@@ -161,7 +159,6 @@ Page({
       offset: 1,
       total: 0,
     })
-    console.log("下拉刷新:",this.data.offset)
     this.getList();
   },
   getList(){
@@ -183,7 +180,6 @@ Page({
               total:res.totalSize
             })
           }else{
-            console.log("列表:",res)
             var list = res.publishList;
             list.map(item=>{
               item.content = item.content.split('&hc').join('\n')
@@ -217,7 +213,6 @@ Page({
               total:res.totalSize
             })
           }else{
-            console.log("列表:",res)
             var list = res.publishList;
             list.map(item=>{
               item.content = item.content.split('&hc').join('\n')

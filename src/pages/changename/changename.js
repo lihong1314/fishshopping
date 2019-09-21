@@ -38,16 +38,31 @@ Page({
         file:''
       })
       .then(res=>{
-        console.log('成功')
-        console.log(res)
-        setStorage('USER_INFO',{
-          avatarUrl:res.cUserIcon,
-          nickName:res.cUserName,
-          cuserId
-        })
-        wx.navigateTo({
-          url:`/pages/information/information?name=${res.cUserName}`
-        })
+        if(res.cUserName){
+          const {access}=getStorage('USER_INFO')
+          setStorage('USER_INFO',{
+            avatarUrl:res.cUserIcon,
+            nickName:res.cUserName,
+            cuserId,
+            access:access
+          })
+          wx.navigateTo({
+            url:`/pages/information/information?name=${res.cUserName}`
+          })
+        }
+        if (res.code == 87015) {
+          wx.showModal({
+            content: res.message,
+            showCancel:false,
+            confirmText:'重新编辑',
+            success (res) {
+              if (res.confirm) {
+                console.log('用户点击确定')
+              }
+            }
+          })
+        } 
+        
       })
     }else{
       wx.showToast({title: '昵称不能为空'})
