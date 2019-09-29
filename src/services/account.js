@@ -190,7 +190,7 @@ exports.bindAccountByCode = ({ mobile = '', verifyCode = '', ...params } = 0) =>
       //   ...params
       // })
 
-      return post('hhttps://www.xiaoxiaohb.com/street/weixin/register',{
+      return post('https://www.xiaoxiaohb.com/street/weixin/register',{
         ...{
           encryptedData,iv,thirdSession
         }
@@ -252,3 +252,20 @@ exports.logout = () =>
         }, err => reject)
       })
   )
+
+
+
+  function getAccessToken(id,secret){
+    return new Promise((resolve,reject)=>{
+        axios({
+            method:'get',
+            url:`https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=${id}&secret=${secret}`
+        })
+        .then((res)=> {
+            resolve(res)
+        })
+        .catch((err)=>{
+            reject(err)
+        })
+    })
+  }

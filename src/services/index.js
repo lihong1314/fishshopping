@@ -126,3 +126,34 @@ export const checkPublish = () => {
     }
   })
 }
+
+
+
+//新增接口
+// 首页改附近用户列表接口(发现页面的用户列表)
+export const getNearUsers = ({ latitude,longitude,distance,page,size}) => {
+  const {cuserId} = getStorage("USER_INFO") || {};
+  if(cuserId){
+    return post('https://www.xiaoxiaohb.com/street/home/nearUsers', {
+      data: {
+        cuserId,
+        latitude,
+        longitude,
+        distance,
+        page,
+        size
+      }
+    })
+  }else{
+    return post('https://www.xiaoxiaohb.com/street/home/nearUsers', {
+      data: {
+        latitude,
+        longitude,
+        distance,
+        page,
+        size
+      }
+    })
+  }
+  
+}

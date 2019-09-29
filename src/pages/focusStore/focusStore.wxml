@@ -18,7 +18,7 @@
                     </view>
                 </view>
         </view>
-        <view class="fulltip" wx:if="{{shopList.length<=0}}">还没有收藏任何门店哦！</view>
+        <view class="fulltip" wx:if="{{!shopList}}">还没有收藏任何门店哦！</view>
         <view class="endbox" wx:if="{{shopList.length > 0}}">- 没有更多了 -</view>
 </view>
 

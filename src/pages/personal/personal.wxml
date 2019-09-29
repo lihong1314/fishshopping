@@ -12,6 +12,11 @@
             <button class="btnStyle" open-type="getUserInfo" data-type="4" lang="zh_CN" bindgetuserinfo="onGotUserInfo"></button>
         </view>
 
+        <view class="maicon">
+                <image src="/assets/images/maicon.png"></image>
+        </view>
+        <button class="maicon2" open-type="getUserInfo" data-type="6" lang="zh_CN" bindgetuserinfo="onGotUserInfo"></button>
+
         <view class="storbox" bindtap="gotoShopapp">
             
                 <div>
@@ -86,6 +91,7 @@
    
     
             <view class="endbox" wx:if="{{publishList.length > 0}}">- 没有更多了 -</view>
+            <view class="fulltip" wx:if="{{!publishList}}">该用户还没有收藏淘贴</view>
         </view>
     
         <view class="postbox" wx:if="{{postShow}}">
@@ -112,6 +118,7 @@
   
                 
                 <view class="endbox" wx:if="{{publishList.length > 0}}">- 没有更多了 -</view>
+                <view class="fulltip" wx:if="{{!publishList}}">该用户还没有发布淘贴</view>
                
             </view>
 </view>

@@ -1,6 +1,6 @@
 {
   "pages": [
-    
+   
     "pages/index/index",
     "pages/personal/personal",
     "pages/release/release",
@@ -16,7 +16,10 @@
     "pages/focusStore/focusStore",
     "pages/fansDetail/fansDetail",
     "pages/changename/changename",
-    "pages/tacollection/tacollection"
+    "pages/tacollection/tacollection",
+    "pages/foundpage/foundpage",
+    
+    "pages/qrCode/qrCode"
     
     
   ],
@@ -39,10 +42,10 @@
       "text": "首页"
     },
     {
-      "pagePath": "pages/store/store",
-      "iconPath": "assets/images/shop.png",
-      "selectedIconPath": "assets/images/shop_selected.png",
-      "text": "好店"
+      "pagePath": "pages/foundpage/foundpage",
+      "iconPath": "assets/images/found.png",
+      "selectedIconPath": "assets/images/found_selected.png",
+      "text": "发现"
     },
     {
       "pagePath": "pages/personal/personal",

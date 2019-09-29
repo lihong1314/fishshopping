@@ -158,3 +158,15 @@ export const canclePublish= ({publishId}) => {
     }
   })
 }
+
+
+// 获取二维码
+///street/weixin/getToken
+export const getQrCodeFn= () => {
+  const { cuserId } = getStorage( 'USER_INFO' ) || {};
+  return get('https://www.xiaoxiaohb.com/street/weixin/getToken', {
+    data: {
+      cuserId
+    }
+  })
+}

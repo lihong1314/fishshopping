@@ -1,0 +1,49 @@
+page{
+    background:#ffffff;
+}
+.qrbox{
+    position: relative;
+    overflow: hidden;
+
+}
+.qrcodecanvas{
+    // display: none;
+    width: 1200px;
+    height: 500px;
+    
+    position: absolute;
+    left:0%;
+    top:0%;
+    transform: scale(0.5,0.5) translate(-50%,-50%);
+    -webkit-transform: scale(0.5,0.5) translate(-50%,-50%);
+}
+.btnbox{
+    width:100%;
+    height:auto;
+    position: absolute;
+    left:50%;
+    top:720rpx;
+    transform: translateX(-50%) translateY(-10%);
+    z-index: 9999!important;
+    .btn{
+        width:562rpx;
+        height:90rpx;
+        background:#ff2f43;
+        color:#fff;
+        text-align: center;
+        line-height: 90rpx;
+        font-size: 32rpx;
+        border-radius:45rpx;
+        margin-left:92rpx;
+        margin-top:60rpx;
+        pointer-events: auto;
+    }
+    .tips{
+        width:70%;
+        margin:0 auto;
+        font-size: 28rpx;
+        margin-top:40rpx;
+        text-align: center;
+        color:#999;
+    }
+}

@@ -2,7 +2,7 @@
 {
   "backgroundTextStyle":"dark",
   "backgroundColor": "#fff",
-  "navigationBarTitleText": "个人主页二维码",
+  "navigationBarTitleText": "发现",
   "navigationBarTextStyle":"black",
   "enablePullDownRefresh":true
 }

@@ -1,0 +1,49 @@
+
+<view class="storbox">
+    <view class="stor_item" wx:for="{{shopList}}" wx:for-index="index" wx:key="{{item.cuserId}}" wx:for-item="item"
+        data-shopid="{{item.cuserId}}">
+        <view class="userbox">
+                <view style="display:flex;width:80%" bindtap="gotoFansDetailFn" data-fansid="{{item.cuserId}}">
+                <view class="userimg">
+                    <image src="{{item.cUserIcon}}"></image>
+                </view>
+                <view class="userinfo">
+                    <view class="name">{{item.cUserName}}</view>
+                    <view class="numbox">
+                        <view>{{item.distance}}km</view>
+                        <view>淘贴 {{item.publishNum}}</view>
+                        <view>粉丝 {{item.fansNum}}</view>
+                    </view>
+                </view>
+                </view>
+                <view wx:if="{{item.attention}}" class="focus selector" >已关注<button class="btnStyle" open-type="getUserInfo" data-type="2" data-index="{{index}}" data-attention="{{item.attention}}" data-cuserid="{{item.cuserId}}" lang="zh_CN" bindgetuserinfo="onGotUserInfo">
+                    </button></view>
+                <view wx:else class="focus">关注<button data-type="1" class="btnStyle" data-index="{{index}}" data-attention="{{item.attention}}" data-cuserid="{{item.cuserId}}" open-type="getUserInfo" lang="zh_CN" bindgetuserinfo="onGotUserInfo"></button></view>
+               
+            </view>
+        <view class="imgbox" bindtap="gotoFansDetailFn" data-fansid="{{item.cuserId}}">
+            <view class="img" wx:for="{{item.images}}" wx:for-index="num" wx:key="index" wx:for-item="img">
+                <image mode='aspectFill' src="{{img}}"></image>
+            </view>
+        </view>
+    </view>
+
+    <view class="endbox" wx:if="{{shopList.length > 0}}">- 没有更多了 -</view>
+</view>
+
+
+<import src="/components/disable/tip.wxml" />
+<template is="disable" data="{{disableFlag}}" />
+<import src="/components/tip/tip.wxml" />
+<template is="tip" data="{{isShowMod}}" />
+
+<view class="ruzhu" wx:if="{{ruzhuFn}}">
+        <view class="ruzhucon">
+            <view class="text">请登录</view>
+            <view class="btnbox">
+                <div class="btn cancel" bindtap="cancelDen">取消</div>
+                <div class="btn">登录<button class="btnStyle" data-publishid="{{item.publishId}}" data-index="{{index}}" data-collection="{{item.collection}}" data-type="5" open-type="getUserInfo" lang="zh_CN" bindgetuserinfo="onGotUserInfo">
+                </button></div>
+            </view>
+        </view>
+    </view>
