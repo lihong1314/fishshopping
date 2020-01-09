@@ -1,7 +1,8 @@
-const commonReg = new RegExp('\\.((test|sit|uat)\\.)?(ffan\\.(net|com))')
+const commonReg = new RegExp('\\.((test-tao)\\.)?(xiaoxiaohb\\.(net|com))')
 
 function getDomainEnv(url = location.host, reg = commonReg) {
   const host = url || location.host
+  console.log("host:",host)
   const domainTestResult = host.match(reg)
   return domainTestResult ? (domainTestResult[2] ? domainTestResult[2] : 'pub') : 'local'
 }

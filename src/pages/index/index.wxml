@@ -17,7 +17,9 @@
 
     <view class="postbox" wx:if="{{tuijianList.length > 0}}">
         <!--第一个淘贴start-->
-        <view class="post_item" wx:for="{{tuijianList}}" wx:key="index" wx:for-item="item">
+        <import src="/components/postlabel/index.wxml" />
+        <template is="postLabel" data="{{tuijianList}}" />
+        <!-- <view class="post_item" wx:for="{{tuijianList}}" wx:key="index" wx:for-item="item">
             <view bindtap="gotoPostFn" data-publishid="{{item.publishId}}">
                 <view class="imgbox">
                     <image src="{{item.images[0]}}"></image>
@@ -29,7 +31,6 @@
             <div class="user">
                 <div bindtap="gotoPostFn" data-publishid="{{item.publishId}}"> <view class="userimg"><image src="{{item.cUserIcon}}"></image></view> </div>
                 <div bindtap="gotoPostFn" data-publishid="{{item.publishId}}" class="username">{{item.cUserName}}</div>
-                <!-- <li class="focus" bindtap="focusFn" data-publishid="{{item.publishId}}" data-index="{{index}}" data-collection="{{item.collection}}"><image src="{{item.collection?'/assets/images/collection_red.png':'/assets/images/collection.png'}}"></image></li> -->
                 <div class="focus" ><image src="{{item.collection?'/assets/images/collection_red.png':'/assets/images/collection.png'}}"></image>
                     <button class="btnStyle" data-publishid="{{item.publishId}}" data-index="{{index}}" data-collection="{{item.collection}}" data-type="1" open-type="getUserInfo" lang="zh_CN" bindgetuserinfo="onGotUserInfo">
                         </button>
@@ -37,7 +38,7 @@
 
                 
             </div>
-        </view>
+        </view> -->
         <view class="endbox" wx:if="{{tuijianList.length > 0}}">- 没有更多了 -</view>
         <!--第一个淘贴end-->
     </view>

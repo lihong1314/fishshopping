@@ -1,12 +1,13 @@
-<view style="width:100%;height:{{statusBarHeight}}px;position:fixed;top:0;padding-top:{{toph}}px;display:flex;background:#fff;z-index: 999;">
+<view
+    style="width:100%;height:{{statusBarHeight}}px;position:fixed;top:0;padding-top:{{toph}}px;display:flex;background:#fff;z-index: 999;">
     <view class="titlebox">
         <view class="imgbox" bindtap="uppage">
-            <image src="/assets/images/zuojiantou.png" alt=""/>
+            <image src="/assets/images/zuojiantou.png" alt="" />
         </view>
         <view class="imgbox imgbox1" bindtap="gotoShouye">
-            <image class="images2" src="/assets/images/shouye.png" alt=""/>
+            <image class="images2" src="/assets/images/shouye.png" alt="" />
         </view>
-        
+
     </view>
     <view class="titlezi">
         <text>淘贴详情</text>
@@ -14,54 +15,60 @@
 </view>
 <view wx:if="{{con == ''}}" class="postbox" style="margin-top:{{statusBarHeight}}px">
     <view class="userbox">
-        <view style="display:flex;width:80%" bindtap="gotoFansDetailFn" data-fansid="{{cuserId}}">
-        <view class="userimg">
-            <image src="{{cuserIcon}}"></image>
-        </view>
-        <view class="userinfo">
-            <view class="name">{{cuserName}}</view>
-            <view class="numbox">
-                <view>淘贴 {{publishNum}}</view>
-                <view>粉丝 {{fansNum}}</view>
+        <view style="display:flex;width:80%;align-items:center;">
+            <view class="userimg">
+                <image src="{{cuserIcon}}"></image>
             </view>
+            <view class="userinfo">
+                <view class="name">{{cuserName}}</view>
+                <view class="numbox">
+                    <view>淘贴 {{publishNum}}</view>
+                    <view>粉丝 {{fansNum}}</view>
+                </view>
+            </view>
+            <button class="btnStyle" style="height:10%" open-type="getUserInfo" data-type="4" data-fansid="{{cuserId}}"
+                lang="zh_CN" bindgetuserinfo="onGotUserInfo">
+            </button>
         </view>
-        </view>
-        <view wx:if="{{attention}}" class="focus selector" >已关注<button class="btnStyle" open-type="getUserInfo" data-type="2" lang="zh_CN" bindgetuserinfo="onGotUserInfo">
+        <view wx:if="{{attention}}" class="focus selector">已关注<button class="btnStyle" open-type="getUserInfo"
+                data-type="2" lang="zh_CN" bindgetuserinfo="onGotUserInfo">
             </button></view>
-        <view wx:else class="focus">关注<button data-type="1" class="btnStyle" open-type="getUserInfo" lang="zh_CN" bindgetuserinfo="onGotUserInfo"></button></view>
-       
+        <view wx:else class="focus">关注<button data-type="1" class="btnStyle" open-type="getUserInfo" lang="zh_CN"
+                bindgetuserinfo="onGotUserInfo"></button></view>
+
     </view>
 
     <view class="postconbox">
         <view class="imgbox">
-            <swiper indicator-dots="{{indicatorDots}}"
-                autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" bindchange="swiperChange">
-                
+            <swiper indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}"
+                duration="{{duration}}" bindchange="swiperChange">
+
                 <swiper-item wx:for="{{imgUrls}}" wx:key="index" wx:for-item="item" wx:for-index="index">
-                    <image src="{{item}}" class="slide-image" width="355" height="150"/>
-                
+                    <image src="{{item}}" class="slide-image" width="355" height="150" />
+
                 </swiper-item>
-                
-                </swiper>
-                <view class="tipbox">{{current+1}}/{{imgUrls.length}}</view>
+
+            </swiper>
+            <view class="tipbox">{{current+1}}/{{imgUrls.length}}</view>
         </view>
         <text class="text">{{content}}</text>
         <view class="fun">
             <view class="time">{{createTime}}</view>
-            <view class="read" >浏览 {{readTimes}}</view>
-            <view class="jubao" bindtap="jubaoFn" data-cuserid= "{{cuserId}}">举报</view>  
+            <view class="read">浏览 {{readTimes}}</view>
+            <view class="jubao" bindtap="jubaoFn" data-cuserid="{{cuserId}}">举报</view>
         </view>
     </view>
 
     <view class="storbox" wx:if="{{shopId}}">
         <view class="store" bindtap="inStorFn" data-shopid="{{shopId}}">
-        <view class="storimg">
-            <image mode='aspectFill' src="{{shopIcon}}"></image>
-        </view>
-        <view class="storinfo">
-            <view class="storname">{{shopName}}</view>
-            <view class="address"><text wx:if="{{shopDitance}}">{{shopDitance}}km</text> {{shopDetailAddress}}</view>
-        </view>
+            <view class="storimg">
+                <image mode='aspectFill' src="{{shopIcon}}"></image>
+            </view>
+            <view class="storinfo">
+                <view class="storname">{{shopName}}</view>
+                <view class="address"><text wx:if="{{shopDitance}}">{{shopDitance}}km</text> {{shopDetailAddress}}
+                </view>
+            </view>
         </view>
         <view class="position" bindtap="chooselaction">
             <image src="/assets/images/position.png"></image>
@@ -69,9 +76,15 @@
     </view>
 
     <view class="btnbox">
-        <div class="btn {{collection?'':'collection'}}" ><image src="{{collection?'/assets/images/collection_red.png':'/assets/images/collection.png'}}"></image>{{collection?'已收藏':'收藏'}}<button class="btnStyle" open-type="getUserInfo" data-type="3" lang="zh_CN" bindgetuserinfo="onGotUserInfo">
-            </button></div>
-        <button class="btn share" bindtap="shareFn" open-type='share'><image src="/assets/images/shear.png"></image>分享</button>
+        <div class="btn {{collection?'':'collection'}}">
+            <image src="{{collection?'/assets/images/collection_red.png':'/assets/images/collection.png'}}"></image>
+            {{collection?'已收藏':'收藏'}}<button class="btnStyle" open-type="getUserInfo" data-type="3" lang="zh_CN"
+                bindgetuserinfo="onGotUserInfo">
+            </button>
+        </div>
+        <button class="btn share" bindtap="shareFn" open-type='share'>
+            <image src="/assets/images/shear.png"></image>分享
+        </button>
     </view>
 </view>
 
@@ -82,4 +95,4 @@
 <import src="/components/tip/tip.wxml" />
 <template is="tip" data="{{isShowMod}}" />
 <import src="/components/disable/tip.wxml" />
-    <template is="disable" data="{{disableFlag}}" />  
+<template is="disable" data="{{disableFlag}}" />

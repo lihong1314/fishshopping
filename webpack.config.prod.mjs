@@ -62,8 +62,8 @@ export default function() {
     plugins: [
       new webpack.DefinePlugin({
         __DEV__: false,
-        __ENV__: '"api.ffan.com"',
-        __QR__: '"h5.ffan.com"'
+        __ENV__: '"xiaoxiaohb.com"',
+        __QR__: '"test-tao.xiaoxiaohb.com"'
       }),
       new CleanWebpackPlugin(['dist/*']),
       new ExtractTextPlugin('[name].wxss'),

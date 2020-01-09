@@ -91,7 +91,7 @@
    
     
             <view class="endbox" wx:if="{{publishList.length > 0}}">- 没有更多了 -</view>
-            <view class="fulltip" wx:if="{{!publishList}}">该用户还没有收藏淘贴</view>
+            <view class="fulltip" wx:if="{{!publishList || publishList.length <= 0}}">没有收藏的淘贴</view>
         </view>
     
         <view class="postbox" wx:if="{{postShow}}">
@@ -118,7 +118,7 @@
   
                 
                 <view class="endbox" wx:if="{{publishList.length > 0}}">- 没有更多了 -</view>
-                <view class="fulltip" wx:if="{{!publishList}}">该用户还没有发布淘贴</view>
+                <view class="fulltip" wx:if="{{!publishList || publishList.length <= 0}}">没有发布的淘贴</view>
                
             </view>
 </view>

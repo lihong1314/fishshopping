@@ -20,7 +20,7 @@ Page({
     distancebFl:true,
     addjiantou:false,
     addweight:0,
-    distance:20,
+    distance:30,
     isShowMod:false,
     windowHeight:0,
     windowWidth:0,
@@ -36,7 +36,6 @@ Page({
     wxp
       .getLocation()
       .then((res) =>{
-        // console.log('res:',res)
         setStorage('location',{latitude:res.latitude.toFixed(4),longitude:res.longitude.toFixed(4)})
         that.setData({
           location:{latitude:res.latitude.toFixed(4),longitude:res.longitude.toFixed(4)}
@@ -74,7 +73,7 @@ Page({
             disableFlag:true
           })
         }
-        that.getList();
+        that.getList(false);
       },
       fail: function(res) {
         //授权失败
@@ -119,7 +118,7 @@ Page({
                                   disableFlag:true
                                 })
                               }
-                              that.getList();
+                              that.getList(false);
                             }
                           });
                         }
@@ -242,7 +241,6 @@ Page({
       this.getList();
     }
     
-    // this.getList();
   },
   tailorTo(){
     const { cuserId } = getStorage( 'USER_INFO' ) || {};
@@ -253,30 +251,15 @@ Page({
       wx.navigateTo({
         url: `/pages/tailor/tailor?index=1`
       })
-      // indexService
-      // .checkPublish()
-      // .then(res => {
-      //   if(res){
-      //     this.setData({
-      //       ruzhuFn:false
-      //     })
-      //     wx.navigateTo({
-      //       url: `/pages/tailor/tailor?index=1`
-      //     })
-      //   }else{
-      //     this.setData({
-      //       ruzhuFn:true
-      //     })
-      //   }
-       
-      // })
+      
     }
     
 
    
   },
-  onLoad(option){
+  onLoad(option,ok){
     // const {refresh} = option;
+    
     let _this = this;
     _this.setData({
       navH: App.globalData.navHeight
@@ -284,7 +267,7 @@ Page({
     this.checkLocation()
     
     this.setData({
-      tipcon:this.data.addweight == '0'?"您选择的距离内没有更多内容":'还没有关注任何用户哦！'
+      tipcon:this.data.addweight == '0'?"暂无推荐内容，选择更大的距离试试~":'暂无关注的内容'
     })
     
     
@@ -306,8 +289,7 @@ Page({
   },
   focusFn(e){
     const {publishid,index,collection} =  e.currentTarget.dataset;//当前所在页面的 index
-    // if(!collection){
-      // console.log('现在collection:',collection)
+    
       indexService
       .chenkCollection({
         publishId:publishid,
@@ -319,10 +301,10 @@ Page({
         this.setData({
           tuijianList:list
         })
-        // this.getList()
+        
 
       })
-    // }
+
     
   },
   changeswiper(e){
@@ -355,8 +337,7 @@ Page({
       this.setData({
         offset: this.data.offset + 1,
       });
-      // console.log("上拉加载:",this.data.offset)
-      this.getList()
+      this.getList(true)
     }
   },
 
@@ -366,10 +347,9 @@ Page({
       offset: 1,
       total: 0,
     })
-    // console.log("下拉刷新:",this.data.offset)
     this.getList();
   },
-  getList(){
+  getList(qingkong){
     let addweight = this.data.addweight;
     if(addweight == 0){
       const {latitude,longitude} = getStorage('location') || {};
@@ -384,10 +364,20 @@ Page({
         })
         .then(res => {
           wx.hideLoading();
-          // console.log("列表:",res)
           if(!res.publishList){
             this.setData({
               tuijianList:null,
+              total:res.totalSize
+            })
+          }else if(!qingkong){
+            
+            var list = res.publishList;
+            list.map(item=>{
+              item.content = item.content.split('&hc').join('\n')
+              return item;
+            })
+            this.setData({
+              tuijianList:list,
               total:res.totalSize
             })
           }else{
@@ -420,7 +410,6 @@ Page({
             total:res.totalSize
           })
         }else{
-          // console.log('关注：',res)
           var list = res.publishList;
           list.map(item=>{
             item.content = item.content.split('&hc').join('\n')
@@ -457,12 +446,10 @@ Page({
         this.tailorTo()
       }
     }else{
-      // console.log('允许')
       wx.showLoading({
         title: '授权中请稍后...',
         mask: true
       })
-      // console.log('e:',e)
       if(e.detail.errMsg == "getUserInfo:fail auth deny"){
         wx.hideLoading();
         return
@@ -474,7 +461,7 @@ Page({
         })
         const pages = getCurrentPages()
         const perpage = pages[pages.length - 1]
-        perpage.onLoad()  
+        perpage.onLoad("ok")  
       }, err => {
         // wx.redirectTo({ url: '/pages/personal/personal'})
       })
@@ -496,6 +483,11 @@ Page({
       weizhiFlg:false
     })
     this.initLocation()
+  },
+  onHide(){
+    // this.setData({
+    //   tuijianList:[]
+    // })
   }
 })
 

@@ -6,7 +6,7 @@ const { getStorage, setStorage } = require('../utils/storage');
 //获取好店列表
 export const getStoreList = ({ latitude,longitude,distance,page,size}) => {
   //console.log(cityId, longitude, latitude )
-  return post('https://www.xiaoxiaohb.com/street/shop/list', {
+  return post('street/shop/list', {
     data: {
       latitude,
       longitude,
@@ -26,7 +26,7 @@ export const getStoreDetail = ({shopId}) => {
   const {longitude,latitude} = getStorage("location") || {};
   if(cuserId && longitude){
     
-    return post('https://www.xiaoxiaohb.com/street/shop/detail', {
+    return post('street/shop/detail', {
       data: {
         shopId,
         cuserId,
@@ -35,7 +35,7 @@ export const getStoreDetail = ({shopId}) => {
       }
     })
   }else if(longitude){
-    return post('https://www.xiaoxiaohb.com/street/shop/detail', {
+    return post('street/shop/detail', {
       data: {
         shopId,
         longitude,
@@ -43,7 +43,7 @@ export const getStoreDetail = ({shopId}) => {
       }
     })
   }else{
-    return post('https://www.xiaoxiaohb.com/street/shop/detail', {
+    return post('street/shop/detail', {
       data: {
         shopId
       }
@@ -57,7 +57,7 @@ export const getStoreDetail = ({shopId}) => {
 //获取好店详情
 export const attentionFn = ({shopId,attention}) => {
   const {cuserId} = getStorage("USER_INFO") || {};
-  return post('https://www.xiaoxiaohb.com/street/shop/attention', {
+  return post('street/shop/attention', {
     data: {
       cuserId,
       shopId,
@@ -71,7 +71,7 @@ export const attentionFn = ({shopId,attention}) => {
 export const getAttentionList = ({cuserId,page,size}) => {
   // const {cuserId} = getStorage("USER_INFO") || {};
   const {longitude,latitude} = getStorage("location") || {};
-  return post('https://www.xiaoxiaohb.com/street/shop/attentionlist', {
+  return post('street/shop/attentionlist', {
     data: {
       latitude,
       longitude,

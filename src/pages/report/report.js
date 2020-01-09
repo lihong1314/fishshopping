@@ -59,10 +59,24 @@ Page({
         })
         .then(res => {
           // console.log("举报:",res)
-          wx.showToast({title: '提交成功'})
-          wx.redirectTo({
-            url: `/pages/post/post?id=${this.data.publishid}`
-          })
+         
+          if (res.code == 87015 ||res.code == 87014) {
+            wx.showModal({
+              content: res.message,
+              showCancel:false,
+              confirmText:'重新编辑',
+              success (res) {
+                if (res.confirm) {
+                  console.log('用户点击确定')
+                }
+              }
+            })
+          }else{
+            wx.showToast({title: '提交成功'})
+            wx.redirectTo({
+              url: `/pages/post/post?id=${this.data.publishid}`
+            })
+          }
         })
         
       }else{

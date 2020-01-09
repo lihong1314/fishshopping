@@ -7,7 +7,7 @@ const { getStorage, setStorage } = require('../utils/storage');
 export const getRecommend = ({ latitude,longitude,distance,page,size}) => {
   const {cuserId} = getStorage("USER_INFO") || {};
   if(cuserId){
-    return post('https://www.xiaoxiaohb.com/street/home/list', {
+    return post('street/home/list', {
       data: {
         cuserId,
         latitude,
@@ -18,7 +18,7 @@ export const getRecommend = ({ latitude,longitude,distance,page,size}) => {
       }
     })
   }else{
-    return post('https://www.xiaoxiaohb.com/street/home/list', {
+    return post('street/home/list', {
       data: {
         latitude,
         longitude,
@@ -35,7 +35,7 @@ export const getRecommend = ({ latitude,longitude,distance,page,size}) => {
 export const getInterestList = ({page,size}) => {
   const {cuserId} = getStorage("USER_INFO") || {};
   if(cuserId){
-    return post('https://www.xiaoxiaohb.com/street/home/interestList', {
+    return post('street/home/interestList', {
       data: {
         cuserId,
         page,
@@ -43,7 +43,7 @@ export const getInterestList = ({page,size}) => {
       }
     })
   }else{
-    return post('https://www.xiaoxiaohb.com/street/home/interestList', {
+    return post('street/home/interestList', {
       data: {
         page,
         size
@@ -60,7 +60,7 @@ export const getRecommendDetail = ({ publishId}) => {
   const {latitude,longitude} = getStorage('location') ||{};
   if(cuserId && latitude){
     
-    return post('https://www.xiaoxiaohb.com/street/home/detail', {
+    return post('street/home/detail', {
       data: {
         cuserId,
         latitude,
@@ -69,7 +69,7 @@ export const getRecommendDetail = ({ publishId}) => {
       }
     })
   }else if(latitude){
-    return post('https://www.xiaoxiaohb.com/street/home/detail', {
+    return post('street/home/detail', {
       data: {
         publishId,
         latitude,
@@ -77,7 +77,7 @@ export const getRecommendDetail = ({ publishId}) => {
       }
     })
   }else{
-    return post('https://www.xiaoxiaohb.com/street/home/detail', {
+    return post('street/home/detail', {
       data: {
         publishId,
       }
@@ -91,7 +91,7 @@ export const getRecommendDetail = ({ publishId}) => {
 //收藏淘贴
 export const chenkCollection = ({ publishId,collection}) => {
   const {cuserId} = getStorage("USER_INFO") || {};
-  return post('https://www.xiaoxiaohb.com/street/home/collection', {
+  return post('street/home/collection', {
     data: {
       cuserId,
       publishId,
@@ -105,7 +105,7 @@ export const chenkCollection = ({ publishId,collection}) => {
 // 举报淘贴
 export const report = ({publishId,reportContent,contact}) => {
   const {cuserId} = getStorage("USER_INFO") || {};
-  return post('https://www.xiaoxiaohb.com/street/home/report', {
+  return post('street/home/report', {
     data: {
       cuserId,
       publishId,
@@ -120,7 +120,7 @@ export const report = ({publishId,reportContent,contact}) => {
 // 校验用户是否可以发布
 export const checkPublish = () => {
   const {cuserId} = getStorage("USER_INFO") || {};
-  return post('https://www.xiaoxiaohb.com/street/home/checkPublish', {
+  return post('street/home/checkPublish', {
     data: {
       cuserId
     }
@@ -131,25 +131,23 @@ export const checkPublish = () => {
 
 //新增接口
 // 首页改附近用户列表接口(发现页面的用户列表)
-export const getNearUsers = ({ latitude,longitude,distance,page,size}) => {
+export const getNearUsers = ({ latitude,longitude,page,size}) => {
   const {cuserId} = getStorage("USER_INFO") || {};
   if(cuserId){
-    return post('https://www.xiaoxiaohb.com/street/home/nearUsers', {
+    return post('street/home/nearUsers', {
       data: {
         cuserId,
         latitude,
         longitude,
-        distance,
         page,
         size
       }
     })
   }else{
-    return post('https://www.xiaoxiaohb.com/street/home/nearUsers', {
+    return post('street/home/nearUsers', {
       data: {
         latitude,
         longitude,
-        distance,
         page,
         size
       }

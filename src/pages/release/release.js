@@ -77,9 +77,12 @@ Page({
     wx.showLoading({ title: '正在上传图片...' })
 
     const { imgUrls, releaseValue } = this.data;
+    let newUrl = __DEV__ ? `https://test-tao.xiaoxiaohb.com/`:`https://www.xiaoxiaohb.com/`;
+    // let newUrl = __DEV__ ? `https://test-tao.xiaoxiaohb.me/`:`https://www.xiaoxiaohb.com/`;
+    // let newUrl = `https://www.xiaoxiaohb.com/`;
     this.upload({
       i: 0,
-      url: 'https://www.xiaoxiaohb.com/street/file/upload',//这里是你图片上传的接口
+      url: newUrl+'street/file/upload',//这里是你图片上传的接口
       path: imgUrls//这里是选取的图片的地址数组 
     });
   },
@@ -225,6 +228,7 @@ Page({
           content: '上传失败',
           showCancel: false
         })
+        zhongzhi = true;
       },
       complete: () => {
         

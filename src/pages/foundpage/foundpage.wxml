@@ -3,7 +3,7 @@
     <view class="stor_item" wx:for="{{shopList}}" wx:for-index="index" wx:key="{{item.cuserId}}" wx:for-item="item"
         data-shopid="{{item.cuserId}}">
         <view class="userbox">
-                <view style="display:flex;width:80%" bindtap="gotoFansDetailFn" data-fansid="{{item.cuserId}}">
+                <view style="display:flex;width:80%;align-items: center;" bindtap="gotoFansDetailFn" data-fansid="{{item.cuserId}}">
                 <view class="userimg">
                     <image src="{{item.cUserIcon}}"></image>
                 </view>
@@ -27,7 +27,7 @@
             </view>
         </view>
     </view>
-
+    <view wx:if="{{!shopList || shopList.length == 0}}" class="fulltip">暂未发现附近活跃的人</view>
     <view class="endbox" wx:if="{{shopList.length > 0}}">- 没有更多了 -</view>
 </view>
 

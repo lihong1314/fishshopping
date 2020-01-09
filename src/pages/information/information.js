@@ -13,6 +13,7 @@ Page({
   onShow(){
     let pages = getCurrentPages();
     console.log('pages:',pages);
+   
   },
   onLoad(option){
     // wx.showLoading({title:'加载中...'})
@@ -60,8 +61,12 @@ Page({
         icon: "loading",
         title: "正在上传"
       })
+      console.log("__DEV__:",__DEV__)
+      let newUrl = __DEV__ ? `https://test-tao.xiaoxiaohb.com/`:`https://www.xiaoxiaohb.com/`;
+      // let newUrl = __DEV__ ? `https://test-tao.xiaoxiaohb.me/`:`https://www.xiaoxiaohb.com/`;
+      // let newUrl = `https://www.xiaoxiaohb.com/`;
       wx.uploadFile({
-        url: "https://www.xiaoxiaohb.com/street/user/updateUserInfo",
+        url: newUrl+"street/user/updateUserInfo",
         filePath: img, 
         name: 'file',
         header: { "Content-Type": "multipart/form-data;charset=UTF-8" },
@@ -88,10 +93,11 @@ Page({
           }else{
             if (obj.code == 0 || obj.code == 200) { 
               console.log('res',obj.data);
+
               const {access}=getStorage('USER_INFO')
               setStorage('USER_INFO',{
                 avatarUrl:obj.data.cUserIcon,
-                nickName:obj.data.name,
+                nickName:obj.data.cUserName,
                 cuserId,
                 access:access
               })

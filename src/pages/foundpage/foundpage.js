@@ -15,10 +15,36 @@ Page({
     total: 0,
     disableFlag: false,
     isShowMod: false,
-    islogin: false
+    islogin: false,
+    ruzhuFn:false
   },
   onShow() {
-    // this.showF()
+    const { avatarUrl, nickName, cuserId, access } = getStorage('USER_INFO') || {}
+    
+    if (cuserId) {
+
+      this.setData({
+        islogin: true,
+        ruzhuFn:false
+      })
+      if (access != "Y" && access) {
+        this.setData({
+          disableFlag: true
+        })
+      } else {
+        this.setData({
+          cuserId
+        })
+      }
+      if(this.data.shopList.length <=0 || !this.data.shopList){
+        this.showF(true)
+      }
+      
+    }else{
+      this.setData({
+        ruzhuFn: true
+      })
+    }
   },
   initLocation() {
     wxp
@@ -48,7 +74,7 @@ Page({
             disableFlag: true
           })
         }
-        that.getList();
+        that.getList(true);
       },
       fail: function (res) {
         //授权失败
@@ -122,43 +148,21 @@ Page({
   },
   onLoad() {
     // this.checkLocation()
-    const { avatarUrl, nickName, cuserId, access } = getStorage('USER_INFO') || {}
-
-    if (cuserId) {
-      this.setData({
-        islogin: true,
-      })
-    }
-    this.showF()
-    if (this.data.islogin) {
-
-      if (access != "Y" && access) {
-        this.setData({
-          disableFlag: true
-        })
-      } else {
-        this.setData({
-          cuserId
-        })
-      }
-    }else{
-      this.setData({
-        ruzhuFn: true
-      })
-    }
+    this.getList(true)
 
   },
   showF() {
     const { cuserId } = getStorage('USER_INFO') || {};
     if (cuserId) {
       this.setData({
-        islogin: true
+        islogin: true,
+        shopList: [],
       })
     }
 
     if (this.data.islogin) {
-
-      this.getList()
+      wx.showLoading({ title: '加载中...' })
+      this.getList(true)
     }
 
   },
@@ -179,14 +183,13 @@ Page({
     })
     this.getList();
   },
-  getList() {
-    wx.showLoading({ title: '加载中...' })
+  getList(qingkong) {
+    
     const { latitude, longitude } = getStorage('location') || {};
     indexService
       .getNearUsers({
         latitude: latitude,
         longitude: longitude,
-        distance: 20,
         page: this.data.offset,
         size: this.data.limit
       })
@@ -198,6 +201,18 @@ Page({
             total: res.totalSize
           })
 
+        } else if(qingkong){
+          let list = res.publishList;
+          list.images
+          list.map(item => {
+            item.images = item.images.filter((list, index) => {
+              return index <= 2
+            })
+          })
+          this.setData({
+            shopList: list,
+            total: res.totalSize
+          })
         } else {
           let list = res.publishList;
           list.images
@@ -270,13 +285,12 @@ Page({
         })
         if (type == '5') {
           this.setData({
-            
             islogin: true,
             ruzhuFn: false
           })
 
         }
-        // this.showF()
+        this.showF(true)
         const pages = getCurrentPages()
         const perpage = pages[pages.length - 1]
         perpage.onLoad()
@@ -342,4 +356,15 @@ Page({
       })
 
   },
+  cancelDen() {
+    console.log("取消")
+    this.setData({
+      ruzhuFn: false
+    })
+  },
+  onHide(){
+    this.setData({
+      shopList:[]
+    })
+  }
 })

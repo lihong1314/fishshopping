@@ -49,7 +49,8 @@ Page({
     const { cuserId } = getStorage('USER_INFO') || {};
     if (cuserId) {
       this.setData({
-        islogin: true
+        islogin: true,
+        ruzhuFn:false
       })
     }
 
@@ -72,7 +73,7 @@ Page({
           })
         })
 
-      this.getList()
+      this.getList(true)
     }
 
   },
@@ -161,7 +162,7 @@ Page({
     })
     this.getList();
   },
-  getList() {
+  getList(qingkongflg) {
     const { addweight } = this.data;
     const { cuserId } = getStorage('USER_INFO') || {};
     if (addweight == 0) {
@@ -169,6 +170,7 @@ Page({
       personalService
         .getMyCollection({
           cuserId,
+          attentionId:cuserId,
           page: this.data.offset,
           size: this.data.limit
         })
@@ -179,6 +181,18 @@ Page({
               publishList: null,
               total: res.totalSize
             })
+          } else if(qingkongflg){
+            var list = res.publishList;
+            list.map(item => {
+              item.content = item.content.split('&hc').join('\n')
+              return item;
+            })
+
+            this.setData({
+              publishList: list,
+              total: res.totalSize
+            })
+
           } else {
             var list = res.publishList;
             list.map(item => {
@@ -210,6 +224,17 @@ Page({
           if (!res.publishList) {
             this.setData({
               publishList: null,
+              total: res.totalSize
+            })
+          }else if(qingkongflg){
+            var list = res.publishList;
+            list.map(item => {
+              item.content = item.content.split('&hc').join('\n')
+              return item;
+            })
+
+            this.setData({
+              publishList: list,
               total: res.totalSize
             })
           } else {
@@ -390,6 +415,11 @@ Page({
   gotoQrCodeFn(){
     wx.navigateTo({
       url: `/pages/qrCode/qrCode`
+    })
+  },
+  onHide(){
+    this.setData({
+      publishList:[]
     })
   }
 

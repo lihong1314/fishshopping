@@ -38,7 +38,7 @@ export const getImage = ()=>new Promise(( resolve, reject )=>{
 //发布
 export const publish = ({cuserId,content,latitude,longitude,location,publishImages})=>{
   
-  return post(`https://www.xiaoxiaohb.com/street/home/publish`,{
+  return post(`street/home/publish`,{
     formJson:true,
     data:{
       cuserId,content,latitude,longitude,location,publishImages

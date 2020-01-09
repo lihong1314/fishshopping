@@ -1,4 +1,4 @@
-  const promisify = require('../utils/promisify')
+const promisify = require('../utils/promisify')
 const fixDomain = require('../utils/domain').fixDomain
 
 const login = promisify(wx.login)
@@ -8,7 +8,7 @@ const request = promisify(wx.request)
 const loginSessionKey = 'LOGIN_SESSION_FFAN'
 const loginUserInfo = 'USER_INFO'
 
-const prUrl = "https://www.xiaoxiaohb.com";
+// const prUrl = "https://www.xiaoxiaohb.com";
 
 /**
  * 校验手机号码
@@ -41,10 +41,16 @@ const post = (url = '', data = {}, options = {}) => {
   }
 
   return new Promise((resolve, reject) => {
-    // console.log('url:',url);
+    let newUrl = '';
+    if (__DEV__) {
+      newUrl = `https://test-tao.xiaoxiaohb.com/${url}`
+    } else {
+      newUrl = `https://www.xiaoxiaohb.com/${url}`;
+    }
+
     request({
       ...{
-        url: url,
+        url: newUrl,
         method: 'POST',
         data,
         header: {
@@ -54,7 +60,7 @@ const post = (url = '', data = {}, options = {}) => {
       }
     }).then(
       res => {
-        
+
         // res = res['data']
         // console.log('url---res:',res['data']);
         if (res['data']['code'] == 0) {
@@ -84,7 +90,7 @@ const setLoginSession = value => wx.setStorageSync(loginSessionKey, value)
 const getLoginSession = () => {
   try {
     const session = wx.getStorageSync(loginSessionKey)
-    console.log('session',session)
+    console.log('session', session)
     if (!session) {
       return getRemoteSession()
     } else {
@@ -100,9 +106,9 @@ const getLoginSession = () => {
  * @param code
  * @return {*|Promise<any>}
  */
-const getRemoteLogin = code =>{
-  post('https://www.xiaoxiaohb.com/street/weixin/login', { code })
-  
+const getRemoteLogin = code => {
+  post('street/weixin/login', { code })
+
 }
 
 /**
@@ -112,9 +118,9 @@ const getRemoteLogin = code =>{
 const getRemoteSession = () => {
   return login()
     .then(res => {
-      
-      return post('https://www.xiaoxiaohb.com/street/weixin/login', { code:res.code })
-      
+
+      return post('street/weixin/login', { code: res.code })
+
     })
     .then(res => {
       setLoginSession(res.data)
@@ -154,13 +160,13 @@ exports.bindAccountBySilent = ({ encryptedData, iv, ...params } = {}) =>
       \n https://mp.weixin.qq.com/debug/wxadoc/dev/api/open.html`
       )
     } else {
-      console.log("res:",res)
-      return post(`${prUrl}/street/weixin/register`,{
-            encryptedData,
-            iv,
-            thirdSession:res.thirdSession
-          })
-      
+      console.log("res:", res)
+      return post(`/street/weixin/register`, {
+        encryptedData,
+        iv,
+        thirdSession: res.thirdSession
+      })
+
     }
   }).then(res => {
     wx.setStorageSync(loginUserInfo, res.data)
@@ -179,7 +185,7 @@ exports.bindAccountByCode = ({ mobile = '', verifyCode = '', ...params } = 0) =>
     if (!checkMobile(mobile) || !verifyCode.trim()) {
       return reject('-- The parameter of mobile, verifyCode must be required')
     } else {
-      // return post('hhttps://www.xiaoxiaohb.com/street/weixin/register', {
+      // return post('street/weixin/register', {
       //   ...{
       //     mobile,
       //     verifyCode,
@@ -190,9 +196,9 @@ exports.bindAccountByCode = ({ mobile = '', verifyCode = '', ...params } = 0) =>
       //   ...params
       // })
 
-      return post('https://www.xiaoxiaohb.com/street/weixin/register',{
+      return post('street/weixin/register', {
         ...{
-          encryptedData,iv,thirdSession
+          encryptedData, iv, thirdSession
         }
       })
     }
@@ -255,17 +261,17 @@ exports.logout = () =>
 
 
 
-  function getAccessToken(id,secret){
-    return new Promise((resolve,reject)=>{
-        axios({
-            method:'get',
-            url:`https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=${id}&secret=${secret}`
-        })
-        .then((res)=> {
-            resolve(res)
-        })
-        .catch((err)=>{
-            reject(err)
-        })
+function getAccessToken(id, secret) {
+  return new Promise((resolve, reject) => {
+    axios({
+      method: 'get',
+      url: `https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=${id}&secret=${secret}`
     })
-  }
+      .then((res) => {
+        resolve(res)
+      })
+      .catch((err) => {
+        reject(err)
+      })
+  })
+}

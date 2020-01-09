@@ -11,24 +11,42 @@ Page({
     limit: 10,
     total: 0,
     fansList:[],
-    tipcon:'还没有任何用户关注您哦！'
+    tipcon:'暂无关注您的粉丝，发布淘贴获取更多关注~'
   },
   onShow(){ 
-    // this.setData({
-    //   fansList:[]
-    // }) 
+    this.setData({
+      fansList:[]
+    }) 
+    this.getList()
   },
   onLoad(option){
     const {id,type,uname} = option;
-    this.setData({
-      id
-    })
-    this.getList()
+    
+    
     if(type == '1'){
       wx.setNavigationBarTitle({
         title: uname+'的粉丝',
-        tipcon:'还没有任何用户关注他哦！'
      })
+     this.setData({
+      tipcon:'暂未获得粉丝关注'
+     })
+    }
+    if(type){
+      this.setData({
+        id,
+        type
+      },()=>{
+        // this.getList()
+      })
+     
+    }else{
+      this.setData({
+        id,
+        type:0
+      },()=>{
+        // this.getList()
+      })
+     
     }
    
   },
@@ -121,10 +139,12 @@ Page({
   },
   getList(){
     wx.showLoading({title:'加载中...'})
-    const {id} = this.data;
+    const {id,type} = this.data;
+    const {cuserId} = getStorage("USER_INFO") || {};
     personalService
       .getFansList({
-        cuserId:id,
+        cuserId:cuserId,
+        attentionId:type == "1"?id:cuserId,
         page:this.data.offset,
         size:this.data.limit
       })

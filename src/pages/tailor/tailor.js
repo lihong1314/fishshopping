@@ -166,12 +166,15 @@ Page({
     })
   },
   upload(page, path){
+    let newUrl = __DEV__ ? `https://test-tao.xiaoxiaohb.com/`:`https://www.xiaoxiaohb.com/`;
+    // let newUrl = __DEV__ ? `https://test-tao.xiaoxiaohb.me/`:`https://www.xiaoxiaohb.com/`;
+    // let newUrl = `https://www.xiaoxiaohb.com/`;
     wx.showToast({
       icon: "loading",
       title: "正在上传"
     }),
       wx.uploadFile({
-        url: "https://www.xiaoxiaohb.com/street/file/upload",
+        url: newUrl + "street/file/upload",
         filePath: path[0], 
         name: 'file',
         header: { "Content-Type": "multipart/form-data" },

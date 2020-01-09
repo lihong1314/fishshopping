@@ -6,7 +6,7 @@ const { getStorage, setStorage } = require('../utils/storage');
 //获取好店列表
 export const getmine = ({cuserId}) => {
   // const { cuserId } = getStorage( 'USER_INFO' ) || {};
-  return post('https://www.xiaoxiaohb.com/street/user/mine', {
+  return post('street/user/mine', {
     data: {
       cuserId
     }
@@ -17,7 +17,7 @@ export const getmine = ({cuserId}) => {
 export const getmine2 = ({cuserId,longitude,latitude}) => {
   // const { cuserId } = getStorage( 'USER_INFO' ) || {};
   if(longitude){
-    return post('https://www.xiaoxiaohb.com/street/user/mine2', {
+    return post('street/user/mine2', {
       data: {
         cuserId,
         longitude,
@@ -25,7 +25,7 @@ export const getmine2 = ({cuserId,longitude,latitude}) => {
       }
     })
   }else{
-    return post('https://www.xiaoxiaohb.com/street/user/mine2', {
+    return post('street/user/mine2', {
     data: {
       cuserId
     }
@@ -35,11 +35,12 @@ export const getmine2 = ({cuserId,longitude,latitude}) => {
 }
 
 //获取收藏的淘贴列表
-export const getMyCollection= ({cuserId,page,size}) => {
+export const getMyCollection= ({cuserId,attentionId,page,size}) => {
   // const { cuserId } = getStorage( 'USER_INFO' ) || {};
-  return post('https://www.xiaoxiaohb.com/street/home/collectionList', {
+  return post('street/home/collectionList', {
     data: {
       cuserId,
+      attentionId,
       page,
       size
     }
@@ -48,11 +49,12 @@ export const getMyCollection= ({cuserId,page,size}) => {
 
 
 //获取用户的粉丝列表
-export const getFansList=({cuserId,page,size})=>{
+export const getFansList=({cuserId,attentionId,page,size})=>{
   // const { cuserId } = getStorage( 'USER_INFO' ) || {};
-  return post('https://www.xiaoxiaohb.com/street/home/fans', {
+  return post('street/home/fans', {
     data: {
       cuserId,
+      attentionId,
       page,
       size
     }
@@ -63,7 +65,7 @@ export const getFansList=({cuserId,page,size})=>{
 // 关注与取消粉丝
 export const attentionFansOrCalcle=({fansId,attentionFans})=>{
   const { cuserId } = getStorage( 'USER_INFO' ) || {};
-  return post('https://www.xiaoxiaohb.com/street/home/attentionFansOrCalcle', {
+  return post('street/home/attentionFansOrCalcle', {
     data: {
       cuserId,
       fansId,
@@ -74,11 +76,12 @@ export const attentionFansOrCalcle=({fansId,attentionFans})=>{
 
 
 // 获已关注注鱼苗列表
-export const getAttentionList=({cuserId,page,size})=>{
+export const getAttentionList=({cuserId,attentionId,page,size})=>{
   // const { cuserId } = getStorage( 'USER_INFO' ) || {};
-  return post('https://www.xiaoxiaohb.com/street/home/attentionList', {
+  return post('street/home/attentionList', {
     data: {
       cuserId,
+      attentionId,
       page,
       size
     }
@@ -90,7 +93,7 @@ export const getAttentionList=({cuserId,page,size})=>{
 // 关注鱼苗 和 取消关注 鱼苗
 export const addOrCancleAttention=({cuserId,attentionId,attention})=>{
   
-  return post('https://www.xiaoxiaohb.com/street/home/addOrCancleAttention', {
+  return post('street/home/addOrCancleAttention', {
     data: {
       cuserId,
       attentionId,
@@ -104,7 +107,7 @@ export const addOrCancleAttention=({cuserId,attentionId,attention})=>{
 // url：/street/user/updateUserInfo
 export const updateUserInfo=({cuserName,file})=>{
   const { cuserId } = getStorage( 'USER_INFO' ) || {};
-  return post('https://www.xiaoxiaohb.com/street/user/updateUserInfo', {
+  return post('street/user/updateUserInfo', {
     data: {
       cuserId,
       cuserName,
@@ -115,16 +118,16 @@ export const updateUserInfo=({cuserName,file})=>{
 
 //获取常见问题
 export const questions=()=>{
-  return post('https://www.xiaoxiaohb.com/street/mine/questions')
+  return post('street/mine/questions')
 }
 
 
 //获取鱼苗详情
 export const attentionDetailList=({attentionId,page,size})=>{
   const { cuserId } = getStorage( 'USER_INFO' ) || {};
-  return post('https://www.xiaoxiaohb.com/street/home/attentionDetailList', {
+  return post('street/home/attentionDetailList', {
     data: {
-      // cuserId,
+      cuserId,
       attentionId,
       page,
       size
@@ -138,7 +141,7 @@ export const attentionDetailList=({attentionId,page,size})=>{
 //street/home/publishList
 export const getPublishListn= ({page,size}) => {
   const { cuserId } = getStorage( 'USER_INFO' ) || {};
-  return post('https://www.xiaoxiaohb.com/street/home/publishList', {
+  return post('street/home/publishList', {
     data: {
       cuserId,
       page,
@@ -151,7 +154,7 @@ export const getPublishListn= ({page,size}) => {
 ///street/home/canclePublish
 export const canclePublish= ({publishId}) => {
   const { cuserId } = getStorage( 'USER_INFO' ) || {};
-  return post('https://www.xiaoxiaohb.com/street/home/canclePublish', {
+  return post('street/home/canclePublish', {
     data: {
       cuserId,
       publishId
@@ -164,7 +167,7 @@ export const canclePublish= ({publishId}) => {
 ///street/weixin/getToken
 export const getQrCodeFn= () => {
   const { cuserId } = getStorage( 'USER_INFO' ) || {};
-  return get('https://www.xiaoxiaohb.com/street/weixin/getToken', {
+  return get('street/weixin/getToken', {
     data: {
       cuserId
     }

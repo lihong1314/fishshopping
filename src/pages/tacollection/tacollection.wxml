@@ -30,7 +30,7 @@
    
     
             <view class="endbox" wx:if="{{publishList.length > 0}}">- 没有更多了 -</view>
-            <view class="fulltip" wx:if="{{!publishList}}">还没有收藏任何淘贴哦！</view>
+            <view class="fulltip" wx:if="{{!publishList}}">暂无收藏的淘贴</view>
         </view>
 
 
@@ -55,7 +55,7 @@
                         </view>
                 </view>
                 <view class="endbox" wx:if="{{publishList.length > 0}}">- 没有更多了 -</view>
-                <view class="fulltip" wx:if="{{!publishList}}">还没有收藏任何门店哦！</view>
+                <view class="fulltip" wx:if="{{!publishList}}">暂无收藏的好店</view>
         </view>
 </view>
 

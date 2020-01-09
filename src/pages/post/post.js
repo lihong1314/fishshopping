@@ -270,6 +270,8 @@ Page({
         }else if(type == '3'){
           
           this.checkCollentFn()
+        }else if(type == '4'){
+          this.gotoFansDetailFn(e)
         }
         
       }else{

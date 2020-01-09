@@ -1,0 +1,24 @@
+<template name="postLabel">
+    <view class="post_item" wx:for="{{tuijianList}}" wx:key="index" wx:for-item="item">
+        <view bindtap="gotoPostFn" data-publishid="{{item.publishId}}">
+            <view class="imgbox">
+                <image src="{{item.images[0]}}"></image>
+            </view>
+            <view class="title">
+                <text>{{item.content}}</text>
+            </view>
+        </view>
+        <div class="user">
+            <div bindtap="gotoPostFn" data-publishid="{{item.publishId}}"> <view class="userimg"><image src="{{item.cUserIcon}}"></image></view> </div>
+            <div bindtap="gotoPostFn" data-publishid="{{item.publishId}}" class="username">{{item.cUserName}}</div>
+            <!-- <li class="focus" bindtap="focusFn" data-publishid="{{item.publishId}}" data-index="{{index}}" data-collection="{{item.collection}}"><image src="{{item.collection?'/assets/images/collection_red.png':'/assets/images/collection.png'}}"></image></li> -->
+            <div class="focus" ><image src="{{item.collection?'/assets/images/collection_red.png':'/assets/images/collection.png'}}"></image>
+                <button class="btnStyle" data-publishid="{{item.publishId}}" data-index="{{index}}" data-collection="{{item.collection}}" data-type="1" open-type="getUserInfo" lang="zh_CN" bindgetuserinfo="onGotUserInfo">
+                    </button>
+            </div>
+
+            
+        </div>
+    </view>
+
+</template>

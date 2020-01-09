@@ -13,7 +13,7 @@
 <view class="qrbox" style="width:{{windowWidth}}px;height:{{windowH}}px">
     <canvas canvas-id='qrcode-canvas' class="qrcodecanvas" style="width:{{windowWidth}}px;height:{{windowH/2+50}}px" ></canvas>
     <view class="btnbox" style="top:{{btnY}}px">
-        <button class="btn" bindlongpress="handleLongPress">保存二维码图片到手机相册</button>
+        <button class="btn" bindtap="handleLongPress">保存二维码图片到手机相册</button>
         <p class="tips">保存二维码图片，并分享到朋友圈邀请好友关注。</p>
     </view>
 </view>

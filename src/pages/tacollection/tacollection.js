@@ -107,11 +107,14 @@ Page({
   getList(){
     const {addweight} = this.data;
     const {id}=this.data
+    const { cuserId } = getStorage( 'USER_INFO' ) || {};
     if(addweight == 0){
       wx.showLoading({title:'加载中...'})
       personalService
         .getMyCollection({
-          cuserId:id,
+          cuserId:cuserId,
+          attentionId:id,
+          // cuserId:id,
           page:this.data.offset,
           size:this.data.limit
         })
@@ -180,20 +183,21 @@ Page({
   } ,
   focusFn(e){
     const {publishid,index,collection} =  e.currentTarget.dataset;//当前所在页面的 index
-    // if(!collection){
+ 
       indexService
       .chenkCollection({
         publishId:publishid,
         collection:!collection
       })
       .then(res => {
+        let list = this.data.publishList;
+        list[index].collection = res.collection
         this.setData({
-          publishList:[]
+          publishList:list
         })
-        this.getList()
 
       })
-    // }
+
     
   },
   delFn(e){

@@ -15,7 +15,8 @@
             </view>
         </view>
     
-        <view class="focus cancel" >已关注<button class="btnStyle" open-type="getUserInfo" lang="zh_CN" data-index="{{index}}" data-attention="{{item.attentionFans}}" data-attentionid="{{item.attentionId}}"  bindgetuserinfo="onGotUserInfo"></button></view>
+        <view wx:if="{{item.attention}}" class="focus cancel" >已关注<button class="btnStyle" data-type="1" open-type="getUserInfo" lang="zh_CN" data-index="{{index}}" data-attention="{{item.attention}}" data-attentionid="{{item.attentionId}}"  bindgetuserinfo="onGotUserInfo"></button></view>
+        <view wx:else class="focus" >关注<button class="btnStyle" open-type="getUserInfo" lang="zh_CN" data-type="2"  data-index="{{index}}" data-attention="{{item.attention}}" data-attentionid="{{item.attentionId}}" bindgetuserinfo="onGotUserInfo"></button></view>
 
         
     </view>

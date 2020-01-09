@@ -3,8 +3,8 @@ require('./star.less');
 const { getStorage, setStorage } = require('../../utils/storage');
 import '../../components/tip/tip.less';
 import * as personalService from '../../services/personal';
-import { identifier } from '@babel/types';
 const account = require('../../services/account.js');
+import * as indexService from '../../services/index'; 
 Page({
   data:{
     isShowMod:false,
@@ -12,26 +12,41 @@ Page({
     limit: 10,
     total: 0,
     starList:[],
-    tipcon:"您还没有关注任何用户哦！"
+    tipcon:"还未关注其他用户"
   },
   onShow(){
-    
-    // this.setData({
-    //   starList:[],
-    // })
+    console.log("show")
+    this.setData({
+      starList:[],
+    })
+    this.getList()
   },
   onLoad(option){
     const {id,type,uname} = option
-    this.setData({
-      id
-    })
-    this.getList()
     if(type == '1'){
       wx.setNavigationBarTitle({
-        title: uname+'的关注',
-        tipcon:"他还没有关注任何用户哦！"
+        title: uname+'的关注'
+     })
+     this.setData({
+        tipcon:"暂未关注其他用户"
      })
     }
+    if(type){
+      this.setData({
+        id,
+        type
+      },()=>{
+        // this.getList()
+      })
+    }else{
+      this.setData({
+        id,
+        type:0
+      },()=>{
+        // this.getList()
+      })
+    }
+    
   },
   cancelFn(){
     this.setData({
@@ -43,10 +58,9 @@ Page({
       isShowMod:false,
       starList:[]
     })
-    // const {attention,attentionid,index} =  e.currentTarget.dataset;
  
     const { cuserId } = getStorage( 'USER_INFO' ) || {};
-    // console.log("attentionid:",attentionid)
+   
     personalService
     .addOrCancleAttention({
       cuserId,
@@ -67,24 +81,13 @@ Page({
       isShowMod:true,
       attentionid
     })
-    // const { cuserId } = getStorage( 'USER_INFO' ) || {};
-    // console.log("attentionid:",attentionid)
-    // personalService
-    // .addOrCancleAttention({
-    //   cuserId,
-    //   attentionId:attentionid,
-    //   attention:false
-    // })
-    // .then(res=>{
-    //   this.getList();
-    // })
+    
   },
   onReachBottom: function() {
     if (this.data.total > this.data.limit * (this.data.offset)) {
       this.setData({
         offset: this.data.offset + 1,
       });
-      console.log("上拉加载:",this.data.offset)
       this.getList()
     }
   },
@@ -95,16 +98,16 @@ Page({
       offset: 1,
       total: 0,
     })
-    console.log("下拉刷新:",this.data.offset)
     this.getList();
   },
   getList(){
     wx.showLoading({title:'加载中...'})
-    // const { cuserId } = getStorage( 'USER_INFO' ) || {};
-    const {id}=this.data;
+    const { cuserId } = getStorage( 'USER_INFO' ) || {};
+    const {id,type}=this.data;
     personalService
     .getAttentionList({
-      cuserId:id,
+      cuserId:cuserId,
+      attentionId:type == "1"?id:cuserId,
       page:this.data.offset,
       size:this.data.limit
     })
@@ -134,16 +137,20 @@ Page({
   },
   onGotUserInfo: function (e) {
     const { cuserId,access } = getStorage( 'USER_INFO' ) || {};
+    const {type} = e.currentTarget.dataset;
     if(cuserId){
-      this.cancelFocus(e)
       
+      if(type == '1'){
+        this.cancelFocus(e)
+       
+      }else if(type == '2'){
+        this.focusFn(e)
+      }
     }else{
-      console.log('允许')
       wx.showLoading({
         title: '授权中请稍后...',
         mask: true
       })
-      console.log('e:',e)
       if(e.detail.errMsg == "getUserInfo:fail auth deny"){
         wx.hideLoading();
         return
@@ -160,5 +167,26 @@ Page({
       })
     }
     
-  }
+  },
+  focusFn(e){
+    const {attentionid,index,attention} =  e.currentTarget.dataset;//当前所在页面的 index
+    const { cuserId } = getStorage( 'USER_INFO' ) || {};
+    if(attentionid == cuserId){
+      return;
+    }
+      personalService
+        .attentionFansOrCalcle({
+          fansId:attentionid,
+          attentionFans:!attention
+        })
+        .then(res => {
+          let list = this.data.starList;
+          list[index].attention = res.attentionFans;
+          this.setData({
+            starList:list
+          })
+        })
+
+    
+  },
 })

@@ -47,7 +47,7 @@
     </view>
 </view>
 <view class="collectionbox">
-        <view wx:if="{{list.length <= 0}}" class="fulltip">该用户还没有发布淘贴</view>
+        <view wx:if="{{list.length <= 0 || !list}}" class="fulltip">暂无发布的淘贴</view>
         <view wx:if="{{list.length > 0}}" class="postbox">
             <!--第一个淘贴-->
             <view class="post_item" wx:for="{{list}}" wx:key="index">

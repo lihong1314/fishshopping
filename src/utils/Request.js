@@ -15,9 +15,16 @@ class Request {
           { data, formEncoding = true, formJson, auth } = {}
         ) =>
           new Promise((resolve, reject) => {
+            let newUrl ='';
+            if(__DEV__){
+              newUrl = `https://test-tao.xiaoxiaohb.com/${url}`
+            }else{
+              newUrl = `https://www.xiaoxiaohb.com/${url}`;
+            }
+            
             const options = {
               // url: fixDomain(url, __ENV__),
-              url: url,
+              url: newUrl,
               data,
               method,
               header: {}
@@ -39,7 +46,7 @@ class Request {
                 if (code == 200 || code==0) {
                   // console.log(data)
                   resolve( data )
-                }else if( code == 87014 || code == 87015){
+                }else if( code == 87014 || code == 87015){ //87015输入的内容有问题不逾通过，87014图片有问题
                   resolve({ code, data, message })
                 } else {
                   reject( data || `${status},${ message || ''}` )
